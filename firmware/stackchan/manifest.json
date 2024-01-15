@@ -104,8 +104,8 @@
                     "sampleRate": 24000
                 },
                 "serial": {
-                    "transmit": 17,
-                    "receive": 18
+                    "transmit": 7,
+                    "receive": 6
                 },
                 "rotation": 0,
                 "virtualButton": true

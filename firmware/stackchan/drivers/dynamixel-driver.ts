@@ -46,7 +46,7 @@ class PControl {
     }
     const position = (this.presentPosition = result.value)
     const current = Math.min(Math.abs(this.goalPosition - position) * this.gain, this.saturation)
-    // trace(`servo ${this.name} ... (${position}, ${this.goalPosition}, ${this.gain}, ${this.saturation}, ${current})\n`)
+    trace(`servo ${this.name} ... (${position}, ${this.goalPosition}, ${this.gain}, ${this.saturation}, ${current})\n`)
     await this.servo.setGoalCurrent(current)
   }
 }
