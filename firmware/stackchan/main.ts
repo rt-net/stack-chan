@@ -104,11 +104,11 @@ async function main() {
     trace(`WiFi connection failed: ${msg}`)
   })
   let { onRobotCreated, onLaunch } = defaultMod
-  // if (Modules.has('mod')) {
-  //   const mod = Modules.importNow('mod') as StackchanMod
-  //   onRobotCreated = mod.onRobotCreated ?? onRobotCreated
-  //   onLaunch = mod.onLaunch ?? onLaunch
-  // }
+  if (Modules.has('mod')) {
+    const mod = Modules.importNow('mod') as StackchanMod
+    onRobotCreated = mod.onRobotCreated ?? onRobotCreated
+    onLaunch = mod.onLaunch ?? onLaunch
+  }
   trace('Kurasawa changed TX7 RX6')
   const shouldRobotCreate = await onLaunch?.()
   if (shouldRobotCreate !== false) {
