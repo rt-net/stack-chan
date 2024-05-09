@@ -1,9 +1,23 @@
-* I welcome pull requests of all kinds
-  * Add original accessories for Stack-chan
-  * Stability/Extensibility improvement of schematics and board layout
-  * New examples(mods) on top of firmware
-  * Add development instruction
-  * Fix typo
-* There are no restrictions or rules regarding the creation and submission of pull requests at this time.
-  * CI process for testing firmware builds is under construction.
-* Take it easy and stay healthy. Thank you very much.
+本リポジトリへのコントリビュート方法について記載しています。
+
+Issues
+
+リポジトリの品質向上にご協力頂きありがとうございます。
+
+Issueの作成を簡単にするテンプレートを用意しているので活用してください。
+
+Pull Requests
+
+Pull Requestの作成ありがとうございます。 提出したPull Request（PR）には次のルールが適用されます。
+
+PRの内容には本リポジトリのライセンス（LICENSEとREADME.mdに記載されています）が適用されます
+PRはrt-netのメンバーによるレビューを経てからマージされます
+すべてのPRがマージされるわけではなく、希望に添えない場合もありますのでご容赦ください
+リポジトリにテストが設定されている場合はできるだけテストを通してください
+何かしらの理由（テストに間違いがある場合など）でテストを通さずPRを出す場合はその旨をPRに記載してください
+マージする際にはPR内の全コミットが1つのコミットにsquashされます
+コミットをスカッシュしてマージする | GitHub Docs
+1つのPRでリクエストする変更はできるだけシンプルにしてください
+異なる内容の変更を含む場合はPRを分割してください
+例えば、複数の機能追加したり、機能追加とリファクタリングを同時にする場合はそれぞれ別々のPRとしてください
+squashマージしても履歴を辿りやすくするためです
