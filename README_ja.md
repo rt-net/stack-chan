@@ -13,14 +13,14 @@
 
 
 ｽﾀｯｸﾁｬﾝは[ししかわ](https://twitter.com/stack_chan)がJavaScriptで開発し、公開している、手乗りサイズのｽｰﾊﾟｰｶﾜｲｲコミュニケーションロボットです。
-* 作品ページ：https://github.com/meganetaaan/stack-chan
+* 作品ページ：https://github.com/stack-chan/stack-chan
 * 動画: https://youtu.be/fZb_mF08xV0
 
 <br>
 
 ｽﾀｯｸﾁｬﾝ アールティver. では以下の変更が加えられています。
 
-* ファームウェアのバージョンと依存するModdable SDKのバージョンを[4.1](https://github.com/Moddable-OpenSource/moddable/releases/tag/4.1)に固定しています
+* ファームウェアが依存するModdable SDKのバージョンを[4.1](https://github.com/Moddable-OpenSource/moddable/releases/tag/4.1)に固定しています
 * 回路図・基板を一部変更しています
 * サーボモータに DYNAMIXEL XL330-M288-T を採用しています
 * 本体を射出成形で製造しています
@@ -46,7 +46,11 @@
 
 ## 製作方法
 
+近日公開
+
 ### モジュールを組み立てる
+
+近日公開
 
 ### ファームウェアをM5Stackに書き込む
 

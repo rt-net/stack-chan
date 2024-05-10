@@ -1,12 +1,12 @@
 本リポジトリへのコントリビュート方法について記載しています。
 
-Issues
+## Issues
 
 リポジトリの品質向上にご協力頂きありがとうございます。
 
 Issueの作成を簡単にするテンプレートを用意しているので活用してください。
 
-Pull Requests
+## Pull Requests
 
 Pull Requestの作成ありがとうございます。 提出したPull Request（PR）には次のルールが適用されます。
 

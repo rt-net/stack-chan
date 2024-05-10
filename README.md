@@ -13,17 +13,19 @@ This is the repository for Stack-chan RT ver.
 
 
 Stack-chan is a super cute, palm-sized communication robot developed and released in JavaScript by [Shinya Ishikawa](https://twitter.com/stack_chan).
-* Project page: https://github.com/meganetaaan/stack-chan
+* Project page: https://github.com/stack-chan/stack-chan
 * Video (with English subtitles): https://youtu.be/fZb_mF08xV0
 
 <br>
 
 The version includes the following changes:
 
-* We are fixing the firmware version and the dependent Moddable SDK version to [4.1](https://github.com/Moddable-OpenSource/moddable/releases/tag/4.1)
-* Some modifications have been made to the circuit diagram and the board.
-* The DYNAMIXEL XL330-M288-T servo motor is adopted.
-* The body is manufactured by injection molding.
+The RT version introduces the following updates:
+
+* The dependent Moddable SDK version is now fixed at 4.1.
+* Several updates have been made to the circuit diagram and board design.
+* The DYNAMIXEL XL330-M288-T servo motor has been integrated.
+* The robot's exterior casing is produced using injection molding.
 
 ## Features
 
@@ -46,7 +48,11 @@ This repository includes the following contents.
 
 ### Assemble board
 
+Coming soon...
+
 ### Flash firmware to M5Stack
+
+Coming soon...
 
 ## Contribution
 
