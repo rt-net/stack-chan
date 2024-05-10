@@ -109,7 +109,6 @@ async function main() {
     onRobotCreated = mod.onRobotCreated ?? onRobotCreated
     onLaunch = mod.onLaunch ?? onLaunch
   }
-  trace('Kurasawa changed TX7 RX6')
   const shouldRobotCreate = await onLaunch?.()
   if (shouldRobotCreate !== false) {
     const robot = createRobot()
