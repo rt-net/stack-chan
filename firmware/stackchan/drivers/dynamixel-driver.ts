@@ -31,7 +31,7 @@ class PControl {
   async init() {
     const result = await this.servo.readPresentPosition()
     if (result.success && result.value > 4096) {
-      this._offset = 4096;
+      this._offset = 4096
     }
     this.goalPosition = 2048
     await this.servo.setOperatingMode(OPERATING_MODE.CURRENT_BASED_POSITION)
