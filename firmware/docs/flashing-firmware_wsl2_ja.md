@@ -26,7 +26,7 @@
 
 <img src="images/flashing-firmware_wsl2_ja/launch_poweshell.jpg" width="100%">
 
-開いた`Windows PoserShell`上に、以下のコマンドを入力し、実行してください。
+開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。
 
 コマンドは画像の通り、`PS C:\WINDOWS\system32>`の後に続けて入力し、Enterキーで実行します。
 ```=powershell
@@ -49,7 +49,7 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
 ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
-ユーザー名では全角文字と大文字は使用できませんので、小文字のみの半角文字の文字列で設定してください。
+ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。
 
 
 <img src="images/flashing-firmware_wsl2_ja/ubuntu22_1st_launch.jpg" width="100%">
@@ -68,10 +68,7 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 <img src="images/flashing-firmware_wsl2_ja/root_boot.jpg" width="100%">
 
-この状態に遭遇された際には本マニュアルの末尾の`最初からやり直したい場合`の節を参照し、再度Ubuntuのインストールを行ってください。
-
-
-** <span id="script-begin">スクリプト開始位置</span> **
+この状態に遭遇された際には本マニュアルの末尾の[最初からやり直したい場合](#最初からやり直したい場合)の節を参照し、再度Ubuntuのインストールを行ってください。
 
 ## `Ubuntu`のパッケージリストの更新と必要パッケージのインストール
 
@@ -82,12 +79,14 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 ### コピー＆ペーストを行う際の注意！
 `Ubuntu`では`Windows PowerShell`と違い、キーボードによるコピー&ペーストは`shift`キーも押す必要があります。
+
 コピー：`ctrl + shift + c`
+
 ペースト：`ctrl + shift + v`
 
 特に、`ctrl + c`をUbuntu上で実行すると、プロセス（現在実行しているコマンド・プログラム）の終了となりますのでご注意ください。
 
-<img src="images/flashing-firmware_wsl2_ja/apt_update.jpg" width="100%">
+### パッケージリストの更新
 
 最新パッケージのリストを更新します。
 
@@ -95,7 +94,11 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 $ sudo apt update
 ```
 
-Pythonの仮想環境を作成する際に使用する`vevnv`に必要となる、`python3.10-venv`をインストールします。
+<img src="images/flashing-firmware_wsl2_ja/apt_update.jpg" width="100%">
+
+### `Python venv`のインストール
+
+Pythonの仮想環境を作成する際に使用するvevnvツールが含まれているpython3.10-venvをインストールします。
 
 ```=bash
 $  sudo apt install -y python3.10-venv
@@ -113,7 +116,7 @@ $  sudo apt install -y python3.10-venv
 
 `Node.js`と`npm`を管理するツール`Volta`をインストールします。
 
-```=bash
+```bash
 $ curl https://get.volta.sh | bash
 ```
 
@@ -123,10 +126,10 @@ $ curl https://get.volta.sh | bash
 
 Ubuntuのウインドウを閉じ、Windows11のスタートメニューからUbuntuを再起動してください。
 
-### `Node.js`と`npm`のインストール
+### `Volta`から`Node.js`と`npm`をインストール
 
 `Node.js`と`npm`をインストールします。
-```=bash
+```bash
 $ volta install node@20.11.0
 ```
 
@@ -135,7 +138,7 @@ $ volta install node@20.11.0
 `npm`と`Node.js`がインストール出来ているかを確認します。
 以下の２つのコマンドをうち、それぞれ画像の通りに表示されれば完了です。
 
-```=bash
+```bash
 $ npm -v
 $ node -v
 ```
@@ -147,7 +150,7 @@ $ node -v
 ### ｽﾀｯｸﾁｬﾝのプログラムのダウンロード
 
 ｽﾀｯｸﾁｬﾝのプログラムをダウンロードします。
-```=bash
+```bash
 $ git clone --recursive https://github.com/rt-net/stack-chan.git
 ```
 
@@ -161,7 +164,7 @@ $ git clone --recursive https://github.com/rt-net/stack-chan.git
 
 `npm install` でインストールを実行します。
 
-```=bash
+```bash
 $ cd stack-chan/firmware
 $ npm install
 ```
@@ -179,7 +182,7 @@ $ npm install
 ２つ目のコマンドでは、再度パスワードが要求されない内に実行してください。
 もし、何らかの理由で１つめのコマンド実行から時間がかかってしまった場合は１つ目のコマンドの実行からやり直してください。
 
-```=bash
+```bash
 $ sudo echo "Temporary SuperUser Grant"
 $ npm run setup
 ```
@@ -196,20 +199,18 @@ $ npm run setup
 ２つ目のコマンドでは、このパスワードが要求されない内に実行してください。
 もし、何らかの理由で１つめのコマンド実行から時間がかかってしまった場合は１つ目のコマンドの実行からやり直してください。
 
-```=bash
+```bash
 $ sudo echo "Temporary SuperUser Grant"
 $ npm run setup -- --device=esp32
 ```
 
 <img src="images/flashing-firmware_wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
-** <span id="script-end">スクリプト終了位置</span> **
-
 ### 構築した環境の確認
 
 以下のコマンドで環境のテストをします。
 
-```=bash
+```bash
 $ npm run doctor
 ```
 
@@ -249,7 +250,7 @@ $ npm run doctor
 
 USBポートに接続されたデバイスリスト出力します。
 
-```=PS
+```PS
 PS C:\WINDOWS\system32> usbipd list
 ```
 
@@ -267,7 +268,7 @@ PS C:\WINDOWS\system32> usbipd list
 
 ｽﾀｯｸﾁｬﾝを起動する前と同様に、`usbipd list`コマンドを実行して再度USBデバイスリスト出力します。
 
-```=PS
+```PS
 PS C:\WINDOWS\system32> usbipd list
 ```
 
@@ -281,12 +282,12 @@ PS C:\WINDOWS\system32> usbipd list
 
 以下に示すように、コマンドの`<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行した後、再度USBデバイスリスト出力してください。
 
-```=PS
+```PS
 PS C:\WINDOWS\system32> usbipd bind --busid <ｽﾀｯｸﾁｬﾝのBUSID>
 PS C:\WINDOWS\system32> usbipd list
 ```
 
-USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`shared`となっていれば完了です。
+USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Shared`となっていれば完了です。
 
 <img src="images/flashing-firmware_wsl2_ja/usbipd_list_3.jpg" width="100%">
 
@@ -302,12 +303,12 @@ USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`shared`とな�
 
 （今回も`bind`のときと同様、<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行します。）
 
-```=PS
+```PS
 PS C:\WINDOWS\system32> usbipd attach --wsl --busid <ｽﾀｯｸﾁｬﾝのBUSID>
 PS C:\WINDOWS\system32> usbipd list
 ```
 
-USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`attached`となっていれば完了です。
+USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Attached`となっていれば完了です。
 
 <img src="images/flashing-firmware_wsl2_ja/usbipd_list_4.jpg" width="100%">
 
@@ -321,7 +322,7 @@ USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`attached`とな
 先程のPowerShell上でのｽﾀｯｸﾁｬﾝと同じ名称のデバイスが表示されています。
 今回の例では、`USB JTAG/serial debug unit`です。
 
-```=bash
+```bash
 $ lsusb
 ```
 
@@ -338,7 +339,7 @@ $ lsusb
 次に、`npm run deploy --target=esp32/m5stack_cores3`を実行すればビルドしたプログラムをｽﾀｯｸﾁｬﾝに書き込めます。
 
 
-```=bash
+```bash
 $ cd stack-chan/firmware
 $ npm run build --target=esp32/m5stack_cores3
 $ npm run deploy --target=esp32/m5stack_cores3
@@ -350,7 +351,7 @@ $ npm run deploy --target=esp32/m5stack_cores3
 
 以下のように書き込みが完了次第、リセットボタンを押下してください。
 
-<img src="images/flashing-firmware_wsl2_ja/deploy.png" width="100%">
+<img src="images/flashing-firmware_wsl2_ja/deploy.jpg" width="100%">
 
 <br>
 
@@ -364,16 +365,13 @@ $ npm run deploy --target=esp32/m5stack_cores3
 
 **<span style="color: red; ">[注意！]</span>リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) も再度実行する必要があります。**
 
-- [スクリプト開始位置へのページ内リンク](#script-begin)
-- [スクリプト終了位置へのページ内リンク](#script-end)
-
 ## 最初からやり直したい場合
 
 どこからかマニュアル通りにいかず、エラーが出力されていまった場合、エラーに従ったり調べるすることで解決に繋がります。
 ですが、`Ubuntu`を一旦アンインストールし、きれいな環境で最初から実行するという手段もあります。
 その場合、管理者権限で開いた`Windows PowerShell`上で以下のコマンドを実行することで現在の`Ubuntu`を削除することができます。
 
-```=PS
+```PS
 PS C:\WINDOWS\system32>  wsl --unregister Ubuntu
 ```
 
@@ -384,4 +382,23 @@ PS C:\WINDOWS\system32>  wsl --unregister Ubuntu
 
 ## よくある質問
 
-- WSL2とPCの設定時間がずれていると、`sudo apt update`でセキュリティ上のエラー(`http`)が起きて、その後の手順でも失敗します。正しく同期していることを確認してください。
+### リリースファイルの有効期限エラー
+
+WSL2とPCの設定時間がずれていると、`sudo apt update`コマンド実行の際に以下の画像のようにセキュリティ上のエラーが起きます。
+
+`sudo apt update`コマンドの実行が完了していない場合、これ以降の手順でも失敗するため、正しく同期していることを確認してください。
+
+```bash
+
+$ sudo apt update
+[sudo] password for ubuntu:
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+Reading package lists... Done
+E: Release file for http://security.ubuntu.com/ubuntu/dists/jammy-security/InRelease is not valid yet (invalid for another 8h 24min 40s). Updates for this repository will not be applied.
+E: Release file for http://archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease is not valid yet (invalid for another 8h 25min 52s). Updates for this repository will not be applied.
+E: Release file for http://archive.ubuntu.com/ubuntu/dists/jammy-backports/InRelease is not valid yet (invalid for another 6h 47min 42s). Updates for this repository will not be applied.
+
+```
