@@ -25,11 +25,12 @@
 17. 六角穴付きネジ(M3x12) 2本
 
 ![](images/assembly/all_parts.jpg)
+<img src="" width="100%">
 
 ## 使用工具一覧
 
-- プラスドライバー（M2ネジ用）
-- マイナスドラバー（先端幅5.5[mm]以下）
+- プラスドライバー（ISO: P1）
+- マイナスドライバー（先端幅5.5[mm]以下）
 - 六角レンチ（M2ネジ用）
 - 【オプション】六角レンチ（M3ネジ用）
 
@@ -42,14 +43,17 @@
 サーボモータ１とサーボモータ２に取り付けられたタップネジ(M2.6x6)を取り外します。
 
 サーボモータ１：青色のシールが貼られたサーボモータ
+
 サーボモータ２：緑色のシールが貼られたサーボモータ
 
 
 ![](images/assembly/disassembling_screw.JPG)
+<img src="" width="100%">
 
 取り外した2本のネジは、この後に使用するので取っておいてください。画像左側のパーツ（『not used』と書かれたパーツ）はｽﾀｯｸﾁｬﾝ アールティver.では使用しません。
 
 ![](images/assembly/disassembling_servo.JPG)
+<img src="" width="100%">
 
 ### 胴体の組み立て
 
@@ -58,16 +62,19 @@
 サーボモータ１とサーボモータ２には、それぞれID1とID2が事前に割り振られており、M5Stackとの通信の際、ソフトウェア上での個体識別として用いています。目印として、ID1に青色、ID2には緑色のシールが貼られています。取り付けが逆にならないように注意してください。
 
 ![servo_wired](images/assembly/servo_wired.JPG)
+<img src="" width="100%">
 
 胴体となる部分はサーボモータ１とサーボモータ２をサーボプラケットで固定します。ケーブルを挟まないように注意しつつ、サーボブラケット(前)とサーボブラケット(後)で挟み込みます。
 この際、サーボに「DYNAMIXEL XL330-M288-T」と書いてあるラベルが矢印方向に向くようにしてください。
 
 
 ![born_prev](images/assembly/born_purge.JPG)
+<img src="" width="100%">
 
 2つのサーボモータをサーボブラケットで挟んで固定します。
 
 ![born](images/assembly/born_base.JPG)
+<img src="" width="100%">
 
 
 ### 足の取り付け
@@ -81,24 +88,29 @@
 </p>
 
 ![](images/assembly/servo_and_feet_protrusions.JPG)
+<img src="" width="100%">
 
 サーボモータ用のネジ（M2.6タップネジ）を締めて固定します。
 
 ![](images/assembly/tightening_feet_screw.JPG)
+<img src="" width="100%">
 
 ネジを奥まで締めたら、足(下)を取り付けます。
 
 ![](images/assembly/feet_bottom_assembled.JPG)
+<img src="" width="100%">
 
 足を取り付けると以下の画像のようになります。
 
 ![](images/assembly/born_feet.JPG)
+<img src="" width="100%">
 
 #### 足の分解方法
 
 足(上)に取り付けた足(下)は4箇所の窪みから取り外すことができます。1箇所ずつ、マイナスドライバーを窪みに差し込み、足(上)のフチを支点としたテコの原理で固定を外します。
 
 ![](images/assembly/disassembling_feet.JPG)
+<img src="" width="100%">
 
 ### サーボホーンの取り付け
 
@@ -107,10 +119,12 @@
 サーボモータ２とサーボホーンが共にギヤの形状となっている部分同士を取り付けます。足の取り付けの際と同様に突起と切り欠きの位置を合わせてグッと押し込んでください。
 
 ![](images/assembly/servo_and_horn_protrusions.JPG)
+<img src="" width="100%">
 
 突起の位置を合わせて接合したギヤ部分にM2.6タップネジを締めてください。
 
 ![](images/assembly/tightening_horn_screw.JPG.JPG)
+<img src="" width="100%">
 
 ### バッテリーパックの取り付け
 
@@ -119,6 +133,7 @@
 バッテリーをバッテリーパック(内)の窪みに入れます。パッテリーのコードはスリットを通して外に出してください。
 
 ![](images/assembly/battery_into_backpack.JPG)
+<img src="" width="100%">
 
 雷マークが描かれたバッテリーパック(上)を閉めます。
 
@@ -129,6 +144,7 @@
 バッテリーパック(内)から出ている突起をサーボブラケット(後)に引っ掛けて固定します。
 
 ![](images/assembly/born_backpackd.JPG)
+<img src="" width="100%">
 
 位置を合わせたら矢印方向にスライドしてください。
 
@@ -138,6 +154,7 @@
 
 
 ![](images/assembly/born_assembled.JPG)
+<img src="" width="100%">
 
 ### 外装の取り付け
 
@@ -146,14 +163,17 @@
 シェルの天板内側にある突起とサーボホーンを取り付けます。バッテリーのコードとサーボモータのTTLケーブルを前に持ってきなからスライドして入れてください。
 
 ![](images/assembly/born_shell.JPG)
+<img src="" width="100%">
 
 突起によってｶﾁｯ！と手応えがあるまでスライドさせてください。
 
 ![](images/assembly/born_slide_shell.JPG)
+<img src="" width="100%">
 
 取り付けて反対側から見ると以下の画像のようになります。青色のラインはサーボホーンの輪郭です。
 
 ![](images/assembly/born_shell_assembled.JPG)
+<img src="" width="100%">
 
 ### 基板の取り付け
 
@@ -175,16 +195,19 @@
 基板まで取り付けると以下の画像のようになります。
 
 ![](images/assembly/board_assembled.JPG)
+<img src="" width="100%">
 
 ### M5Stack CoreS3の取り付け
 
 M5Stack CoreS3を基板に対してピンの位置をわせてグッと押し込んでください。
 
 ![](images/assembly/m5_attaching.JPG)
+<img src="" width="100%">
 
 無事に取り付けられたらｽﾀｯｸﾁｬﾝの組み立ては完了です。
 
 ![](images/assembly/stack-chan_assembled.JPG)
+<img src="" width="100%">
 
 
 ### 【オプション】M5Stack CoreS3の固定
@@ -194,8 +217,10 @@ M5Stack CoreS3をしっかり固定したい場合は、キットに付属して
 バッテリーパックをサーボブラケット(後)から取り外し、バッテリーの端子も基板から外します。短いほうの六角ネジ2本をｽﾀｯｸﾁｬﾝの上側に、長いほうの六角ネジ2本を下側に取り付けます。4本のネジを締め終えたらバッテリーパックを再度取り付けます。
 
 ![](images/assembly/back_screws.JPG)
+<img src="" width="100%">
 
 ![](images/assembly/assembling_back_screws.JPG)
+<img src="" width="100%">
 
 <span style="font-size: 120%; color: red;">六角ネジを取り付ける際は、必ずバッテリーを外してから取り付けてください。ネジを基板上に落とすとショートして壊れる恐れがあります。</span>
 
