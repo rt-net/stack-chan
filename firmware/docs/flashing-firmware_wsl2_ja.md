@@ -10,10 +10,9 @@
 - `Windows PowerShell`：コマンド入力欄の表示が`PS C:\WINDOWS\system32> `
 - `Ubuntu`：コマンド入力欄の末尾の表示が`$`
 
-<p><
-    <img src="images/flashing-firmware_wsl2_ja/windows_powershell.jpg" width=48%>
-    <img src="images/flashing-firmware_wsl2_ja/ubuntu.jpg" width=48%>
-</p>
+<img src="images/flashing-firmware_wsl2_ja/windows_powershell.jpg" width=100%>
+
+<img src="images/flashing-firmware_wsl2_ja/ubuntu.jpg" width=100%>
 
 ## `WSL2`+`Ubuntu22.04`のインストール
 
@@ -24,7 +23,9 @@
 2. 検索欄に「windows powershell」と入力する
 3. `Windows PowerShell`のアイコンが出てくるので「管理者権限で開く」を選択してください。
 
-<img src="images/flashing-firmware_wsl2_ja/launch_poweshell.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/launch_poweshell.jpg" width="90%">
+
+<br>
 
 開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。
 
@@ -33,8 +34,10 @@
 PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/install_ubuntu22.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/install_ubuntu22.jpg" width="100%">
 
+<br>
+<br>
 
 インストールが完了したら、PCを再起動してください。
 
@@ -47,12 +50,18 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 <img src="images/flashing-firmware_wsl2_ja/launch_ubuntu2.jpg" width="80%">
 
+<br>
+<br>
+
 ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
 ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
 ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。
 
 
-<img src="images/flashing-firmware_wsl2_ja/ubuntu22_1st_launch.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/ubuntu22_1st_launch.jpg" width="100%">
+
+<br>
+<br>
 
 設定が完了したら`Ubuntu`を再起動します。
 `Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、再度スタートメニューから`Ubuntu`を選択してを起動してください。
@@ -60,15 +69,20 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 末尾が`$`記号の文字列が表示されていればUbuntuの設定は完了です。
 成功していれば、`<設定したUbuntuのユーザー名>@...:~$`表示されています。
 
-<img src="images/flashing-firmware_wsl2_ja/setted_ubuntu.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/setted_ubuntu.jpg" width="100%">
+
+<br>
+<br>
 
 ### **<span style="color: red; ">[注意！]</span>初期設定に失敗した場合**
 
 `Ubuntu`起動時、`root@"...:~#`のように表示される場合、ユーザー作成の設定は失敗しています。
 
-<img src="images/flashing-firmware_wsl2_ja/root_boot.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/root_boot.jpg" width="100%">
 
 この状態に遭遇された際には本マニュアルの末尾の[最初からやり直したい場合](#最初からやり直したい場合)の節を参照し、再度Ubuntuのインストールを行ってください。
+
+<br>
 
 ## `Ubuntu`のパッケージリストの更新と必要パッケージのインストール
 
@@ -77,14 +91,19 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 コマンドは画像の通り、`$`の後に続けて入力し、Enterキーで実行します。
 
+<br>
+
 ### コピー＆ペーストを行う際の注意！
-`Ubuntu`では`Windows PowerShell`と違い、キーボードによるコピー&ペーストは`shift`キーも押す必要があります。
+
+<span style="font-size: 120%; color: red;">`Ubuntu`では`Windows PowerShell`と違い、キーボードによるコピー&ペーストは`shift`キーも押す必要があります。</span>
 
 コピー：`ctrl + shift + c`
 
 ペースト：`ctrl + shift + v`
 
 特に、`ctrl + c`をUbuntu上で実行すると、プロセス（現在実行しているコマンド・プログラム）の終了となりますのでご注意ください。
+
+<br>
 
 ### パッケージリストの更新
 
@@ -94,11 +113,11 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 $ sudo apt update
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/apt_update.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/apt_update.jpg" width="100%">
 
 ### `Python venv`のインストール
 
-Pythonの仮想環境を作成する際に使用するvevnvツールが含まれているpython3.10-venvをインストールします。
+Pythonの仮想環境を作成する際に使用するvenvツールが含まれているpython3.10-venvをインストールします。
 
 ```=bash
 $  sudo apt install -y python3.10-venv
@@ -120,7 +139,7 @@ $  sudo apt install -y python3.10-venv
 $ curl https://get.volta.sh | bash
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/volta_reboot.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/volta_reboot.jpg" width="100%">
 
 インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを開始するように促されます。
 
@@ -143,7 +162,7 @@ $ npm -v
 $ node -v
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/npm_node.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/npm_node.jpg" width="100%">
 
 ## ｽﾀｯｸﾁｬﾝのプログラムのインストール
 
@@ -154,7 +173,7 @@ $ node -v
 $ git clone --recursive https://github.com/rt-net/stack-chan.git
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/git_clone.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/git_clone.jpg" width="100%">
 
 ### ソフトウェアパッケージのインストール
 
@@ -169,7 +188,7 @@ $ cd stack-chan/firmware
 $ npm install
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/npm_install.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/npm_install.jpg" width="100%">
 
 ### `Moddable`のインストール
 
@@ -187,7 +206,7 @@ $ sudo echo "Temporary SuperUser Grant"
 $ npm run setup
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/npm_run_setup.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/npm_run_setup.jpg" width="100%">
 
 ### `M5Stack`向けに`Moddable`をにセットアップ
 
@@ -204,7 +223,7 @@ $ sudo echo "Temporary SuperUser Grant"
 $ npm run setup -- --device=esp32
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/npm_run_setup_esp32.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
 ### 構築した環境の確認
 
@@ -214,7 +233,7 @@ $ npm run setup -- --device=esp32
 $ npm run doctor
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/npm_run_doctor.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/npm_run_doctor.jpg" width="100%">
 
 `Moddable`のバージョンが`v4.1.0`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。
 ここまで完了次第、Ubuntuのウインドウを閉じてください。
@@ -229,17 +248,17 @@ $ npm run doctor
 
 [公式のダウンロードページ](https://github.com/dorssel/usbipd-win/releases)から、最新版の`.msi`形式ファイルをダウンロードしてください。
 
-<img src="images/flashing-firmware_wsl2_ja/usp-ipd_download.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usp-ipd_download.jpg" width="100%">
 
 ### `usbipd-win`のインストール
 
 ダウンロードしてきたファイル（インストーラ）に従ってインストールしてください。インストールが完了したらPCを再起動してください。
 
-<img src="images/flashing-firmware_wsl2_ja/usb-ipd_install_1.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usb-ipd_install_1.jpg" width="60%">
 
-<img src="images/flashing-firmware_wsl2_ja/usb-ipd_install_2.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usb-ipd_install_2.jpg" width="60%">
 
-<img src="images/flashing-firmware_wsl2_ja/usb-ipd_install_3.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usb-ipd_install_3.jpg" width="60%">
 
 ### `ｽﾀｯｸﾁｬﾝ`の`BUSID`を確認する
 
@@ -254,7 +273,10 @@ USBポートに接続されたデバイスリスト出力します。
 PS C:\WINDOWS\system32> usbipd list
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/usbipd_list_1.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usbipd_list_1.jpg" width="100%">
+
+<br>
+<br>
 
 以下の手順で`ｽﾀｯｸﾁｬﾝ`とPCを接続して起動します。
 
@@ -263,8 +285,10 @@ PS C:\WINDOWS\system32> usbipd list
 3. 起動ボタンを押して`ｽﾀｯｸﾁｬﾝ`の電源をONにします（OFFにするときは6秒間長押しします）
 
 <p>
-    <img src="images/flashing-firmware_wsl2_ja/stackchan_connected_pc.jpg" width="40%"><img src="images/flashing-firmware_wsl2_ja/stackchan_connected_focus.jpg" width="40%">
+    <img src="images/flashing-firmware_wsl2_ja/stackchan_connected_pc.jpg" width="45%"><img src="images/flashing-firmware_wsl2_ja/stackchan_connected_focus.jpg" width="45%">
 </p>
+
+<br>
 
 ｽﾀｯｸﾁｬﾝを起動する前と同様に、`usbipd list`コマンドを実行して再度USBデバイスリスト出力します。
 
@@ -274,7 +298,7 @@ PS C:\WINDOWS\system32> usbipd list
 
 今回のコマンドで新たに現れた`BUSID`（画像の場合では`2-1`）がｽﾀｯｸﾁｬﾝを指し示してます。
 
-<img src="images/flashing-firmware_wsl2_ja/usbipd_list_2.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usbipd_list_2.jpg" width="100%">
 
 ### `ｽﾀｯｸﾁｬﾝ`を`bind`する
 
@@ -289,7 +313,7 @@ PS C:\WINDOWS\system32> usbipd list
 
 USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Shared`となっていれば完了です。
 
-<img src="images/flashing-firmware_wsl2_ja/usbipd_list_3.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usbipd_list_3.jpg" width="100%">
 
 <br>
 
@@ -310,7 +334,7 @@ PS C:\WINDOWS\system32> usbipd list
 
 USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Attached`となっていれば完了です。
 
-<img src="images/flashing-firmware_wsl2_ja/usbipd_list_4.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/usbipd_list_4.jpg" width="100%">
 
 ### `WSL2`から`ｽﾀｯｸﾁｬﾝ`を認識できていることを確認する
 
@@ -326,7 +350,7 @@ USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Attached`とな
 $ lsusb
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/lsusb.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/lsusb.jpg" width="100%">
 
 ## プログラムのビルドと書き込み
 
@@ -345,19 +369,21 @@ $ npm run build --target=esp32/m5stack_cores3
 $ npm run deploy --target=esp32/m5stack_cores3
 ```
 
-<img src="images/flashing-firmware_wsl2_ja/npm_run_deploy.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/npm_run_deploy.jpg" width="100%">
 
+<br>
 <br>
 
 以下のように書き込みが完了次第、リセットボタンを押下してください。
 
-<img src="images/flashing-firmware_wsl2_ja/deploy.jpg" width="80%">
+<img src="images/flashing-firmware_wsl2_ja/deploy.jpg" width="100%">
 
+<br>
 <br>
 
 リセットボタンの位置
 
-<img src="images/flashing-firmware_wsl2_ja/reset_button.jpg" width="500">
+<img src="images/flashing-firmware_wsl2_ja/reset_button.jpg" width="60%">
 
 リセットボタンを押下した後にｽﾀｯｸﾁｬﾝに顔が表示されていれば書き込み完了です。
 
