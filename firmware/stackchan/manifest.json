@@ -47,6 +47,7 @@
     "config": {
         "sntp": "pool.ntp.org",
         "driver": {
+            "type": "dynamixel",
             "panId": 1,
             "tiltId": 2,
             "pwmPan": 5,
