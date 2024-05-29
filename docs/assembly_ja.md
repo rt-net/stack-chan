@@ -6,33 +6,47 @@
 
 ｽﾀｯｸﾁｬﾝの組み立てには以下のパーツを使用します。
 
-<span style="font-size: 120%; color: red;">『[ｽﾀｯｸﾁｬﾝ アールティver. 組立キット](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』には、以下のパーツ一覧に記載されていない`M2.5x8`のネジが2本が同梱されています。これらのネジは組み立てのどのステップにも使用されません。誤って使用しないよう、ご注意ください。</span>
+<span style="font-size: 120%; color: red;">『[ｽﾀｯｸﾁｬﾝ アールティver. 組立キット](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』には、`M2.5x8`のネジが2本が同梱されています。これらのネジは組み立てのどのステップにも使用されません。誤って使用しないよう、ご注意ください。</span>
+
+<img src="images/assembly/parts_1.jpg" width="100%">
+<img src="images/assembly/parts_2.jpg" width="100%">
+<img src="images/assembly/parts_3.jpg" width="100%">
+<img src="images/assembly/parts_4.jpg" width="100%">
+<img src="images/assembly/parts_5.jpg" width="100%">
+<img src="images/assembly/parts_6.jpg" width="100%">
+<img src="images/assembly/parts_7.jpg" width="100%">
+
+### 使用パーツ
 
 1. M5Stack CoreS3
 2. 基板
 3. シェル
-4. バッテリーパック(内)
-5. バッテリーパック(外)
-6. バッテリー(1セル 450mAh)
-7. 足(上)
-8. 足(下)
-9. サーボブラケット(後)
-10. サーボブラケット(前)
-11. サーボモータ１
-12. サーボモータ２
-13. サーボホーン
-14. TTLケーブル 2本
-15. タップネジ(M2x5) 4本
-16. 六角穴付きネジ(M3x14) 2本
-17. 六角穴付きネジ(M3x12) 2本
+4. 足(上)
+5. 足(下)
+6. サーボブラケット(前)
+7. サーボブラケット(後)
+8. サーボモータ１
+9. サーボモータ２
+10. TTLケーブル 2本
+11. バッテリーパック
+12. サーボホーン
+13. 六角穴付きタップネジ M2x5[mm] 4本
 
-<img src="images/assembly/all_parts.jpg" width="100%">
+### オプションパーツ
+
+14. 六角穴付きネジ M3x12[mm] 2本
+15. 六角穴付きネジ M3x14[mm] 2本
+
+### 不要パーツ
+
+16. 六角穴付きネジ M2.5x8[mm] 2本
+
 
 ## 使用工具一覧
 
 - プラスドライバー PH1（M2.6ネジ用）
 - マイナスドライバー（先端幅5.5[mm]以下）
-- 六角レンチ 0.89[mm]（M2六角穴付きネジ用）
+- 六角レンチ 1.5[mm]（M2六角穴付きネジ用）
 - 【オプション】六角レンチ 2.5mm[mm]（M3六角穴付きネジ用）
 
 ## 組み立て
@@ -75,7 +89,7 @@
 
 胴体にｽﾀｯｸﾁｬﾝの足を取り付けます。
 
-サーボモータ１の突起と足(上)の接合部の切り欠きの位置を合わせてグッと押して固定してください。
+サーボモータ１の突起と足(上)の接合部の切り欠きの位置を合わせてグッと押して固定してください。突起と切り欠きの位置が正しく合っていない場合、押し込む際に突起が折れてしまう恐れがあります。慎重に確認してから押し込んでください。
 
 <p>
     <img src="images/assembly/servo_protrusion_focus.jpg" width="35%"> <img src="images/assembly/feet_cutout.jpg" width="60%">
@@ -113,24 +127,10 @@
 
 <img src="images/assembly/tightening_horn_screw.jpg" width="100%">
 
-### 【オプション】バッテリーパックの組み立て
-
-<span style="font-size: 120%; color: red;">『ｽﾀｯｸﾁｬﾝ アールティver.』では、予めバッテリーパックが組み立てられた状態です。本節は、バッテリーパックの部品交換が必要となった際にご参照ください。</span>
-
-バッテリーをバッテリーパック(内)の窪みに入れます。パッテリーのコードはスリットを通して外に出してください。
-
-<img src="images/assembly/battery_into_backpack.jpg" width="100%">
-
-雷マークが描かれたバッテリーパック(上)を閉めます。
-
-<p>
-    <img src="images/assembly/backpack_opening.jpg" width="50%"><img src="images/assembly/backpack_assembled.jpg" width="50%">
-</p>
-
 ### バッテリーパックの取り付け
 
-バッテリーパックを取り付けます。
-バッテリーパック(内)から出ている突起をサーボブラケット(後)に引っ掛けて固定します。
+バッテリーパックを胴体に取り付けます。
+バッテリーパックから出ている突起をサーボブラケット(後)に引っ掛けて固定します。
 
 <img src="images/assembly/born_backpack.jpg" width="100%">
 
@@ -182,7 +182,7 @@
 
 ### M5Stack CoreS3の取り付け
 
-M5Stack CoreS3を基板に対してピンの位置をわせてグッと押し込んでください。
+M5Stack CoreS3を基板に対してピンの位置を合わせてグッと押し込んでください。
 
 <img src="images/assembly/m5_attaching.jpg" width="100%">
 
