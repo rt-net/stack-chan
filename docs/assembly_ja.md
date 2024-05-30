@@ -6,7 +6,7 @@
 
 ｽﾀｯｸﾁｬﾝの組み立てには以下のパーツを使用します。
 
-<span style="font-size: 120%; color: red;">『[ｽﾀｯｸﾁｬﾝ アールティver. 組立キット](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』には、`M2.5x8`のネジが2本が同梱されています。これらのネジは組み立てのどのステップにも使用されません。誤って使用しないよう、ご注意ください。</span>
+**『[ｽﾀｯｸﾁｬﾝ アールティver. 組立キット](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』には、`M2.5x8`のネジが2本が同梱されています。これらのネジは組み立てのどのステップにも使用されません。誤って使用しないよう、ご注意ください。**
 
 <img src="images/assembly/parts_1.jpg" width="100%">
 <img src="images/assembly/parts_2.jpg" width="100%">
@@ -169,14 +169,14 @@
 
 サーボモータに取り付けたTTLケーブルとバッテリーのケーブルを基板の指定した端子につなげます。
 
-<span style="font-size: 120%; color: red;">バッテリー端子の向きに気をつけてください。間違えると故障の原因となります。</span>
+**バッテリー端子の向きに気をつけてください。間違えると故障の原因となります。**
 
 <img src="images/assembly/cable_connecting.jpg" width="100%">
 
 画像の通り、基板に取り付けられた青と黒のコネクタが上になるように基板とシェルの穴の位置を合わせてネジ（M2タップネジ）を4つ締めて固定します。スライドスイッチが基板から突出しているため、シェルの側面にある穴に斜めに入れてネジの位置を合わせます。
 
 
-<span style="font-size: 120%; color: red;">ネジが導体（銀色の箇所）には触れないように注意してください。バッテリの端子が接続されているためショートする恐れがあります。</span>
+**ネジが導体（銀色の箇所）には触れないように注意してください。バッテリの端子が接続されているためショートする恐れがあります。**
 
 <p>
     <img src="images/assembly/board_shell_attaching.jpg" width="50%"><img src="images/assembly/board_shell_assembling.jpg" width="50%">
@@ -207,6 +207,6 @@ M5Stack CoreS3をしっかり固定したい場合は、キットに付属して
 
 <img src="images/assembly/assembling_back_screws.jpg" width="100%">
 
-<span style="font-size: 120%; color: red;">六角ネジを取り付ける際は、必ずバッテリーを外してから取り付けてください。ネジを基板上に落とすとショートして壊れる恐れがあります。</span>
+**六角ネジを取り付ける際は、必ずバッテリーを外してから取り付けてください。ネジを基板上に落とすとショートして壊れる恐れがあります。**
 
-<span style="font-size: 120%; color: red;">必ず短い六角ネジを上側、長い六角ネジは下側に取り付けてください。間違えると液晶を壊す恐れがあります。</span>
+**必ず短い六角ネジを上側、長い六角ネジは下側に取り付けてください。間違えると液晶を壊す恐れがあります。**
