@@ -48,11 +48,11 @@ This repository includes the following contents.
 
 ### Assemble board
 
-Coming soon...
+* See [Stack-chan RT ver. Assembly Manual (Japanese)](docs/assembly_ja.md)
 
 ### Flash firmware to M5Stack
 
-Coming soon...
+* See [(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](firmware/docs/getting-started-wsl2_ja.md)
 
 ## Contribution
 

@@ -46,13 +46,13 @@
 
 ## 製作方法
 
-近日公開
-
 ### モジュールを組み立てる
 
-近日公開
+[ｽﾀｯｸﾁｬﾝ アールティver. 組み立てマニュアル](docs/assembly_ja.md)を参照ください。
 
 ### ファームウェアをM5Stackに書き込む
+
+[Windows 11 のｽﾀｯｸﾁｬﾝ環境構築マニュアル（WSL2）](firmware/docs/getting-started-wsl2_ja.md)を参照ください。
 
 ## コントリビューション
 
