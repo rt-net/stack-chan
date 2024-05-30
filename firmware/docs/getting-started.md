@@ -2,22 +2,26 @@
 
 [日本語](./getting-started_ja.md)
 
+Stack-chan can be developed on Windows 11, MacOS, and Linux.For Windows 11, please refer to the environment setup procedure using WSL2.
+
+* **[(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](./getting-started-wsl2_ja.md)**
+
 ## Prerequisites
 
 * Host PC
-    * Tested on Linux (Ubuntu 20.04)
-* M5Stack Basic
+    * Tested on Linux (Ubuntu 22.04)
+* M5Stack CoreS3
 * USB type-C cable
 * [git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/en/)
-    * Tested with v16.14.2
+    * Tested with v20.11.0
 
 ## Clone the repository
 
 Clone this repository with the `--recursive` option.
 
 ```console
-$ git clone --recursive https://github.com/meganetaaan/stack-chan.git
+$ git clone --recursive https://github.com/rt-net/stack-chan.git
 $ cd stack-chan/firmware
 $ npm i
 ```
@@ -29,7 +33,6 @@ Install [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/ge
 There are three ways to do this
 
 - Using the CLI (recommended)
-- Using a Docker image
 - Set up manually
 
 ### Using xs-dev (recommended)
@@ -43,13 +46,6 @@ $ npm run setup -- --device=esp32
 ```
 
 The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
-
-### Using Docker images (for Linux only)
-
-This repository provides a Dockerfile build environment.
-You can build, write and debug firmware inside a Docker container.
-
-Note: This has been tested and confirmed to work on Linux (Ubuntu 20.04). It is not recommended for use on Windows (WSL) or MacOS, as there have been reported [issues](https://github.com/meganetaaan/stack-chan/issues/144) with connecting to devices from the container side.
 
 #### From terminal
 
@@ -85,19 +81,21 @@ If the installation was successful, the version of Moddable SDK will be displaye
 $ npm run doctor
 
 > stack-chan@0.2.1 doctor
-> xs-dev doctor
+> echo stack-chan environment info: && git rev-parse HEAD && git rev-parse --show-toplevel && xs-dev doctor
 
+stack-chan environment info:
+55d005ac9f0764a4ebc561b7d0a2a29a66ee5199
+/home/kurasawa/Projects/stack-chan
 xs-dev environment info:
-  CLI Version                0.20.0                                                                
-  OS                         Linux                                                                 
-  Arch                       x64                                                                   
-  NodeJS Version             v16.14.2 (/usr/local/bin/node)                                        
-  Python Version             3.8.10 (/home/sskw/.espressif/python_env/idf4.4_py3.8_env/bin/python) 
-  Moddable SDK Version       3.6.0 (/home/sskw/.local/share/moddable)                              
-  Supported target devices   lin, esp32                                                            
-  ESP32 IDF Directory        /home/sskw/.local/share/esp32/esp-idf                                 
-
-If this is related to an error when using the CLI, please create an issue at "https://github.com/hipsterbrown/xs-dev/issues/new" with the above info.
+  CLI Version                0.28.1
+  OS                         Linux
+  Arch                       x64
+  Shell                      /bin/bash
+  NodeJS Version             v20.11.0 (/home/ubuntu/.volta/tools/image/node/20.11.0/bin/node)
+  Python Version             3.10.12 (/home/ubuntu/.rye/shims/python)
+  Moddable SDK Version       4.1 (/home/ubuntu/.local/share/moddable)
+  Supported target devices   lin, esp32
+  ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
 ```
 
 ## Next step

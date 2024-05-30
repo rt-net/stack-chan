@@ -2,22 +2,26 @@
 
 [English](./getting-started.md)
 
+ｽﾀｯｸﾁｬﾝはWindows11、MacOS、Linuxで開発ができます。Windows 11の場合はWSL2を使った環境構築手順を参照してください
+
+* **[Windows 11 のｽﾀｯｸﾁｬﾝ環境構築マニュアル（WSL2）](./getting-started-wsl2_ja.md)**
+
 ## 開発に必要なもの
 
 * ホストPC
-    * Linux(Ubuntu20.04)でテスト済み
-* M5Stack Basic
+    * Linux(Ubuntu22.04)でテスト済み
+* M5Stack CoreS3
 * USB type-Cケーブル
 * [git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/en/)
-    * v16.14.2でテスト済み
+    * v20.11.0でテスト済み
 
 ## ｽﾀｯｸﾁｬﾝリポジトリのクローン
 
 `--recursive`オプションをつけて本リポジトリをクローンします。
 
 ```console
-$ git clone --recursive https://github.com/meganetaaan/stack-chan.git
+$ git clone --recursive https://github.com/rt-net/stack-chan.git
 $ cd stack-chan/firmware
 $ npm i
 ```
@@ -29,7 +33,6 @@ $ npm i
 次の3通りの方法があります。
 
 - CLIを使う（推奨）
-- Dockerイメージを使う
 - 手動でセットアップする
 
 ### xs-devを使う（推奨）
@@ -43,13 +46,6 @@ $ npm run setup -- --device=esp32
 ```
 
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。
-
-### Dockerイメージを使う（Linuxのみ）
-
-このリポジトリはDockerfileによるビルド環境を提供しています。
-Dockerコンテナの中でファームウェアのビルド、書き込みとデバッグが可能です。
-
-注意：Linux（Ubuntu20.04）で動作確認しています。Windows（WSL）やMacOSでは、コンテナ側からのデバイスへの接続がうまくいかない[問題](https://github.com/meganetaaan/stack-chan/issues/144)が報告されているため、非推奨です。
 
 #### ターミナルから
 
@@ -85,19 +81,21 @@ CLIやDockerがうまくセットアップできない場合はこちらを行�
 $ npm run doctor
 
 > stack-chan@0.2.1 doctor
-> xs-dev doctor
+> echo stack-chan environment info: && git rev-parse HEAD && git rev-parse --show-toplevel && xs-dev doctor
 
+stack-chan environment info:
+55d005ac9f0764a4ebc561b7d0a2a29a66ee5199
+/home/kurasawa/Projects/stack-chan
 xs-dev environment info:
-  CLI Version                0.20.0                                                                
-  OS                         Linux                                                                 
-  Arch                       x64                                                                   
-  NodeJS Version             v16.14.2 (/usr/local/bin/node)                                        
-  Python Version             3.8.10 (/home/sskw/.espressif/python_env/idf4.4_py3.8_env/bin/python) 
-  Moddable SDK Version       3.6.0 (/home/sskw/.local/share/moddable)                              
-  Supported target devices   lin, esp32                                                            
-  ESP32 IDF Directory        /home/sskw/.local/share/esp32/esp-idf                                 
-
-If this is related to an error when using the CLI, please create an issue at "https://github.com/hipsterbrown/xs-dev/issues/new" with the above info.
+  CLI Version                0.28.1
+  OS                         Linux
+  Arch                       x64
+  Shell                      /bin/bash
+  NodeJS Version             v20.11.0 (/home/ubuntu/.volta/tools/image/node/20.11.0/bin/node)
+  Python Version             3.10.12 (/home/ubuntu/.rye/shims/python)
+  Moddable SDK Version       4.1 (/home/ubuntu/.local/share/moddable)
+  Supported target devices   lin, esp32
+  ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
 ```
 
 ## 次のステップ
