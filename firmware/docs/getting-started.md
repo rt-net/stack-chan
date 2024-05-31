@@ -2,7 +2,7 @@
 
 [日本語](./getting-started_ja.md)
 
-Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, please refer to the setup instructions using WSL2. Here, we will outline the development environment setup for MacOS/Linux (operation on MacOS has not been verified).
+Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, please refer to the setup instructions using WSL2 (Japanese only). Here, we will outline the development environment setup for MacOS/Linux (operation on MacOS has not been verified).
 
 * **[(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](./getting-started-wsl2_ja.md)**
 
