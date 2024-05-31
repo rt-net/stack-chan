@@ -52,7 +52,8 @@ This repository includes the following contents.
 
 ### Flash firmware to M5Stack
 
-* See [(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](firmware/docs/getting-started-wsl2_ja.md)
+* For Windows:  [(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](firmware/docs/getting-started-wsl2_ja.md)
+* For MacOS/Linux: [Getting Started (MacOS/Linux)](./firmware/docs/getting-started.md)
 
 ## Contribution
 

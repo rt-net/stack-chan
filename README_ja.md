@@ -52,7 +52,8 @@
 
 ### ファームウェアをM5Stackに書き込む
 
-[Windows 11 のｽﾀｯｸﾁｬﾝ環境構築マニュアル（WSL2）](firmware/docs/getting-started-wsl2_ja.md)を参照ください。
+* Windowsの場合：[Windows 11 のｽﾀｯｸﾁｬﾝ環境構築マニュアル（WSL2）](firmware/docs/getting-started-wsl2_ja.md)
+* MacOS/Linuxの場合：[環境構築（MacOS/Linux）マニュアル](./firmware/docs/getting-started_ja.md)
 
 ## コントリビューション
 
