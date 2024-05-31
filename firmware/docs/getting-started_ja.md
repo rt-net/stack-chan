@@ -32,10 +32,10 @@ $ npm i
 [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html)をインストールします。
 次の2通りの方法があります。
 
-- CLIを使う（推奨）
+- xs-dev（CLI）を使う（推奨）
 - 手動でセットアップする
 
-### xs-devを使う（推奨）
+### xs-dev（CLI）を使う（推奨）
 
 ｽﾀｯｸﾁｬﾝはセットアップ手順をnpmスクリプト化しています。
 `stack-chan/firmware`ディレクトリで次のコマンドを実行します。
@@ -47,10 +47,10 @@ $ npm run setup -- --device=esp32
 
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。
 
-### 手動で行う
+### 手動でセットアップする
 
 [公式サイトの手順（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md)に従ってModdableSDKとESP-IDFをインストールします。
-CLIやDockerがうまくセットアップできない場合はこちらを行ってください。
+xs-dev（CLI）でうまくセットアップできない場合はこちらを行ってください。
 
 **ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.1 での動作を想定しています。**
 

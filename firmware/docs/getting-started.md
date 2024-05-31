@@ -30,12 +30,12 @@ $ npm i
 
 On the host PC, install [ModdableSDK](https://github.com/Moddable-OpenSource/moddable) and
 Install [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html) on the host PC.
-There are three ways to do this
+There are two ways to do this.
 
-- Using the CLI (recommended)
+- Using the xs-dev(CLI) (recommended)
 - Set up manually
 
-### Using xs-dev (recommended)
+### Using xs-dev(CLI) (recommended)
 
 Stack-Chan has npm scripting of the setup procedure.
 Run the following command in the `stack-chan/firmware` directory.
@@ -47,10 +47,10 @@ $ npm run setup -- --device=esp32
 
 The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
 
-### Manual
+### Set up Manual
 
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
-If you cannot setup CLI or Docker properly, please do this.
+If you cannot setup xs-dev(CLI) properly, please do this.
 
 **The Stack-chan RT version is designed to operate with Moddable SDK 4.1**
 
