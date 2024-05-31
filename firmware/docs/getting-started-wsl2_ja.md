@@ -1,5 +1,7 @@
 # Windows 11 のｽﾀｯｸﾁｬﾝ環境構築マニュアル（WSL2）
 
+ｽﾀｯｸﾁｬﾝはWindows11、MacOS、Linuxで開発ができます。MacOS、Linuxの場合は[環境構築マニュアル（MacOS/Linux）](./getting-started_ja.md)を参照してください
+
 `Windows11`上でｽﾀｯｸﾁｬﾝのプログラムを書き込む手順を説明します。
 `Moddable`を使用したｽﾀｯｸﾁｬﾝの開発環境は`Ubuntu`OSを想定しています。`WSL2(Windows Subsystem for Linux 2)`を使用することで、`Windows`環境上で`Ubuntu`の環境を構築することができます。
 

@@ -39,82 +39,6 @@
 
 また、`"include"`キーの配下にリスト形式で他のマニフェストファイルのパスを指定できます。
 
-### 設定例: ｽﾀｯｸﾁｬﾝ M5Bottom 版キットを動かす
-
-紅木タカオ氏（[@mongonta0716](https://github.com/mongonta0716)）が頒布する
-[ｽﾀｯｸﾁｬﾝ組み立てキット M5Bottom 版](https://mongonta.booth.pm/)を本リポジトリのファームウェアで動かすための設定例です。
-M5Bottom 版は本リポジトリと違って専用基板を使わず、M5Bottom のポートとサーボを接続します。
-
-M5Stack Core2 の Port.A（M5Stack Core2 本体側面の赤い穴）を使う場合:
-
-`manifest_local.json`
-
-```json
-{
-  // ...
-  "config": {
-    "driver": {
-      "type": "pwm",
-      "pwmPan": 33,
-      "pwmTilt": 32
-    }
-  }
-}
-```
-
-M5Stack Core2 の Port.C を使う場合:
-
-`manifest_local.json`
-
-```json
-{
-  // ...
-  "config": {
-    "driver": {
-      "type": "pwm",
-      "pwmPan": 13,
-      "pwmTilt": 14
-    }
-  }
-}
-```
-
-M5Stack Basic の Port.C を使う場合:
-
-`manifest_local.json`
-
-```json
-{
-  // ...
-  "config": {
-    "driver": {
-      "type": "pwm",
-      "pwmPan": 16,
-      "pwmTilt": 17
-    }
-  }
-}
-```
-
-ファームウェア導入後、ｽﾀｯｸﾁｬﾝが左右に首振りを行うようであれば成功です。
-
-参考: [ｽﾀｯｸﾁｬﾝ M5GoBottom 版のファームウェアについて \| M5Stack 沼人の日記](https://raspberrypi.mongonta.com/softwares-for-stackchan/)
-
-### 設定例: mod の書き込み領域を増やす
-
-2023 年 3 月現在、Moddable は SD Card のドライバが実装されていないため、音声や画像などのリソースは mod に含めてコンパイルして書き込む形になります。
-多量の音声を含む場合、ｽﾀｯｸﾁｬﾝのデフォルトのパーティションサイズである 4MB を上回って mod が書き込めない場合があります。
-
-最近の M5Stack は 16MB の Flash を備えています。
-その場合は[`stackchan/manifest_8mb_flash.json`](../stackchan/manifest_8mb_flash.json)をインクルードすることで、
-mod を書き込むパーティションの容量が大幅に増加します。
-
-```json
-{
-  "include": ["./manifest_8mb_flash.json"]
-}
-```
-
 ## 基本プログラム（ホスト）の書き込み
 
 前述の通りｽﾀｯｸﾁｬﾝのファームウェアは基本プログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。
@@ -123,15 +47,6 @@ mod を書き込むパーティションの容量が大幅に増加します。
 _コマンドに`sudo`をつける必要はありません。_
 
 ```console
-# M5Stack Basic/Gray/Fireの場合
-$ npm run build
-$ npm run deploy
-
-# M5Stack Core2の場合
-$ npm run build --target=esp32/m5stack_core2
-$ npm run deploy --target=esp32/m5stack_core2
-
-# M5Stack CoreS3の場合
 $ npm run build --target=esp32/m5stack_cores3
 $ npm run deploy --target=esp32/m5stack_cores3
 ```
@@ -150,13 +65,6 @@ M5Stack のボタンを押すと次のように変わります。
 次のコマンドでプログラムのデバッグが可能です
 
 ```console
-# M5Stack Basic/Gray/Fireの場合
-$ npm run debug
-
-# M5Stack Core2の場合
-$ npm run debug --target=esp32/m5stack_core2
-
-# M5Stack CoreS3の場合
 $ npm run debug --target=esp32/m5stack_cores3
 ```
 
@@ -174,20 +82,13 @@ $ npm run debug --target=esp32/m5stack_cores3
 _コマンドに`sudo`をつける必要はありません。_
 
 ```console
-# M5Stack Basic/Gray/Fireの場合
-$ npm run mod [modのマニフェストファイルのパス]
-
-# M5Stack Core2の場合
-$ npm run mod --target=esp32/m5stack_core2 [modのマニフェストファイルのパス]
-
-# M5Stack CoreS3の場合
 $ npm run mod --target=esp32/m5stack_cores3 [modのマニフェストファイルのパス]
 ```
 
 **例: [`mods/look_around`](../mods/look_around/)をインストールする**
 
 ```console
-$ npm run mod ./mods/look_around/manifest.json
+$ npm run mod --target=esp32/m5stack_cores3 ./mods/look_around/manifest.json
 
 > stack-chan@0.2.1 mod
 > mcrun -d -m -p ${npm_config_target=esp32/m5stack} ${npm_argument} "./mods/look_around/manifest.json"

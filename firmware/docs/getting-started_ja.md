@@ -1,4 +1,4 @@
-# 環境構築
+# 環境構築（MacOS/Linux）マニュアル
 
 [English](./getting-started.md)
 
@@ -10,7 +10,7 @@
 
 * ホストPC
     * Linux(Ubuntu22.04)でテスト済み
-* M5Stack CoreS3
+* [ｽﾀｯｸﾁｬﾝ アールティver.](https://rt-net.jp/products/rt-stackchan/) または その互換品
 * USB type-Cケーブル
 * [git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/en/)
@@ -30,7 +30,7 @@ $ npm i
 
 ホストPCで[ModdableSDK](https://github.com/Moddable-OpenSource/moddable)と
 [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html)をインストールします。
-次の3通りの方法があります。
+次の2通りの方法があります。
 
 - CLIを使う（推奨）
 - 手動でセットアップする
@@ -47,35 +47,17 @@ $ npm run setup -- --device=esp32
 
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。
 
-#### ターミナルから
-
-`stack-chan/firmware`ディレクトリで次のコマンドを実行します。
-
-```console
-$ ./docker/build-container.sh
-$ ./docker/launch-container.sh
-
-# コンテナ内で以下を実行
-$ npm install
-```
-
-#### VSCodeから
-
-VSCodeのDevContainer用設定を同梱しています。
-以下のコマンドでコンテナ内でプロジェクトを開けます。
-
-* コマンドパレットを開く(ctrl+shift+p)
-* `>Remote-Containers: Reopen in Container`を実行する
-
 ### 手動で行う
 
 [公式サイトの手順（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md)に従ってModdableSDKとESP-IDFをインストールします。
 CLIやDockerがうまくセットアップできない場合はこちらを行ってください。
 
+**ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.1 での動作を想定しています。**
+
 ## 環境のテスト
 
 `npm run doctor`コマンドで環境のテストができます。
-インストールに成功していれば次のようにModdable SDKのバージョンが表示され、Supported target devicesにesp32が表示されます。
+インストールに成功していれば次のようにModdable SDKのバージョンとして4.1が表示され、Supported target devicesにesp32が表示されます。
 
 ```console
 $ npm run doctor

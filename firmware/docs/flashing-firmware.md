@@ -35,82 +35,6 @@ StackChan can change settings such as motor types and pin assignments from the m
 
 Additionally, you can specify the paths of other manifest files in a list format under the `"include"` key.
 
-### Configuration Example: the Stack-chan M5Bottom Kit
-
-This is an example configuration for running [Stack-chan Assembly Kit M5Bottom Version](https://mongonta.booth.pm/) distributed by Takao Akaki ([@mongonta0716](https://github.com/mongonta0716)) with the firmware in this repository. The M5Bottom version does not use a dedicated board, but connects to the M5Bottom port and servo.
-
-When using Port.A of M5Stack Core2:
-
-`manifest_local.json`
-
-```json
-{
-  // ...
-  "config": {
-    "driver": {
-      "type": "pwm",
-      "pwmPan": 33,
-      "pwmTilt": 32
-    }
-  }
-}
-```
-
-When using Port.C of M5Stack Core2:
-
-`manifest_local.json`
-
-```json
-{
-  // ...
-  "config": {
-    "driver": {
-      "type": "pwm",
-      "pwmPan": 13,
-      "pwmTilt": 14
-    }
-  }
-}
-```
-
-When using Port.C of M5Stack Basic:
-
-`manifest_local.json`
-
-```json
-{
-  // ...
-  "config": {
-    "driver": {
-      "type": "pwm",
-      "pwmPan": 16,
-      "pwmTilt": 17
-    }
-  }
-}
-```
-
-If Stack-chan is shaking her head left and right, the configuration has been successful.
-
-Reference: [About the firmware for Stack-chan M5Go Bottom version (Japanese)](https://raspberrypi.mongonta.com/softwares-for-stackchan/)
-
-### Configuration example: increase mod write space
-
-Moddable currently doesn't have an SD Card driver, so resources like audio and images are compiled and saved within the mod itself.
-However, if you have a lot of audio files, the mod may not be able to write beyond the default partition size of 4MB on the stack chan due to limitations.
-
-If you have a recent M5Stack with 16MB of Flash,
-you can include the [stackchan/manifest_8mb_flash.json](. /stackchan/manifest_8mb_flash.json) file
-to increase the size of the partition where the mod is saved.
-
-Simply add the following code to your manifest file:
-
-```json
-{
-  "include": [". /manifest_8mb_flash.json"]
-}
-```
-
 ## Writing the base program (hosts)
 
 As stated above, Stack-chan's firmware comprises a base program (host) and a user application (MOD).
@@ -119,15 +43,6 @@ The following commands are used to build and write a host.
 _No `sudo` required for the command._
 
 ```console
-# For M5Stack Basic/Gray/Fire
-$ npm run build
-$ npm run deploy
-
-# For M5Stack Core2
-$ npm run build --target=esp32/m5stack_core2
-$ npm run deploy --target=esp32/m5stack_core2
-
-# For M5Stack CoreS3
 $ npm run build --target=esp32/m5stack_cores3
 $ npm run deploy --target=esp32/m5stack_cores3
 ```
@@ -139,13 +54,6 @@ The program will be saved under the `$MODDABLE/build/` directory.
 You can debug the program using the following commands:
 
 ```
-# For M5Stack Basic/Gray/Fire
-$ npm run debug
-
-# For M5Stack Core2
-$ npm run debug --target=esp32/m5stack_core2
-
-# For M5Stack CoreS3
 $ npm run debug --target=esp32/m5stack_cores3
 ```
 
@@ -163,13 +71,6 @@ The following command is used to build and write a mod.
 _No `sudo` required for the command._
 
 ```console
-# For M5Stack Basic/Gray/Fire
-$ npm run mod [mod manifest file path]
-
-# For M5Stack Core2
-$ npm run mod --target=esp32/m5stack_core2 [mod manifest file path]
-
-# For M5Stack CoreS3
 $ npm run mod --target=esp32/m5stack_cores3 [mod manifest file path]
 ```
 
@@ -183,7 +84,7 @@ The M5Stack buttons will change Stack-chan's behavior as follows:
 **Example: Installing [`mods/look_around`](../mods/look_around/)**
 
 ```console
-$ npm run mod ./mods/look_around/manifest.json
+$ npm run mod --target=esp32/m5stack_cores3 ./mods/look_around/manifest.json
 
 > stack-chan@0.2.1 mod
 > mcrun -d -m -p ${npm_config_target=esp32/m5stack} ${npm_argument} "./mods/look_around/manifest.json"

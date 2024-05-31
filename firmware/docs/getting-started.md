@@ -1,4 +1,4 @@
-# Getting Started
+# Getting Started (MacOS/Linux)
 
 [日本語](./getting-started_ja.md)
 
@@ -10,7 +10,7 @@ Stack-chan can be developed on Windows 11, MacOS, and Linux.For Windows 11, plea
 
 * Host PC
     * Tested on Linux (Ubuntu 22.04)
-* M5Stack CoreS3
+* [Stack-chan RT ver.](https://rt-net.jp/products/rt-stackchan/) or its compatible product
 * USB type-C cable
 * [git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/en/)
@@ -47,30 +47,12 @@ $ npm run setup -- --device=esp32
 
 The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
 
-#### From terminal
-
-Run the following command in the `stack-chan/firmware` directory.
-
-```console
-$ ./docker/build-container.sh
-$ ./docker/launch-container.sh
-
-# Run inside container
-$ npm install
-```
-
-#### From VSCode
-
-This project includes DevContainer preference for VSCode.
-You can open the project in a container with the following commands
-
-* Open the command palette (ctrl+shift+p)
-* Run `>Remote-Containers: Reopen in Container`
-
 ### Manual
 
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
 If you cannot setup CLI or Docker properly, please do this.
+
+**The Stack-chan RT version is designed to operate with Moddable SDK 4.1**
 
 ## Test the environment
 
