@@ -63,7 +63,7 @@
 
 **青色のラインは切りかけの位置を明示的に図示したものなので、実際のサーボモータに描かれていません**
 
-<img src="images/assembly/disk_horn_rotation_1.jpg" width="60%">
+<img src="images/assembly/disk_horn_rotation_1.jpg" width="30%">
 
 ##### サーボモータ２
 
@@ -71,7 +71,7 @@
 
 **サーボモータ１側と違い、円形サーボホーンの切り欠きが1本であることに注意してください。また、緑色のラインは切りかけの位置を明示的に図示したものなので、実際のサーボモータに描かれていません**
 
-<img src="images/assembly/disk_horn_rotation_2.jpg" width="50%">
+<img src="images/assembly/disk_horn_rotation_2.jpg" width="30%">
 
 #### 円形サーボホーンとネジの取り外し
 
@@ -153,7 +153,7 @@
 位置を合わせたら矢印方向にスライドしてください。
 
 <p>
-    <img src="images/assembly/born_backpack_attaching.jpg" width="30%"> <img src="images/assembly/born_backpack_sliding.jpg" width="30%">
+    <img src="images/assembly/born_backpack_attaching.jpg" width="25%"> <img src="images/assembly/born_backpack_sliding.jpg" width="25%">
 </p>
 
 
@@ -189,7 +189,7 @@
 **ネジが導体（銀色の箇所）には触れないように注意してください。バッテリの端子が接続されているためショートする恐れがあります。**
 
 <p>
-    <img src="images/assembly/board_shell_attaching.jpg" width="30%"> <img src="images/assembly/board_shell_assembling.jpg" width="30%">
+    <img src="images/assembly/board_shell_attaching.jpg" width="25%"> <img src="images/assembly/board_shell_assembling.jpg" width="25%">
 </p>
 
 基板まで取り付けると以下の画像のようになります。
