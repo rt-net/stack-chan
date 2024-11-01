@@ -1,16 +1,29 @@
-# Stack-chan
+# Stack-chan RT ver.
 
 [![Build Stack-chan Firmware](https://github.com/meganetaaan/stack-chan/actions/workflows/build.yml/badge.svg)](https://github.com/meganetaaan/stack-chan/actions/workflows/build.yml)
 [![Discord server invitation](https://dcbadge.vercel.app/api/server/eGhd9adnBm)](https://discord.gg/eGhd9adnBm)
 
 [日本語](./README_ja.md)
 
-![stackchan](./docs/images/stackchan.gif)
+![stackchan](./docs/images/stack-chan_main_2400x2400_350dpi_rgb.jpg)
 
-Stack-chan is a JavaScript-driven M5Stack-embedded super-kawaii robot.
+This is the repository for Stack-chan RT ver.
 
-* Video (with English subtitles): https://youtu.be/fZb_mF08xV0
 * Official hashtag: [`#stackchan` | `#ｽﾀｯｸﾁｬﾝ` (JP)](https://twitter.com/search?q=%23stackchan%20OR%20%23%EF%BD%BD%EF%BE%80%EF%BD%AF%EF%BD%B8%EF%BE%81%EF%BD%AC%EF%BE%9D).
+
+
+Stack-chan is a super cute, palm-sized communication robot developed and released in JavaScript by [Shinya Ishikawa](https://twitter.com/stack_chan).
+* Project page: https://github.com/stack-chan/stack-chan
+* Video (with English subtitles): https://youtu.be/fZb_mF08xV0
+
+<br>
+
+The RT version introduces the following updates:
+
+* The dependent Moddable SDK version is now fixed at [4.9.5](https://github.com/Moddable-OpenSource/moddable/releases/tag/4.9.5).
+* Several updates have been made to the circuit diagram and board design.
+* The DYNAMIXEL XL330-M288-T servo motor has been integrated.
+* The robot's exterior casing is produced using injection molding.
 
 ## Features
 
@@ -25,31 +38,26 @@ Stack-chan is a JavaScript-driven M5Stack-embedded super-kawaii robot.
 
 ## Contents
 
-This repository includes all the component of the robot.
+This repository includes the following contents.
 
 * __firmware__ : Source codes of the firmware.
-* __case__ : Stereolithography(STL) of the case.
-* __schematics__ : Schematics and board layout data.
 
 ## Installation
 
 ### Assemble board
 
-* See [schematics/README.md](./schematics/README.md) and [case/README.md](./case/README.md)
-* OR You can get a pre-assembled module(COMING SOON)
+* See [Stack-chan RT ver. Assembly Manual (Japanese)](docs/assembly_ja.md)
 
 ### Flash firmware to M5Stack
 
-* See [firmware/README.md](./firmware/README.md)
+* For Windows:  [(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](firmware/docs/getting-started-wsl2_ja.md)
+* For MacOS/Linux: [Getting Started (MacOS/Linux)](./firmware/docs/getting-started.md)
 
 ## Contribution
 
-__Feature requests/Bug reports__ are extremely welcome! See [issues](https://github.com/meganetaaan/stack-chan/issues) page to post some.
-
-__Wanna be a sponsor__? It would be my great honor. please visit my [sponsor](https://github.com/sponsors/meganetaaan/) page.
+We accept __feature requests / bug reports__ through the [issues](https://github.com/rt-net/stack-chan/issues) page.
 
 ## License
 
 Resources of this repository are distributed under Apache version 2.0 license.
 See [LICENSE](./LICENSE).
-

@@ -1,0 +1,18 @@
+{
+    "include": [
+        "$(MODDABLE)/examples/manifest_base.json",
+        "$(MODDABLE)/examples/manifest_typings.json"
+    ],
+    "modules": {
+        "*": [
+            "./main"
+        ]
+    },
+    "platforms":{
+	"esp32": {
+		"config" :{
+			"startupSound": false
+		}
+	}
+    }
+}

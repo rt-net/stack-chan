@@ -13,7 +13,7 @@
 ## 特徴
 
 * JavaScriptを使ったプログラミングが可能
-* 複数のサーボモーター（Feetech、FUTABA、DYNAMIXEL、PWMサーボ）に対応
+* DYNAMIXELサーボモーターのみ対応
 * クラウド音声合成（VOICEVOX、ElevenLabs）に対応
 * ホストプログラムとユーザアプリケーション（MOD）が分離した設計。MODのみの書き換えは非常に高速なので、効率的に開発サイクルを回せます。
 * [Webブラウザからのファームウェア書き込み](docs/flashing-firmware-web_ja.md)に対応
@@ -34,5 +34,3 @@
 - [API](docs/api_ja.md)
 - [MOD](mods/README_ja.md)
 
-- [Webブラウザからのファームウェア書き込み](docs/flashing-firmware-web_ja.md)
-- [Webブラウザからの設定変更](docs/setting-preferences-web_ja.md)

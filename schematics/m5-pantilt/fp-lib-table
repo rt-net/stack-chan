@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name m5-pantilt)(type KiCad)(uri ${KIPRJMOD}/m5-pantilt.pretty)(options "")(descr ""))
-)

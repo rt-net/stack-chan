@@ -1,11 +1,9 @@
-import TextDecoder from 'text/decoder'
 
 /**
  * @brief face tracking mod with UnitV2
  * @param {*} robot
  */
 function onRobotCreated(robot, device) {
-  const decoder = new TextDecoder()
   const target = {
     x: 0.8,
     y: 0,
@@ -22,7 +20,7 @@ function onRobotCreated(robot, device) {
     onReadable(count) {
       let result
       try {
-        const text = decoder.decode(this.read(count))
+        const text = robot.decode(this.read(count))
         result = JSON.parse(text.split('|')[0])
       } catch (e) {
         trace('parse failed.\n')

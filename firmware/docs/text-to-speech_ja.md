@@ -13,7 +13,7 @@
 
 どちらの方法を選んでも、まず外部のTTSエンジンを準備する必要があります。
 
-以下がテスト済みです：
+以下がTTSののエンジンの候補になります。VoiceVoxはテスト済みです：
 
 * [Google Cloud Text-to-Speech API](https://cloud.google.com/text-to-speech)
 * [Coqui AI TTS](https://github.com/coqui-ai/TTS)

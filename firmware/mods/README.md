@@ -5,6 +5,8 @@ For instructions on how to write mods, please refer to [Build and Write Programs
 
 Some mods require a network connection or an external server to run (as of writing).
 
+Environment settings are Japanese only.(./README_ja.md)
+
 ## Look Around: Kyoro-kyoro gaze Stack-chan
 
 ![squeaking Stack-chan](../../docs/images/stackchan.gif)

@@ -1,5 +1,6 @@
 import Timer from 'timer'
-import { randomBetween } from 'stackchan-util'
+import { randomBetween, asyncWait } from 'stackchan-util'
+
 
 export function onRobotCreated(robot) {
   let isFollowing = false
@@ -7,6 +8,8 @@ export function onRobotCreated(robot) {
     if (this.read()) {
       trace('pressed A\n')
       isFollowing = !isFollowing
+      const text = isFollowing ? 'looking' : 'stop'
+      robot.showBalloon(text)
     }
   }
   robot.button.b.onChanged = function () {
@@ -14,11 +17,21 @@ export function onRobotCreated(robot) {
       trace('pressed B\n')
     }
   }
+  let flag = false
   robot.button.c.onChanged = function () {
     if (this.read()) {
       trace('pressed C\n')
+      if (flag) {
+        robot.setColor('primary', 0xff, 0xff, 0xff)
+        robot.setColor('secondary', 0x00, 0x00, 0x00)
+      } else {
+        robot.setColor('primary', 0x00, 0x00, 0x00)
+        robot.setColor('secondary', 0xff, 0xff, 0xff)
+      }
+      flag = !flag
     }
   }
+
   const targetLoop = () => {
     if (!isFollowing) {
       robot.lookAway()

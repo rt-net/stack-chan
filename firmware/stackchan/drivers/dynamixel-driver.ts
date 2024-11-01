@@ -14,6 +14,7 @@ class PControl {
   gain: number
   saturation: number
   goalPosition: number
+  _offset: number
   _lastGoalPosition: number
   presentPosition: number
   constructor(servo: Dynamixel, gain, saturation, name = 'servo') {
@@ -23,10 +24,15 @@ class PControl {
     this.name = name
     this.goalPosition = 0
     this.presentPosition = 0
+    this._offset = 0
     this._lastGoalPosition = 0
   }
 
   async init() {
+    const result = await this.servo.readPresentPosition()
+    if (result.success && result.value > 4096) {
+      this._offset = 4096
+    }
     this.goalPosition = 2048
     await this.servo.setOperatingMode(OPERATING_MODE.CURRENT_BASED_POSITION)
     await this.servo.setTorque(true)
@@ -36,7 +42,7 @@ class PControl {
     // trace(`${this.name} ... update\n`)
     if (this._lastGoalPosition !== this.goalPosition) {
       trace(`${this.name} ... updating goal position to ${this.goalPosition}\n`)
-      await this.servo.setGoalPosition(this.goalPosition)
+      await this.servo.setGoalPosition(this.goalPosition + this._offset)
       this._lastGoalPosition = this.goalPosition
     }
     const result = await this.servo.readPresentPosition()
@@ -44,7 +50,7 @@ class PControl {
       trace(`${this.name} ... failed to update\n`)
       return
     }
-    const position = (this.presentPosition = result.value)
+    const position = (this.presentPosition = result.value - this._offset)
     const current = Math.min(Math.abs(this.goalPosition - position) * this.gain, this.saturation)
     // trace(`servo ${this.name} ... (${position}, ${this.goalPosition}, ${this.gain}, ${this.saturation}, ${current})\n`)
     await this.servo.setGoalCurrent(current)

@@ -5,11 +5,8 @@
     "config": {
         "tts": {
             "type": "voicevox",
-            "host": "192.168.7.136",
+            "host": "192.168.40.71",
             "port": 50021
-        },
-        "driver": {
-            "type": "scservo"
         }
     }
 }

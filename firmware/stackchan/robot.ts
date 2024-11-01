@@ -7,6 +7,7 @@ import { createBalloonDecorator } from 'decorator'
 import { DEFAULT_FONT } from 'consts'
 import Resource from 'Resource'
 import parseBMF from 'commodetto/parseBMF'
+import TextDecoder from 'text/decoder'
 
 const INTERVAL_FACE = 1000 / 30
 const INTERVAL_POSE = 1000 / 10
@@ -63,6 +64,7 @@ type RobotConstructorParam<T extends string> = {
     }
   }
   touch?: Touch
+  decoder: TextDecoder
 }
 
 const LEFT_RIGHT = Object.freeze(['left', 'right'])
@@ -94,6 +96,7 @@ export class Robot {
   #updateFaceHandler: Timer
   #font: ReturnType<typeof parseBMF>
   #balloon: FaceDecorator
+  #decoder: TextDecoder
   updating: boolean
   constructor(params: RobotConstructorParam<ButtonName>) {
     this.useRenderer(params.renderer)
@@ -103,6 +106,7 @@ export class Robot {
     this.#power = 0
     this.#button = params.button
     this.#touch = params.touch
+    this.#decoder = params.decoder
     this.#pose = params.pose ?? {
       body: {
         position: {
@@ -241,6 +245,10 @@ export class Robot {
           })
         })
     })
+  }
+
+  decode(buffer){
+    return this.#decoder.decode(buffer)
   }
 
   /**

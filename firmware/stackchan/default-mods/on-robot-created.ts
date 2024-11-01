@@ -83,7 +83,7 @@ export const onRobotCreated: StackchanMod['onRobotCreated'] = (robot) => {
   let flag = false
   robot.button.c.onChanged = function () {
     if (this.read()) {
-      trace('pressed B\n')
+      trace('pressed C\n')
       if (flag) {
         robot.setColor('primary', 0xff, 0xff, 0xff)
         robot.setColor('secondary', 0x00, 0x00, 0x00)

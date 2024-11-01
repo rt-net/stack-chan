@@ -13,6 +13,11 @@
       "./beacon-packet"
     ]
   },
+  "ble": {
+    "*": [
+      "./bleservices/*"
+         ]
+  },
   "preload": [
     "stk-server",
     "beacon-packet"
