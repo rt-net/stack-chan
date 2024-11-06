@@ -16,9 +16,10 @@
 * 事前にインストールしておくアプリ
   * [git](https://git-scm.com/)
   * [Node.js](https://nodejs.org/en/)
-    * v22.7.0でテスト済み
-  * Python3.10(macOSの場合は、brewでインストールするのではなく[https://www.python.org](https://www.python.org)からダウンロードしインストールしてください。)
-  * xcode-select(macOS)  
+    * cherrup_ble_liteのmodに関しては、新しいNode.jsに対応していないためV18.x.xを使用する必要があります。
+    * その他のmodはv22.8.xで動作することは確認しています。
+  * Python3.12で動作確認ができています。(macOSはbrewでインストールするのではなく[https://www.python.org](https://www.python.org)からダウンロードしインストールしてください。)
+  * xcode-select(macOSのみ)  
 
 ## ｽﾀｯｸﾁｬﾝリポジトリのクローンとnodeのmoduleのインストール
 
