@@ -1,238 +1,134 @@
-# サンプルMOD
+# プログラムのビルドと書き込み
 
-ｽﾀｯｸﾁｬﾝのユーザアプリケーション（MOD）のサンプル集です。
-MODの書き込み方法は[プログラムのビルドと書き込み](../docs/flashing-firmware_ja.md)を参照ください。
+[English](./flashing-firmware.md)
 
-一部のMODは動かすためにネットワーク接続や外部のサーバなどを準備を準備する必要があります。
+## ｽﾀｯｸﾁｬﾝのプログラム構成について
 
-## Look Around: きょろきょろｽﾀｯｸﾁｬﾝ  
-![きょろきょろｽﾀｯｸﾁｬﾝ](../docs/images/stackchan.gif)  
-- 環境設定時のAボタンに入っている動作と同じです。  
-- ホストのビルド時に、Wi-Fiの設定は不要です。  
-    - $ npm run build --target=esp32/m5stack_cores3  
-- ホストのプログラムを書き込みます。  
-    -  $ npm run deploy --target=esp32/m5stack_cores3  
-- modの書き込み  
-    - $ npm run mod --target=esp32/m5stack_cores3 ./mods/look_around/manifest.json  
-- ｽﾀｯｸﾁｬﾝの顔が出たらAボタンを押すと動作します。  
-- [look_around](./look_around/)  
+### ホストと MOD
 
-## Monologue: ぽしょぽしょ独り言ｽﾀｯｸﾁｬﾝ  
-- TTS(合成音声)を使用して音声を再生します。TTSの使用については、[こちら](../docs/text-to-speech_ja.md)を参照ください。
-- ここでの動作確認は、VoiceVoxを使った事前生成を使った方法のインストール方法を紹介します。
-- TTSエンジンVoiceVoxをクローンします。
-    - $ git clone https://github.com/VOICEVOX/voicevox_engine.git
-- dockerを使って起動します。
-    - $ docker pull voicevox/voicevox_engine:cpu-ubuntu20.04-latest
-    - $ docker run --rm -p 50021:50021 voicevox/voicevox_engine:cpu-ubuntu20.04-latest
-- TTSの環境を設定します。
-    - stack-chan/firmware/stackchan/manifest_local.jsonにあるttsのhostのアドレスをdockerを起動したPCのIPアドレスに修正します。
-- JavaScpiptファイルに発話する文章を書き込みます。ランダムで発話します。
-    - JavaScrptファイル : stack-chan/firmware/mods/monologue/speeches_monologue.js  
-- ホストのビルド時に、Wi-Fiの設定が必要になります。Wi-Fiは2.4Gに接続してください。
-    - $ npm run build --target=esp32/m5stack_cores3 ssid="SSIDの名前" password="SSIDのパスワード"
-- ホストのプログラムを書き込みます。  
-    -  $ npm run deploy --target=esp32/m5stack_cores3  
-- modの書き込み  
-    - $ npm run mod --target=esp32/m5stack_cores3 ./mods/monologue/manifest.json 
-- ｽﾀｯｸﾁｬﾝの顔が出たらAボタンを押すと動作します。      
-- [monologue](./monologue/)
+![ｽﾀｯｸﾁｬﾝのプログラム構成](./images/host-and-mod.jpg)
 
-## Cheerup: ｽﾀｯｸﾁｬﾝ応援団
-![顔の同期](../docs/images/face-sync.gif)
-![ｽﾀｯｸﾁｬﾝ応援団](../docs/images/cheerup.gif)
-- PCとｽﾀｯｸﾁｬﾝを一対一でBLEで接続します。
-- PCにwebカメラが必要になります。
-- まだ不具合があり音声の応援、顔の表情の変化はできません。追従のみ対応しています。
-- webソケット版は、未検証です。
-- ｽﾀｯｸﾁｬﾝの設定
-	- ホストのビルド時に、Wi-Fiの設定をしないでください。
-    	- $ npm run build --target=esp32/m5stack_cores3
-	- ホストのプログラムを書き込みます。  
-    	-  $ npm run deploy --target=esp32/m5stack_cores3  
-	- modの書き込み  
-    	- $ npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json 
-- PC側の環境設定
-	- セキュリティの問題がありブラウザはChromeのみ対応しています。
-	- windowsの場合nodeを18.12以上にする必要があります。
-		- $ volta install node@18
-	- ブラウザからBluetoothへのアクセスができるようにExperimetal Web Platform featuresのフラグを有効にする必要があります。
-		- chromeのURLにchrome://flagsを入力し、Experimetal Web Platform featuresを停止から有効にします。
-	- https://github.com/meganetaaan/suburi-mediapipeをクローンします。
-		- $ git clone https://github.com/meganetaaan/suburi-mediapipe
-	- 必要なツールをインストールします。
-		- $ sudo apt install -y curl
-		- $ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-		- $ echo "deb https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-		- yarnのツールのインストール
-			- ubuntu : $ sudo apt update && sudo apt install yarn
-			- macOS : $ brew install yarn
-			- Windows : $ volta install yarn と yarn install
-		- $ npm install react react-dom
-	- google-chromeをインストール(windowsでwlsからchromeが認識しない時)
-		- $ sudo apt update
-		- $ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-		- $ sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-		- $ sudo apt install google-chrome-stable
-	- opensslのバージョンとnodeのバージョンの互換性のため以下のコマンドが必要になります。
-		- ターミナルを開くたびに以下のコマンドが必要になるため、毎回打ち込むかbashrcに追加する必要があります。
-			- $ export NODE_OPTIONS=--openssl-legacy-provider
-	- node_moduleに書き込み権限がないとエラーが出た場合、cacheに書き込み権限を追加します。
-		- $ sudo chmod 777 /home/ubuntu/suburi-mediapipe/frontend/node_modules/.cache
-	- ツールはdocker compose upで起動できますが、各OSで共通して起動する手順を示します。
-		- node_modulesをfrontendとbackendにインストールします。
-			- $ cd suburi-mediapipe/backend
-			- $ npm install react-scripts
-			- $ cd suburi-mediapipe/frontend
-			- $ npm install react-scripts
-		- frontendとbackendの2種類を起動します。
-		- 一つ目のターミナル
-			- $ cd suburi-mediapipe/backend
-			- $ yarn start(windowsはsudoが必要)
-		- 二つ目のターミナル
-			- $ cd suburi-mediapipe/frontend
-			- $ yarn start(windowsはsudoが必要)
-	- chromeが自動起動しない場合、URLに http://localhost:3000/sandboxes/stackchan/facesync を入力します。
-	- chromeにｽﾀｯｸﾁｬﾝが表示されたら下の方にあるConnection MethodをWebSoketからbluetoothに変更し、connectをクリックします。
-	- http://localhost:3000がペア設定を求めてきます。stkを選択し、ペアリングします。
-- [cheerup_ble_lite](./cheerup_ble_lite/): BLE版
-- [cheerup_ws](./cheerup_ws/): WebSocket版
+ｽﾀｯｸﾁｬﾝのファームウェアは、ｽﾀｯｸﾁｬﾝの基本動作を提供するプログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。
+一度ホストを書き込んでしまえば、ユーザアプリケーションのインストールは短時間で終わるため高速な開発が可能です。
+最初にホストを書き込み、必要に応じて MOD の書き込みを行います。
 
-## Mimic: まねっこｽﾀｯｸﾁｬﾝ
-- ｽﾀｯｸﾁｬﾝが2台必要になります。
-![まねっこｽﾀｯｸﾁｬﾝ](../docs/images/mimic.gif)
-- [mimic_main](./mimic_main/): ユーザが動かすほう
-- [mimic_follow](./mimic_follow/): まねして動くほう
+### マニフェストファイル
 
-## Face Tracker: 顔を追いかけるｽﾀｯｸﾁｬﾝ
-- ｽﾀｯｸﾁｬﾝと[M5Stack UnitV2](https://docs.m5stack.com/en/unit/unitv2)が必要になります。
-- UnitV2の設定
-    - UnitV2のドライバをインストールします。Ubuntuはインストール不要です。
-        - https://docs.m5stack.com/ja/guide/ai_camera/unitv2/base_functions
-    - Wi-Fiの設定をします。
-        - USBでPCとUnitV2を接続し、ターミナルからUnitV2にログインします。
-            - $ ssh m5stack@10.254.239.1
-            - パスワードは 12345678 です。
-        - 使用するSSIDのパスワードをパスフレーズに変換して/etc/wpa_supplicant.confに書き込みます。
-        - SSIDのパスワードをパスフレーズに変換するコマンド
-            - $ sudo wpa_passphrase Wi-FiのSSID　Wi-Fiのパスワード
-        - wpa_supplicant.contをルート権限で開き、先ほど生成したパスフレーズとSSIDを書き込みます。
-			```console
-			network={
-				ssid=”Wi-FiのSSID”
-				psk=生成された暗号文
-			}
-			```
-    - Chromeを開き、URLにhttp://10.254.239.1を入力します
-    - Face Detectorを選択して顔のデータが出力します。
-- ｽﾀｯｸﾁｬﾝの設定
-    - ホストのビルド時に、Wi-Fiの設定が必要になります。Wi-Fiは2.4Gに接続してください。
-	    - $ npm run build --target=esp32/m5stack_cores3 ssid="SSIDの名前" password="SSIDのパスワード"
-	- ホストのプログラムを書き込みます。  
-    	-  $ npm run deploy --target=esp32/m5stack_cores3  
-	- modの書き込み  
-    	- $ npm run mod --target=esp32/m5stack_cores3 ./mods/face_tracker/manifest.json 
-![顔を追いかけるｽﾀｯｸﾁｬﾝ](../docs/images/face-tracker.gif)
-- [face_tracker](./face_tracker/)
+ホストと MOD はそれぞれ、設定用のマニフェストファイル（manifest.json）、JavaScript モジュールのソースコード、画像や音声などのリソースから構成されます。
+マニフェストファイルでは、JavaScript モジュールの名前と場所（modules）や、モジュール内から参照できる設定（config）などを含みます。
+また、マニフェストファイルは他のマニフェストファイルを含める（include）こともできます。
 
-## Face: ｽﾀｯｸﾁｬﾝの表情と顔色の変化
-- 顔の表情と顔色を順番に変化します。
-- modのインストール方法  
-    - ホストのビルド時に、Wi-Fiの設定は不要です。  
-        - $ npm run build --target=esp32/m5stack_cores3  
-    - ホストのプログラムを書き込みます。  
-        -  $ npm run deploy --target=esp32/m5stack_cores3  
-    - modの書き込み  
-        - $ npm run mod --target=esp32/m5stack_cores3 ./mods/face/manifest.json  
+全ての設定項目は[Moddable の公式ドキュメント（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/tools/manifest.md)を参照してください。
 
-## おしゃべりスタックチャン
-- CharGPTを使ってスタックちゃんと会話をします。
-- macOSは対象外になります。
-- アプリからChatGPTを起動するには有料プランが必要になります。
-- 使用するsimple-stt-serverが要求しているnodeのversionが16から20になっています
--PC側の設定
-	- Windowsは以下の音声認識のためwindows側でpulseaudoのインストールが必要になります。
-		- Windows11側のインストール
-			- Pulse Audio On Windowsをダウンロードしインストールします。
-				- https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/からzipfile containing preview binariesをクリックしてダウンロードします。
-				- C:\Users\ユーザー名\pulseaudio-1.1に展開します。
-				- C:\Users\ユーザー名\pulseaudio-1.1\etc\pulse\default.paを編集します。
-					-  #load-module module-native-protocol-tcpとload-module module-esound-protocol-tcpのコメントを外してipアドレスを追加します
-						- load-module module-esound-protocol-tcp auth-ip-acl=127.0.0.1;172.16.0.0/12
-						- load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;172.16.0.0/12 
-				- C:\User\ユーザー名\pulseaudio-1.1\etc\pulse\daemon.confを編集します。
-					- セミコロンを外して数字を20から-1に変更します。
-						- exit-idle-time = -1
-			- Pulse Audioを起動します
-				- C:\User\ユーザー名\puseaudio-1.1\bin\pulseaudio.exeをダブルクリックで起動します。一度目はすぐに終了してしまいます。もう一度ダブルクリックして起動します。エラーがありますが、終了しないのであればせそのままにします。
-				- Windowsを起動するたびにpulseaduio.exeを起動します。
-		- WSL側のインストール
-			- 必要なライブラリをインストールします。
-				- $ sudo apt install alsa-utils
-				- $ sudo apt install libpulse0
-				- $ sudo apt install -y pulseaudio
-			- WebSocketサーバの環境整えます
-				- $ git clone https://github.com/meganetaaan/simple-stt-server.git
-				- $ cd simple-stt-server
-				- nodeが新しいとインストールできないためnodeのバージョンを16にします。
-					$ volta install node@16
-				- $ npm install
-			- VOSKのモデルをダウンロードしsimple-stt-serverのしたにmodelのフォルダーを作りダウンロードした出たデータを展開した状態でコピーします。
-				- ダウンロードするデータ https://alphacephei.com/vosk/models/vosk-model-ja-0.22.zip
-				- windowsからsimple-stt-serverのフォルダーにアクセスするにはエクスプローラーの左にあるLinuxのフォルダーがアクセスすることができます。Linux/Ubuntu-22.04/home/ubuntu/simple-sst-server
-			- PULSE_SERVERの環境変数を設定します。~/.bashrcの最後に次の二行を追加します
-				- export HOST_IP="$(ip route |awk '/^default/{print $3}')"
-				- export PULSE_SERVER="tcp:$HOST_IP"
-	- Ubuntu
-		- 必要なliblaryをインストールします
-			- sudo apt install alsa-utils
-			- sudo apt install alsa-tools
-		- WebSocketサーバの環境整えます
-			- $ git clone https://github.com/meganetaaan/simple-stt-server.git
-			- $ cd simple-stt-server
-			- $ npm install
-		- VOSKのモデルをダウンロードしsimple-stt-serverのしたにmodelのフォルダーを作りダウンロードした出たデータを展開した状態でコピーします。
-			- ダウンロードするデータ https://alphacephei.com/vosk/models/vosk-model-ja-0.22.zip
-	- 続きは、WSLとUbuntu共通になります。
-		- 音声認識を起動します。
-			- simple-stt-serverのところで以下のコマンドを実行します。
-				- $ npm start -- --device default
-		- ChatGPTからの返答の文章をｽﾀｯｸﾁｬﾝの発話に変換する音声合成サーバーのvoicevox_engineをクローンします。
-			- $ git clone https://github.com/VOICEVOX/voicevox_engine.git
-		- dockerを使用して起動します。dockerのインストールは https://docs.docker.com/engine/install/ubuntu/ を参照してください。
-			- $ docker pull voicevox/voicevox_engine:cpu-ubuntu20.04-latest
-			- $ docker run --rm -p 50021:50021 voicevox/voicevox_engine:cpu-ubuntu20.04-latest
-- ｽﾀｯｸﾁｬﾝ側の設定
-	- manifest_local.json (stack-chan/firmware/stackchan/manifest_local.json) のconfigに必要な設定を追加・変更します。
-		- ChatGPTのトーク : 取得したChatGPTのトークン
-		- IPアドレス : 自分のPCに割り当てられたIPアドレス
-			```console
-			{
-    			"include": [
-        			"./manifest.json"
-    			],
-    			"config": {
-        			"ai": {
-            		"token": "ChatGPTのトークン"
-        			},
-        			"tts": {
-            			"type": "voicevox",
-            			"host": "IPアドレス",
-           	 			"port": 50021
-        			}
-    			}
-			}
-			```	
-	- stack-chan/firmware/mods/chatgpt/mod.jsで定義されているｽﾀｯｸﾁｬﾝに使用するChatGPTのモデルに変更します。ここでは、gpt-40にします。
-		```console
-			const STT_HOST = 'stackchan-base.local'
-			// const MODEL = 'gpt-4'
-			// const MODEL = 'gpt-3.5-turbo'
-			const MODEL = 'gpt-4o'
-		```
-	- ホストのビルド時に、Wi-Fiの設定が必要になります。Wi-Fiは2.4Gに接続してください。
-	    - $ npm run build --target=esp32/m5stack_cores3 ssid="SSIDの名前" password="SSIDのパスワード"
-	- ホストのプログラムを書き込みます。  
-    	- $ npm run deploy --target=esp32/m5stack_cores3  
-	- modの書き込み  
-    	- $ npm run mod --target=esp32/m5stack_cores3 ./mods/chatgpt/manifest.json 
+## 設定変更
+
+ｽﾀｯｸﾁｬﾝが使うモータの種類やピンアサインなどをマニフェストファイルから変更できます。
+ユーザが変更する設定は[`stack-chan/firmware/stackchan/manifest_local.json`](../stackchan/manifest_local.json)にまとまっています。
+`"config"`キーの配下に次のような設定が書けます。
+
+| キー              | 説明                                            | 使用可能な値                                |
+| ----------------- | ----------------------------------------------- | ------------------------------------------- |
+| driver.type       | モータドライバの種類                            | "dynamixel",           |
+| driver.panId      | パン軸（首の横回転）に使うシリアルサーボの ID   | 1~254                                       |
+| driver.tiltId     | チルト軸（首の縦回転）に使うシリアルサーボの ID | 1~254                                       |
+| tts.type          | [TTS](./text-to-speech_ja.md) の種類            | "local", "voicevox"                         |
+| tts.host          | TTS がサーバと通信する場合のホスト名            | "localhost", "ttsserver.local" などの文字列 |
+| tts.port          | TTS がサーバと通信する場合のポート番号          | 1~65535                                     |
+
+また、`"include"`キーの配下にリスト形式で他のマニフェストファイルのパスを指定できます。
+
+## 基本プログラム（ホスト）の書き込み
+
+前述の通りｽﾀｯｸﾁｬﾝのファームウェアは基本プログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。  
+esp-idfのバージョンが5.xからesp32に接続しているPSRAMの扱いが変わっています。デフォルト設定ではスムーズに動かないため一部変更します。  
+~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconifgのファイルにある
+CONFIG_SPIRAM=yをCONFIG_SPIRAM_nに書き換えます。
+
+
+次のコマンドで基本プログラム（ホスト）の書き込みを行います。
+
+_コマンドに`sudo`をつける必要はありません。_
+
+```console
+$ cd ~/stack-chan/firmware
+$ npm run build --target=esp32/m5stack_cores3
+$ npm run deploy --target=esp32/m5stack_cores3
+```
+
+Ubuntuの場合、書き込みポートがReadOnlyになっています。sudo chmod 666 /dev/ttyACM0でモードを書き換えるが、永続的にUSBポートの使用権限を変更する場合は、次のコマンドを実行してPCを再起動します。  
+```console
+$sudo usermod -aG dialout $USER
+```
+
+ビルドしたプログラムは`$MODDABLE/build/`ディレクトリ配下に保存されます。
+
+正しく書き込めていれば起動から数秒後にｽﾀｯｸﾁｬﾝの顔が表示されます。
+M5Stack のボタンを押すと次のように変わります。
+
+- A ボタン（CoreS3 の場合は画面左下の領域） ... ｽﾀｯｸﾁｬﾝが 5 秒おきにランダムな方向を見る
+- B ボタン（CoreS3 の場合は画面中央下の領域） ... ｽﾀｯｸﾁｬﾝが左、右、下、上を向く
+- C ボタン（CoreS3 の場合は画面右下の領域） ... ｽﾀｯｸﾁｬﾝの顔の色が反転する
+
+modを書き込みをした場合、上の動作ができなくなります。初期状態に戻すには、Flashの内容を消去してdeployで書き込む必要があります。
+
+```console
+$ ~/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash
+$ cd ~/stack-chan/firmware
+$ npm run deploy --target=esp32/m5stack_cores3
+```
+
+
+## デバッグ
+
+次のコマンドでプログラムのデバッグが可能です
+
+```console
+$ npm run debug --target=esp32/m5stack_cores3
+```
+
+このコマンドはModdableのデバッガ`xsbug`を開き、M5Stackと接続します。
+
+![xsbug](./images/xsbug.png)
+
+`xsbug`を使うとログの確認やブレークポイントの設定（プログラムの特定行で一時停止する）、ステップ実行（プログラムを1行ずつ実行する）などができます。
+`xsbug`の詳しい使い方は[公式ドキュメント（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/xs/xsbug.md)を参照してください。
+
+## ユーザアプリケーション（MOD）の書き込み
+
+次のコマンドでユーザアプリケーション（MOD）の書き込みを行います。
+
+_コマンドに`sudo`をつける必要はありません。_  
+書き込みが完了するとcompleteのメッセージが表示されます。  
+表示されない場合は、書き込みができない可能性か高いです。  
+そのときはｽﾀｯｸﾁｬﾝをリセットし、素早くmodを書き込むがリセットボタンを4秒以上押し続けて強制書き込みモードにする必要があります。  
+
+
+```console
+$ npm run mod --target=esp32/m5stack_cores3 [modのマニフェストファイルのパス]
+```
+
+**例: [`mods/look_around`](../mods/look_around/)をインストールする**
+
+```console
+$ npm run mod --target=esp32/m5stack_cores3 ./mods/look_around/manifest.json
+
+> stack-chan@0.2.1 mod
+> mcrun -d -m -p ${npm_config_target=esp32/m5stack} ${npm_argument} "./mods/look_around/manifest.json"
+
+# xsc mod.xsb
+# xsc check.xsb
+# xsc mod/config.xsb
+# xsl look_around.xsa
+Installing mod...complete
+```
+
+ポートが見つからず "/bin/sh: 1: [[ not found"のメッセージが表示され書き込みができないことがあります。その時は、npmの前にポートを指定します。  
+以下はwindows(WLS2)の[`mods/cherrup_ble_lite`](../mods/cheerup_ble_lite/)を書き込むときの例です。
+```console
+$  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
+```
+
+## 次のステップ
+
+- [mods/README_ja.md](../mods/README_ja.md): 同梱のサンプル MOD の紹介です。
+- [API](./api_ja.md): ｽﾀｯｸﾁｬﾝの API ドキュメントです。
