@@ -227,6 +227,14 @@ $ npm run setup -- --device=esp32
 
 <img src="images/getting-started-wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
+
+最後にmoddableの環境設定スクリプト xs-dev-export.sh がターミナル起動時に自動で読み込まれません。~/.bashrcに  
+source ~/.local/share/xs-dev-export.sh  
+を追加してください。
+
+ここまで完了次第、Ubuntuのウインドウを閉じてください。
+
+
 ### 構築した環境の確認
 
 以下のコマンドで環境のテストをします。
@@ -238,13 +246,6 @@ $ npm run doctor
 <img src="images/getting-started-wsl2_ja/npm_run_doctor.jpg" width="100%">
 
 `Moddable`のバージョンが`v4.9.5`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。  
-
-moddableの環境設定スクリプト xs-dev-export.sh がターミナル起動時に自動で読み込まれません。~/.bashrcに  
-source ~/.local/share/xs-dev-export.sh  
-を追加してください。
-
-ここまで完了次第、Ubuntuのウインドウを閉じてください。
-
 
 ## `PCのUSBポートに接続されたデバイスをWSL2上で認識できるようにする`
 
