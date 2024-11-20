@@ -23,8 +23,8 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 - TTSエンジンVoiceVoxをクローンします。
     - $ git clone https://github.com/VOICEVOX/voicevox_engine.git
 - dockerを使って起動します。
-    - $ docker pull voicevox/voicevox_engine:cpu-ubuntu20.04-latest
-    - $ docker run --rm -p 50021:50021 voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    - $ docker pull voicevox/voicevox_engine:cpu-ubuntu20.04-0.21.1
+    - $ docker run --rm -p 50021:50021 voicevox/voicevox_engine:cpu-ubuntu20.04-0.21.1
 - TTSの環境を設定します。
     - stack-chan/firmware/stackchan/manifest_local.jsonにあるttsのhostのアドレスをdockerを起動したPCのIPアドレスに修正します。
 - JavaScpiptファイルに発話する文章を書き込みます。ランダムで発話します。
@@ -65,7 +65,8 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 		- $ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 		- $ echo "deb https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 		- yarnのツールのインストール
-			- ubuntu : $ sudo apt update && sudo apt install yarn
+			- ubuntu : $ sudo apt update && sudo apt install yarn　(voltaが入っていない場合)
+			- ubuntu : $ sudo apt update && volta install yarn とyarn install (voltaが入っている場合)
 			- macOS : $ brew install yarn
 			- Windows : $ volta install yarn と yarn install
 		- $ npm install react react-dom
@@ -81,16 +82,16 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 		- $ sudo chmod 777 /home/ubuntu/suburi-mediapipe/frontend/node_modules/.cache
 	- ツールはdocker compose upで起動できますが、各OSで共通して起動する手順を示します。
 		- node_modulesをfrontendとbackendにインストールします。
-			- $ cd suburi-mediapipe/backend
+			- $ cd /home/ubuntu/suburi-mediapipe/backend
 			- $ npm install react-scripts
-			- $ cd suburi-mediapipe/frontend
+			- $ cd /home/ubuntu/suburi-mediapipe/frontend
 			- $ npm install react-scripts
 		- frontendとbackendの2種類を起動します。
 		- 一つ目のターミナル
-			- $ cd suburi-mediapipe/backend
+			- $ cd /home/ubuntu/suburi-mediapipe/backend
 			- $ yarn start(windowsはsudoが必要)
 		- 二つ目のターミナル
-			- $ cd suburi-mediapipe/frontend
+			- $ cd /home/ubuntu/suburi-mediapipe/frontend
 			- $ yarn start(windowsはsudoが必要)
 	- chromeが自動起動しない場合、URLに http://localhost:3000/sandboxes/stackchan/facesync を入力します。
 	- chromeにｽﾀｯｸﾁｬﾝが表示されたら下の方にあるConnection MethodをWebSoketからbluetoothに変更し、connectをクリックします。
