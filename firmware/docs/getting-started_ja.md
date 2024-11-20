@@ -52,7 +52,10 @@ $ npm run setup -- --device=esp32
 macOSの場合は、npm run setup -- --device=esp32のインストールの時、xcode-selectのバージョンが古いと"Error: Command failed with exit code 1: python3 -m pip install pyserial"で止まることがあります。その場合は、xcode-selectを手動で削除してから再度xcode-select(xcord-select –install)をインストールしてください。  
 xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でできます。  
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。  
-macOSの場合、自動で.zshrcにsource /User/username/.local/share/xs-dev-export.shが追加されません。手動で追加をする必要があります。
+
+moddableの環境設定スクリプト xs-dev-export.sh がターミナル起動時に自動で読み込まれません。~/.bashrcや ~/.zshrcに  
+source ~/.local/share/xs-dev-export.sh  
+を追加してください。
 
 ### 手動でセットアップする
 
