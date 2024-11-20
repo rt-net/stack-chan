@@ -93,11 +93,17 @@ $ npm run debug --target=esp32/m5stack_cores3
 `xsbug`を使うとログの確認やブレークポイントの設定（プログラムの特定行で一時停止する）、ステップ実行（プログラムを1行ずつ実行する）などができます。
 `xsbug`の詳しい使い方は[公式ドキュメント（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/xs/xsbug.md)を参照してください。
 
-## （オプション）ユーザアプリケーション（MOD）の書き込み
+## ユーザアプリケーション（MOD）の書き込み
 
 次のコマンドでユーザアプリケーション（MOD）の書き込みを行います。
 
-_コマンドに`sudo`をつける必要はありません。_
+_コマンドに`sudo`をつける必要はありません。_  
+書き込みが完了するとcompleteのメッセージが表示されます。  
+表示されない場合は、書き込みができない可能性か高いです。  
+そのときはｽﾀｯｸﾁｬﾝをリセットし、素早くmodを書き込むがリセットボタンを押し続けて強制書き込みモードにする必要があります。  
+強制リセットにすると
+
+
 
 ```console
 $ npm run mod --target=esp32/m5stack_cores3 [modのマニフェストファイルのパス]
@@ -118,8 +124,8 @@ $ npm run mod --target=esp32/m5stack_cores3 ./mods/look_around/manifest.json
 Installing mod...complete
 ```
 
-windowsの場合は、ポートが見つからず "/bin/sh: 1: [[ not found"のメッセージが表示され書き込みができないことがあります。その時は、npmの前にポートを指定します。  
-以下の例は[`mods/cherrup_ble_lite`](../mods/cheerup_ble_lite/)です。
+ポートが見つからず "/bin/sh: 1: [[ not found"のメッセージが表示され書き込みができないことがあります。その時は、npmの前にポートを指定します。  
+以下はwindows(WLS2)の[`mods/cherrup_ble_lite`](../mods/cheerup_ble_lite/)を書き込むときの例です。
 ```console
 $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
 ```
