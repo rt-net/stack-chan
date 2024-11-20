@@ -237,7 +237,12 @@ $ npm run doctor
 
 <img src="images/getting-started-wsl2_ja/npm_run_doctor.jpg" width="100%">
 
-`Moddable`のバージョンが`v4.1.0`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。
+`Moddable`のバージョンが`v4.9.5`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。  
+
+moddableの環境設定スクリプト xs-dev-export.sh がターミナル起動時に自動で読み込まれません。~/.bashrcに  
+source ~/.local/share/xs-dev-export.sh  
+を追加してください。
+
 ここまで完了次第、Ubuntuのウインドウを閉じてください。
 
 
