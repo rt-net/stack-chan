@@ -102,7 +102,7 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 - [cheerup_ws](./cheerup_ws/): WebSocket版
 
 ## Mimic: まねっこｽﾀｯｸﾁｬﾝ
-- ｽﾀｯｸﾁｬﾝが2台必要になります。
+- ｽﾀｯｸﾁｬﾝが2台必要になります。  
 ![まねっこｽﾀｯｸﾁｬﾝ](../docs/images/mimic.gif)
 - [mimic_main](./mimic_main/): ユーザが動かすほう
 - [mimic_follow](./mimic_follow/): まねして動くほう
