@@ -5,7 +5,7 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 
 一部のMODは動かすためにネットワーク接続や外部のサーバなどを準備を準備する必要があります。
 
-## Look Around: きょろきょろｽﾀｯｸﾁｬﾝ(WLS/Ubuntu/mac)  
+## Look Around: きょろきょろｽﾀｯｸﾁｬﾝ(windows/Ubuntu/mac)  
 ![きょろきょろｽﾀｯｸﾁｬﾝ](../docs/images/stackchan.gif)  
 - 環境設定時のAボタンに入っている動作と同じです。  
 - ホストのビルド時に、Wi-Fiの設定は不要です。  
@@ -17,7 +17,8 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 - ｽﾀｯｸﾁｬﾝの顔が出たらAボタンを押すと動作します。  
 - [look_around](./look_around/)  
 
-## Monologue: ぽしょぽしょ独り言ｽﾀｯｸﾁｬﾝ(Ubuntu/mac)  
+## Monologue: ぽしょぽしょ独り言ｽﾀｯｸﾁｬﾝ(Ubuntu/mac)
+- windowsはWi-Fiブリッジが正常に動作しないため対象外になります。
 - TTS(合成音声)を使用して音声を再生します。TTSの使用については、[こちら](../docs/text-to-speech_ja.md)を参照ください。
 - ここでの動作確認は、VoiceVoxを使った事前生成を使った方法のインストール方法を紹介します。
 - TTSエンジンVoiceVoxをクローンします。
@@ -39,7 +40,7 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 - ｽﾀｯｸﾁｬﾝの顔が出たらAボタンを押すと動作します。      
 - [monologue](./monologue/)
 
-## Cheerup: ｽﾀｯｸﾁｬﾝ応援団(WLS/Ubuntu/mac)
+## Cheerup: ｽﾀｯｸﾁｬﾝ応援団(windows/Ubuntu/mac)
 ![顔の同期](../docs/images/face-sync.gif)
 ![ｽﾀｯｸﾁｬﾝ応援団](../docs/images/cheerup.gif)
 - PCとｽﾀｯｸﾁｬﾝを一対一でBLEで接続します。
@@ -106,7 +107,7 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 - [mimic_main](./mimic_main/): ユーザが動かすほう
 - [mimic_follow](./mimic_follow/): まねして動くほう
 
-## Face Tracker: 顔を追いかけるｽﾀｯｸﾁｬﾝ(WLS/Ubuntu/mac)
+## Face Tracker: 顔を追いかけるｽﾀｯｸﾁｬﾝ(Windows/Ubuntu/mac)
 - ｽﾀｯｸﾁｬﾝと[M5Stack UnitV2](https://docs.m5stack.com/en/unit/unitv2)が必要になります。
 - UnitV2の設定
     - UnitV2のドライバをインストールします。Ubuntuはインストール不要です。
@@ -137,7 +138,7 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
 ![顔を追いかけるｽﾀｯｸﾁｬﾝ](../docs/images/face-tracker.gif)
 - [face_tracker](./face_tracker/)
 
-## Face: ｽﾀｯｸﾁｬﾝの表情と顔色の変化(WLS/Ubuntu/mac)
+## Face: ｽﾀｯｸﾁｬﾝの表情と顔色の変化(Windows/Ubuntu/mac)
 - 顔の表情と顔色を順番に変化します。
 - modのインストール方法  
     - ホストのビルド時に、Wi-Fiの設定は不要です。  
@@ -147,9 +148,10 @@ MODの書き込み方法は[プログラムのビルドと書き込み](../docs/
     - modの書き込み  
         - $ npm run mod --target=esp32/m5stack_cores3 ./mods/face/manifest.json  
 
-## おしゃべりスタックチャン(Ubuntu/mac)
+## おしゃべりスタックチャン(Ubuntu)
 - CharGPTを使ってスタックちゃんと会話をします。
 - macOSは対象外になります。
+- windowsはWi-Fiブリッジが正常に動作しないため対象外になります。
 - アプリからChatGPTを起動するには有料プランが必要になります。
 - 使用するsimple-stt-serverが要求しているnodeのversionが16から20になっています
 - PSRAMを使用していないため長い文章を話すことができない状態です。
