@@ -1,4 +1,4 @@
-# Stack-chan RT ver. Assembley Manual組み立てマニュア
+# Stack-chan RT ver. Assembley Manual
 
 we will explain the assembly procedure for [Stack-chan RT ver.](https://rt-net.jp/products/rt-stackchan/).
 
