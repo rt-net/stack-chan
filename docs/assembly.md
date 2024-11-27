@@ -6,7 +6,7 @@ we will explain the assembly procedure for [Stack-chan RT ver.](https://rt-net.j
 
 Items used for assembly.
 
-**『[Stack-chan RT ver. Assemly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』 comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly. **
+**[Stack-chan RT ver. Assemly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』 comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly.**
 
 <img src="images/assembly/parts_1.jpg" width="50%">
 <img src="images/assembly/parts_2.jpg" width="50%">
@@ -126,30 +126,29 @@ Once the feet are attached, it should look like the image below.
 
 #### How to detach the feet
 
-足(上)に取り付けた足(下)は4箇所の窪みから取り外すことができます。1箇所ずつ、マイナスドライバーを窪みに差し込み、足(上)のフチを支点としたテコの原理で固定を外します。
+Remove the feet(bottom) by detaching the feet(top) from the four depressions: one at a time, insert a flat-blade or screwdriver into the depressions and use the edge of the foot(top) as a fulcrum to release the fixing.
 
 <img src="images/assembly/disassembling_feet.jpg" width="50%">
 
-### サーボホーンの取り付け
+### Mounting the servo horn
 
-サーボホーンを胴体に取り付けます。
+Attach the servo horn to the body.
 
-サーボモータ２とサーボホーンが共にギヤの形状となっている部分同士を取り付けます。足の取り付けの際と同様に突起と切り欠きの位置を合わせてグッと押し込んでください。
+Attach the servo motor2 and servo horn together with the part shaped as a gear. Align the protrustions and notches in the same way as when attaching the legs and push them firmly into place.
 
 <img src="images/assembly/servo_and_horn_protrusions.jpg" width="50%">
 
-突起の位置を合わせて接合したギヤ部分にタップネジ（M2.6x6[mm]）を締めてください。
+Tighten the tap screws (M2.6x6[mm]) in the gear section jointed by aligning the protrussions.
 
 <img src="images/assembly/tightening_horn_screw.jpg" width="50%">
 
-### バッテリーパックの取り付け
+### Battery pack installation
 
-バッテリーパックを胴体に取り付けます。
-バッテリーパックから出ている突起をサーボブラケット(後)に引っ掛けて固定します。
+Attach the battery pack to the body. Hook the protrusion from the battery pack onto the servo bracket(rear) and fix it in place.
 
 <img src="images/assembly/born_backpack.jpg" width="50%">
 
-位置を合わせたら矢印方向にスライドしてください。
+Once aligned,slide in the direction of the arrow.
 
 <p>
     <img src="images/assembly/born_backpack_attaching.jpg" width="25%"> <img src="images/assembly/born_backpack_sliding.jpg" width="25%">
@@ -158,64 +157,63 @@ Once the feet are attached, it should look like the image below.
 
 <img src="images/assembly/born_assembled.jpg" width="50%">
 
-### 外装の取り付け
+### Exteror fitting
 
-ｽﾀｯｸﾁｬﾝの外装となるシェルを取り付けます。
+Attach the shell, which serves as the exterior of Stack-chan.
 
-シェルの天板内側にある突起とサーボホーンを取り付けます。バッテリーのコードとサーボモータのTTLケーブルを前に持ってきなからスライドして入れてください。
+Attach the projection on the inside of the top plate of the shell and the servo horn. Slide the battery cord and servo motor TTL cable in after bringing them to the front.
 
 <img src="images/assembly/born_shell.jpg" width="50%">
 
-突起によってｶﾁｯ！と手応えがあるまでスライドさせてください。
+Click by the prongs! Slide the unit until you feel a clock.
 
 <img src="images/assembly/born_slide_shell.jpg" width="50%">
 
-取り付けて反対側から見ると以下の画像のようになります。青色のラインはサーボホーンの輪郭です。
+When mounted and viewed from the reversed side, you should see as shown in the image below. The blue line outline the servo horn.
 
 <img src="images/assembly/born_shell_assembled.jpg" width="50%">
 
-### 基板の取り付け
+### Mounting the board
 
-サーボモータに取り付けたTTLケーブルとバッテリーのケーブルを基板の指定した端子につなげます。
+Connect the TTL cable attached to the servo motor and the battery cable to the specified terminals on the board.
 
-**バッテリー端子の向きに気をつけてください。間違えると故障の原因となります。**
+**Pay attention to the orientation of the battery terminals. Mistakes can cause manifunctions.**
 
 <img src="images/assembly/cable_connecting.jpg" width="50%">
 
-画像の通り、基板に取り付けられた青と黒のコネクタが上になるように基板とシェルの穴の位置を合わせてネジ（六角穴付きタップネジ M2x5[mm]）を4つ締めて固定します。スライドスイッチが基板から突出しているため、シェルの側面にある穴に斜めに入れてネジの位置を合わせます。
+Align the holes in the board and shell so that the blue and black connectors attached to the board are on top, as shown in the image. Tighten the four screws (hexagon sockets tap screws M2x5[mm]) to secure. As the slide switch protrudes from the board, align the screws by slanting them into the holes ub the side of the shell.
 
-
-**ネジが導体（銀色の箇所）には触れないように注意してください。バッテリの端子が接続されているためショートする恐れがあります。**
+**Make sure that the screws doN7t touch the conductor(sliver parts). The battery terminals are connected and may short-cirduit.**
 
 <p>
     <img src="images/assembly/board_shell_attaching.jpg" width="25%"> <img src="images/assembly/board_shell_assembling.jpg" width="25%">
 </p>
 
-基板まで取り付けると以下の画像のようになります。
+At this point with the circuit board installed, it should look like the image below.
 
 <img src="images/assembly/board_assembled.jpg" width="50%">
 
-### M5Stack CoreS3の取り付け
+### Installation of M5Stack CoreS3
 
-M5Stack CoreS3を基板に対してピンの位置を合わせてグッと押し込んでください。
+Gently press the M5Stack CoreS3 into the board, aligning the pins against the board.
 
 <img src="images/assembly/m5_attaching.jpg" width="50%">
 
-無事に取り付けられたらｽﾀｯｸﾁｬﾝの組み立ては完了です。
+Once successfully installed, the stack-chan assembly is complete.
 
 <img src="images/assembly/stack-chan_assembled.jpg" width="50%">
 
 
-### 【オプション】M5Stack CoreS3の固定
+### [Optiomal] Fixing M5Stack CoreS3
 
-M5Stack CoreS3をしっかり固定したい場合は、キットに付属している4本の六角穴付きネジで固定します。ネジの長さは２種類あるため注意してください。
+If you want to secure the M5Stack CoreS3 firmly, use the four Allen screws supplied in the kit. Note that there are two different screw lengths.
 
-バッテリーパックをサーボブラケット(後)から取り外し、バッテリーの端子も基板から外します。短いほうの六角穴付きネジM3x12[mm]の2本をｽﾀｯｸﾁｬﾝの上側に、長いほうの六角穴付きネジM3x14[mm]の2本を下側に取り付けます。4本のネジを締め終えたらバッテリーパックを再度取り付けます。
+Remove the battery pack from the servo bracket(rear) and disconnect the battery terminals from the board. Attach the two shorter hexagon socket head screws M3x12[mm] to the upper side of the stack-chan and the two longer hexagon socket head screws M3x14[mm] to the lower side.
 
 <img src="images/assembly/back_screws.jpg" width="50%">
 
 <img src="images/assembly/assembling_back_screws.jpg" width="50%">
 
-**六角ネジを取り付ける際は、必ずバッテリーを外してから取り付けてください。ネジを基板上に落とすとショートして壊れる恐れがあります。**
+**Always remove the battey before installing the hexagonal screws. Dropping the screws onto the board may cause a short circuit and damage the board.**
 
-**必ず短い六角ネジを上側、長い六角ネジは下側に取り付けてください。間違えると液晶を壊す恐れがあります。**
+**Always install the short hexagonal screws on the upper side and the long hexagonal screws on the lower side. If you make a mistake, the LCD may be damaged.**
