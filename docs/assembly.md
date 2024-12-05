@@ -8,13 +8,13 @@ Items used for assembly.
 
 **[Stack-chan RT ver. Assemly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』 comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly.**
 
-<img src="images/assembly/parts_1.jpg" width="50%">
-<img src="images/assembly/parts_2.jpg" width="50%">
-<img src="images/assembly/parts_3.jpg" width="50%">
-<img src="images/assembly/parts_4.jpg" width="50%">
-<img src="images/assembly/parts_5.jpg" width="50%">
-<img src="images/assembly/parts_6.jpg" width="50%">
-<img src="images/assembly/parts_7.jpg" width="50%">
+<img src="images/assembly/parts_1_en.jpg" width="50%">
+<img src="images/assembly/parts_2_en.jpg" width="50%">
+<img src="images/assembly/parts_3_en.jpg" width="50%">
+<img src="images/assembly/parts_4_en.jpg" width="50%">
+<img src="images/assembly/parts_5_en.jpg" width="50%">
+<img src="images/assembly/parts_6_en.jpg" width="50%">
+<img src="images/assembly/parts_7_en.jpg" width="50%">
 
 ### 使用パーツ
 
@@ -63,7 +63,7 @@ Rotate the circular servo horn with your finger. The **two notches on** the circ
 
 **Notice: The bule line is an explicit illustration of the notch position and is therefore not drawn on the actual servo motor.**
 
-<img src="images/assembly/disk_horn_rotation_1.jpg" width="30%">
+<img src="images/assembly/disk_horn_rotation_1_en.png" width="30%">
 
 ##### Servo motor2
 
@@ -71,7 +71,7 @@ Rotate the circular servo horn with your finger so that the angle of **one notch
 
 **Notice: Unlike the servo motor1 side, the circular servo horn has a single notch. Also note that the green line is not drawn on the actual servo motor as it is an explicit illustration of the notch position.**
 
-<img src="images/assembly/disk_horn_rotation_2.jpg" width="30%">
+<img src="images/assembly/disk_horn_rotation_2_en.png" width="30%">
 
 #### Removing screws and circular servo horn
 
@@ -93,7 +93,7 @@ Servo motor1 and servo motor2 have the pre-assignatikon ID1 and ID2 respectively
 
 Fix the part that will become the body with servo brackets for  servo motor1 and servo motor2. Be careful not to pinch the cables, sandwich them between the servo bracket(front) and the servo bracker(rear). At this point, make sure that the lable on the servo that say's 'DYNAMIXEL XL330-M288-T' faces in the direction of the arrow.
 
-<img src="images/assembly/born_purge.jpg" width="50%">
+<img src="images/assembly/born_purge_en.jpg" width="50%">
 
 Fix the two servo motors between the servo brackets.
 
