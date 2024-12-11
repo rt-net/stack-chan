@@ -3,7 +3,7 @@
 # Sample MOD
 
 This is a collection of sample Stack-chan user applications (MODs).  
-See [Building and Writing Programs](./docs/flashing-firmware.md) for instructions on how to wrire mods. 
+See [Building and Writing Programs](../docs/flashing-firmware.md) for instructions on how to wrire mods. 
 
 As described in the section on building and writing programs, when writing mods, the port may not be found, and the message "/bin/sh: 1: [[ not found" may be displayed and writing may not be possible. At that time, specify the port before npm.
 The following is an example of writing mods/cherrup_ble_lite for windows (WLS2).
