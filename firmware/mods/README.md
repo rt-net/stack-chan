@@ -3,19 +3,14 @@
 # Sample MOD
 
 This is a collection of sample Stack-chan user applications (MODs).  
-See [Building and Writing Programs](../docs/flashing-firmware.md) for instructions on how to wrire mods. 
+See [Building and Writing Programs](../docs/flashing-firmware.md) for instructions on how to write mods. 
 
 As described in the section on building and writing programs, when writing mods, the port may not be found, and the message "/bin/sh: 1: [[ not found" may be displayed and writing may not be possible. At that time, specify the port before npm.
 The following is an example of writing mods/cherrup_ble_lite for windows (WLS2).
 
 ```console
-$  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
+$ UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
 ```
-
-
-
-
-
 
 Some MODs require a network connection or an external server to run.
 
@@ -24,17 +19,17 @@ Some MODs require a network connection or an external server to run.
 
 ![squeaking Stack-chan](../docs/images/stackchan.gif)  
 - This is the same action that is in the A button during preferences.
-- When buling the host, you do not need to set uo Wi-Fi.
+- When buling the host, you do not need to set up Wi-Fi.
     - $ npm run build --target=esp32/m5stack_cores3
 - Write the host program.
     - $ npm run deploy --target=esp32/m5stack_cores3
 - Writing mod.
-    - $ npm run mod --target=esp32/m5stack_cores3. /mods/loock_around/manifest.json
+    - $ npm run mod --target=esp32/m5stack_cores3. /mods/look_around/manifest.json
 - When the Stack-chan face appears, press the A button and it should move.
 - [look_around](./look_around/)
 
 ## Monologue: Posho-posho soliloquy stackchan(Ubuntu/mac)
-- Windows is not eligble because the Wi-Fi bridge does not work properly.
+- Windows is not eligible because the Wi-Fi bridge does not work properly.
 - Use TTS(synthesized speech) to playback audio; for more information on using TTS, please refer to [here](../docs/text-to-speech.md).
 - The operation presented in this section, show how to install the method pre-generated using VoiceVox.
 - Clone the TTS engine VoiceVox.
@@ -44,10 +39,10 @@ Some MODs require a network connection or an external server to run.
     - $ docker pull voicevox/voicevox_engine:cpu-ubuntu20.04-0.21.1
     - $ docker run --rm -p 50021:50021 voicevox/voicevox_engine:cpu-ubuntu20.04-0.21.1
 - Set up the TTS environment.
-    - $ Corrent the IP address of the TTS hist of the PC from which docker was started in stack-chan/firmware/statckchan/manifest_local.json.
+    - Correct the IP address of the TTS host of the PC from which docker was started in stack-chan/firmware/statckchan/manifest_local.json.
 - Write the sentence to be spoken in the JavaScript file. The speech will be random.
     - JavaScripts file : stack-chan/firmware/mods/monologue/speeches_monologue.js
-- Wi-Fi setup is required when building the host; Wi-Fi connection shoukd be 2.4G.
+- Wi-Fi setup is required when building the host; Wi-Fi connection should be 2.4G.
     - $ npm run build --target=esp32/m5stack_cores3 ssid="SSID name" password="SSID password"
 - Write the host program.
     - $ npm run deploy --target=esp32/m5stack_cores3
@@ -68,7 +63,7 @@ Some MODs require a network connection or an external server to run.
     - Do not configure Wi-Fi when building the host.
         - $ npm run build --target=esp32/m5stack_cores3
     - Write the program for the host.
-        - $ npm run deploy --targrt=esp32/m5stack_cores3
+        - $ npm run deploy --target=esp32/m5stack_cores3
     - Writing mod
         - $ npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
 - Setting preferences on the PC side.
@@ -119,7 +114,7 @@ Some MODs require a network connection or an external server to run.
 - [cheerup_ws](./cheerup_ws/): WebSocket version
 
 ## Mimic: Manekko mimicing stack chan.  
-- You will require 2 Stack-chan unit.  
+- You will require 2 Stack-chan units.  
 ![manekko_stackchan](../docs/images/mimic.gif)  
 - [mimic_main](./mimic_main/): the one the user runs  
 - [mimic_follow](./mimic_follow/): The one that mimics the user.  
@@ -143,7 +138,7 @@ Some MODs require a network connection or an external server to run.
 				psk=passphrase
 			}
 			```
-    - Open Chrome, an insert the following URL http://10254.239.1
+    - Open Chrome, and insert the following URL http://10254.239.1
     - Select Face Detector to output face data.
 - Setting Stack-chan
     - When building the host, you will need to set up Wi-Fi; Wi-Fi should be connected to 2.4G.
@@ -166,7 +161,7 @@ Some MODs require a network connection or an external server to run.
         - $npm run mod --target=esp32/m5stack_cores3 ./mods/face/manifest.json
 
 ## Chatty stack-chan(Ubuntu)
-- CharGPT is used to talk to the stack properly.
+- ChatGPT is used to talk to the stack properly.
 - MacOS is out of scope.
 - Windows is not covered because the Wi-Fi bridge does not work properly.
 - A paid plan is required to run ChatGPT from the app.
