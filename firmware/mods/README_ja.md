@@ -1,7 +1,16 @@
+[English](./README..md)
+
 # サンプルMOD
 
 ｽﾀｯｸﾁｬﾝのユーザアプリケーション（MOD）のサンプル集です。
-MODの書き込み方法は[プログラムのビルドと書き込み](../docs/flashing-firmware_ja.md)を参照ください。
+MODの書き込み方法は[プログラムのビルドと書き込み](../docs/flashing-firmware_ja.md)を参照ください。  
+
+プログラムのビルドと書き込みのところでも記載していますが、modを書き込む時、ポートが見つからず "/bin/sh: 1: [[ not found"のメッセージが表示され書き込みができないことがあります。その時は、npmの前にポートを指定します。  
+以下はwindows(WLS2)の[`mods/cherrup_ble_lite`](../mods/cheerup_ble_lite/)を書き込むときの例です。
+```console
+$  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
+```
+
 
 一部のMODは動かすためにネットワーク接続や外部のサーバなどを準備を準備する必要があります。
 
