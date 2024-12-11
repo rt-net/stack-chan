@@ -2,28 +2,30 @@
 
 [日本語](./getting-started_ja.md)
 
-Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, please refer to the setup instructions using WSL2 (Japanese only). Here, we will outline the development environment setup for MacOS/Linux (operation on MacOS has not been verified).
+Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, please refer to the setup instructions using WSL2 (Japanese only). Here, we will outline the development environment setup for MacOS/Linux.
 
 * **[(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](./getting-started-wsl2_ja.md)**
 
 ## Prerequisites
 
 * Host PC
-    * Tested on Linux (Ubuntu 22.04)
+    * Tested on Linux (Ubuntu 22.04 or Ubuntu24.04)
+    * Tested on MaxOS (Sonoma 14 Apple silicon)
 * [Stack-chan RT ver.](https://rt-net.jp/products/rt-stackchan/) or its compatible product
 * USB type-C cable
 * [git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/en/)
-    * Tested with v20.11.0
+  * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
+  * I've confirmed that other mods work with v22.8.x.
+* The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
+* xcode-select (macOS only)
 
-## Clone the repository
-
-Clone this repository with the `--recursive` option.
+## Clone the Stack-chan repository and install the module on node
 
 ```console
-$ git clone --recursive https://github.com/rt-net/stack-chan.git
+$ git clone https://github.com/rt-net/stack-chan.git
 $ cd stack-chan/firmware
-$ npm i
+$ npm install
 ```
 
 ## Setting up ModdableSDK
@@ -36,14 +38,23 @@ There are two ways to do this.
 - Set up manually
 
 ### Using xs-dev(CLI) (recommended)
-
-Stack-Chan has npm scripting of the setup procedure.
-Run the following command in the `stack-chan/firmware` directory.
+Stack-chan has npm scripted setup instructions. In the stack-chan/firmware directory, run the following command:  
+Immediately after executing the first command shown below, you will be asked to enter the password set in Ubuntu.  
+After entering the password, the password will not be requested even if the same command is executed for a certain period of time.   
+For the second command, run it before you are prompted for a password again. If, for some reason, it takes a long time to execute the first command, please start over from the execution of the first command.
 
 ```console
+$ sudo echo "emporary SuperUser Grant"
 $ npm run setup
 $ npm run setup -- --device=esp32
 ```
+
+For macOS, when installing npm run setup -- --device=esp32, if the version of xcode-select is outdated, it may stop at "Error: Command failed with exit code 1: python3 -m pip install pyserial". In that case, manually remove xcode-select and install xcode-select (xcord-select –install) again.  
+You can remove xcode-select with "sudo rm -rf /Library/Developer/CommandLineTools".   
+Internally, [`xs-dev`](https://github.com/HipsterBrown/xs-dev)  is used to automate the setup of ModdableSDK and ESP-IDF.
+
+The moddable configuration script xs-dev-export.sh is not automatically loaded when starting the terminal.   
+Add source ~/.local/share/xs-dev-export.sh to ~/.bashrc or ~/.zshrc.
 
 The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
 
@@ -52,12 +63,12 @@ The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
 If you cannot setup xs-dev(CLI) properly, please do this.
 
-**The Stack-chan RT version is designed to operate with Moddable SDK 4.1**
+**Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work. I have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
 
 ## Test the environment
 
-You can test the environment with the `npm run doctor` command.
-If the installation was successful, the version of Moddable SDK will be displayed as follows, and esp32 will be displayed in Supported target devices.
+You can test your environment with the `npm run doctor` command.   
+If the installation is successful, 4.9.5 will be displayed as the version of Moddable SDK as shown below, and esp32 will be displayed in Supported target devices.
 
 ```console
 $ npm run doctor
@@ -67,15 +78,15 @@ $ npm run doctor
 
 stack-chan environment info:
 55d005ac9f0764a4ebc561b7d0a2a29a66ee5199
-/home/kurasawa/Projects/stack-chan
+/home/ubuntu/stack-chan
 xs-dev environment info:
-  CLI Version                0.28.1
+  CLI Version                0.32.3
   OS                         Linux
   Arch                       x64
   Shell                      /bin/bash
-  NodeJS Version             v20.11.0 (/home/ubuntu/.volta/tools/image/node/20.11.0/bin/node)
-  Python Version             3.10.12 (/home/ubuntu/.rye/shims/python)
-  Moddable SDK Version       4.1 (/home/ubuntu/.local/share/moddable)
+  NodeJS Version             v22.8.0 (/home/ubuntu/.nvm/versions/node/22.8.0/bin/node)
+  Python Version             3.12.3 (/usr/bin/python)
+  Moddable SDK Version       4.9.5 (/home/ubuntu/.local/share/moddable)
   Supported target devices   lin, esp32
   ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
 ```
