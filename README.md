@@ -46,7 +46,7 @@ This repository includes the following contents.
 
 ### Assemble board
 
-* See [Stack-chan RT ver. Assembly Manual (Japanese)](docs/assembly_ja.md)
+* See [Stack-chan RT ver. Assembly Manual](docs/assembly.md)
 
 ### Flash firmware to M5Stack
 
