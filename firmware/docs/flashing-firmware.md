@@ -24,11 +24,9 @@ StackChan can change settings such as motor types and pin assignments from the m
 
 | Key               | Description                                                                | Available values                     |
 | ----------------- | -------------------------------------------------------------------------- | ------------------------------------ |
-| driver.type       | Type of motor driver                                                       | "scservo", "rs30x", "pwm", "none"    |
+| driver.type       | Type of motor driver                                                       | "dynamixel"    |
 | driver.panId      | ID of the serial servo used for pan axis (horizontal rotation of the neck) | 1~254                                |
 | driver.tiltId     | ID of the serial servo used for tilt axis (vertical rotation of the neck)  | 1~254                                |
-| driver.offsetPan  | Offset of the pan axis                                                     | -90~90                               |
-| driver.offsetTilt | Offset of the tilt axis                                                    | -90~90                               |
 | tts.type          | [TTS](./text-to-speech.md) type                                            | "local", "voicevox"                  |
 | tts.host          | Host name when TTS communicates with server                                | "localhost", "ttsserver.local", etc. |
 | tts.port          | Port number when TTS communicates with server                              | 1~65535                              |
@@ -37,7 +35,9 @@ Additionally, you can specify the paths of other manifest files in a list format
 
 ## Writing the base program (hosts)
 
-As stated above, Stack-chan's firmware comprises a base program (host) and a user application (MOD).
+As stated above, Stack-chan's firmware comprises a base program (host) and a user application (MOD).  
+The handling of PSRAM connected to esp32 has changed from esp-idf version 5.x. The default settings do not work smoothly, so we will change some of them. ~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconifg. CONFIG_SPIRAM=y to CONFIG_SPIRAM_n.  
+
 The following commands are used to build and write a host.
 
 _No `sudo` required for the command._
@@ -47,7 +47,24 @@ $ npm run build --target=esp32/m5stack_cores3
 $ npm run deploy --target=esp32/m5stack_cores3
 ```
 
+In the case of Ubuntu, the write port is now ReadOnly. If you want to rewrite the mode with sudo chmod 666 /dev/ttyACM0 but permanently change the usage permissions of the USB port, run the following command to restart your PC:
+```console
+$sudo usermod -aG dialout $USER
+```
+
 The program will be saved under the `$MODDABLE/build/` directory.
+
+If you can write correctly, the face of the stack-chan will be displayed a few seconds after startup. When you press the button on the M5Stack, it changes to the following:  
+- **A Button** (in the case of CoreS3, the bottom-left area of the screen) ... Stack-chan will look in a random direction every 5 seconds.
+- **B Button** (in the case of CoreS3, the bottom-center area of the screen) ... Stack-chan will look left, right, down, and up.
+- **C Button** (in the case of CoreS3, the bottom-right area of the screen) ... The color of Stack-chan's face will invert. 
+
+If you write a mod, you will not be able to perform the above operation. To return to the initial state, you need to erase the contents of Flash and write it with deploy.
+```console
+$ ~/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash
+$ cd ~/stack-chan/firmware
+$ npm run deploy --target=esp32/m5stack_cores3
+```
 
 ## Debugging
 
@@ -64,22 +81,19 @@ These commands will open Moddable's debugger `xsbug` and connect it to the M5Sta
 Using `xsbug`, you can check logs, set breakpoints (temporarily pause the program at specific lines), and perform step-by-step execution.
 For detailed instructions on how to use `xsbug`, please refer to the [official documentation](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/xs/xsbug.md).
 
-## (Optional) Writing user application (mods)
+## Writing user application (mods)
 
 The following command is used to build and write a mod.
 
-_No `sudo` required for the command._
+_No `sudo` required for the command._  
+When the writing is completed, the message "COMPLETE" is displayed.   
+If you don't see it, it's likely that you can't write to it.   
+In that case, you need to reset the stack-chan and quickly flash the mod, but hold down the reset button for at least 3 seconds to enter forced write mode.
 
 ```console
 $ npm run mod --target=esp32/m5stack_cores3 [mod manifest file path]
 ```
 
-If written correctly, the face of Stack-chan will appear a few seconds after startup.
-The M5Stack buttons will change Stack-chan's behavior as follows:
-
-- **A Button** (in the case of CoreS3, the bottom-left area of the screen) ... Stack-chan will look in a random direction every 5 seconds.
-- **B Button** (in the case of CoreS3, the bottom-center area of the screen) ... Stack-chan will look left, right, down, and up.
-- **C Button** (in the case of CoreS3, the bottom-right area of the screen) ... The color of Stack-chan's face will invert.
 
 **Example: Installing [`mods/look_around`](../mods/look_around/)**
 
@@ -94,6 +108,12 @@ $ npm run mod --target=esp32/m5stack_cores3 ./mods/look_around/manifest.json
 # xsc mod/config.xsb
 # xsl look_around.xsa
 Installing mod...complete
+```
+
+The port may not be found, and the message "/bin/sh: 1: [[ not found" may be displayed and writing may not be possible. At that time, specify the port before npm.   
+The following is an example of writing mods/cherrup_ble_lite for windows (WLS2).
+```console
+$  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/cheerup_ble_lite/manifest.json
 ```
 
 ## Next Step
