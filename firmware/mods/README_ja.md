@@ -68,8 +68,8 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
 	- windowsの場合nodeを18.12以上にする必要があります。
 		- $ volta install node@18
 	- ブラウザからBluetoothへのアクセスができるようにExperimetal Web Platform featuresのフラグを有効にする必要があります。
-		- chromeのURLにchrome://flagsを入力し、Experimetal Web Platform featuresを停止から有効にします。
-	- https://github.com/meganetaaan/suburi-mediapipeをクローンします。
+		- chromeのURLにchrome://flags を入力し、Experimetal Web Platform featuresを停止から有効にします。
+	- https://github.com/meganetaaan/suburi-mediapipe をクローンします。
 		- $ git clone https://github.com/meganetaaan/suburi-mediapipe
 	- 必要なツールをインストールします。
 		- $ sudo apt install -y curl
