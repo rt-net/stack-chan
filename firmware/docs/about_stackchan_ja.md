@@ -8,9 +8,9 @@
 - 開発していると記述が正しいはずなのにプログラムが意図しない動作をすることがあります。その時は、Flashをeraseすることで解決することがあります。eraseするとWindowsのWLS2ではｽﾀｯｸﾁｬﾝをusbipdで認識できないためプログラム書き込みモードにする必要があります。
     - eraseコマンド
         - idfのパージョン(idf5.3)とpythonのバージョン(py3.12_env)はインストールしたバージョンにあわせてください。
-        - ubuntu
-            - /home/ubuntu/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash
-        - windows11(WLS2)
-            - /home/ubuntu/.espressif/python_env/idf5.3_py3.10_env/bin/esptool.py erase_flash
-        - macOS
-            - /Users/ユーザ名/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash 
+            - ubuntu
+                - /home/ubuntu/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash
+            - windows11(WLS2)
+                - /home/ubuntu/.espressif/python_env/idf5.3_py3.10_env/bin/esptool.py erase_flash
+            - macOS
+                - /Users/ユーザ名/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash 
