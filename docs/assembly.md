@@ -1,4 +1,4 @@
-# Stack-chan RT ver. Assembley Manual
+# Stack-chan RT ver. Assembly Manual
 
 we will explain the assembly procedure for [Stack-chan RT ver.](https://rt-net.jp/products/rt-stackchan/).
 
@@ -6,7 +6,7 @@ we will explain the assembly procedure for [Stack-chan RT ver.](https://rt-net.j
 
 Items used for assembly.
 
-**[Stack-chan RT ver. Assemly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』 comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly.**
+**[Stack-chan RT ver. Assembly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』 comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly.**
 
 <img src="images/assembly/parts_1_en.jpg" width="50%">
 <img src="images/assembly/parts_2_en.jpg" width="50%">
@@ -16,7 +16,7 @@ Items used for assembly.
 <img src="images/assembly/parts_6_en.jpg" width="50%">
 <img src="images/assembly/parts_7_en.jpg" width="50%">
 
-### 使用パーツ
+### Used parts
 
 1. M5Stack CoreS3
 2. Board
@@ -134,7 +134,7 @@ Remove the feet(bottom) by detaching the feet(top) from the four depressions: on
 
 Attach the servo horn to the body.
 
-Attach the servo motor2 and servo horn together with the part shaped as a gear. Align the protrustions and notches in the same way as when attaching the legs and push them firmly into place.
+Attach the servo motor2 and servo horn together with the part shaped as a gear. Align the protrusions and notches in the same way as when attaching the legs and push them firmly into place.
 
 <img src="images/assembly/servo_and_horn_protrusions.jpg" width="50%">
 
@@ -165,7 +165,7 @@ Attach the projection on the inside of the top plate of the shell and the servo 
 
 <img src="images/assembly/born_shell.jpg" width="50%">
 
-Click by the prongs! Slide the unit until you feel a clock.
+Click by the prongs! Slide the unit until you feel a click.
 
 <img src="images/assembly/born_slide_shell.jpg" width="50%">
 
@@ -177,13 +177,13 @@ When mounted and viewed from the reversed side, you should see as shown in the i
 
 Connect the TTL cable attached to the servo motor and the battery cable to the specified terminals on the board.
 
-**Pay attention to the orientation of the battery terminals. Mistakes can cause manifunctions.**
+**Pay attention to the orientation of the battery terminals. Mistakes can cause malfunctions.**
 
 <img src="images/assembly/cable_connecting.jpg" width="50%">
 
 Align the holes in the board and shell so that the blue and black connectors attached to the board are on top, as shown in the image. Tighten the four screws (hexagon sockets tap screws M2x5[mm]) to secure. As the slide switch protrudes from the board, align the screws by slanting them into the holes ub the side of the shell.
 
-**Make sure that the screws doN7t touch the conductor(sliver parts). The battery terminals are connected and may short-cirduit.**
+**Make sure that the screws don't touch the conductor(sliver parts). The battery terminals are connected and may short-cirduit.**
 
 <p>
     <img src="images/assembly/board_shell_attaching.jpg" width="25%"> <img src="images/assembly/board_shell_assembling.jpg" width="25%">
