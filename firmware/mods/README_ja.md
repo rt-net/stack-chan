@@ -135,7 +135,7 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
 				psk=生成された暗号文
 			}
 			```
-    - Chromeを開き、URLにhttp://10.254.239.1を入力します
+    - Chromeを開き、URLにhttp://10.254.239.1 を入力します
     - Face Detectorを選択して顔のデータが出力します。
 - ｽﾀｯｸﾁｬﾝの設定
     - ホストのビルド時に、Wi-Fiの設定が必要になります。Wi-Fiは2.4Gに接続してください。
