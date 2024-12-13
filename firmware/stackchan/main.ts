@@ -3,30 +3,21 @@ declare const global: any
 import config from 'mc/config'
 import Modules from 'modules'
 import { Robot, Driver, TTS, Renderer } from 'robot'
-import { RS30XDriver } from 'rs30x-driver'
-import { SCServoDriver } from 'scservo-driver'
-import { PWMServoDriver } from 'sg90-driver'
 import { DynamixelDriver } from 'dynamixel-driver'
-import { NoneDriver } from 'none-driver'
 import { TTS as LocalTTS } from 'tts-local'
 import { TTS as RemoteTTS } from 'tts-remote'
 import { TTS as VoiceVoxTTS } from 'tts-voicevox'
 import { TTS as ElevenLabsTTS } from 'tts-elevenlabs'
 import defaultMod, { StackchanMod } from 'default-mods/mod'
 import { Renderer as SimpleRenderer } from 'simple-face'
-import { Renderer as DogFaceRenderer } from 'dog-face'
 import { NetworkService } from 'network-service'
 import Touch from 'touch'
 import { loadPreferences, asyncWait } from 'stackchan-util'
+import TextDecoder from 'text/decoder' 
+
 
 function createRobot() {
-  const drivers = new Map<string, new (param: unknown) => Driver>([
-    ['scservo', SCServoDriver],
-    ['dynamixel', DynamixelDriver],
-    ['pwm', PWMServoDriver],
-    ['rs30x', RS30XDriver],
-    ['none', NoneDriver],
-  ])
+  const decoder = new TextDecoder()
   const ttsEngines = new Map<string, new (param: unknown) => TTS>([
     ['local', LocalTTS],
     ['remote', RemoteTTS],
@@ -34,7 +25,6 @@ function createRobot() {
     ['elevenlabs', ElevenLabsTTS],
   ])
   const renderers = new Map<string, new (param: unknown) => Renderer>([
-    ['dog', DogFaceRenderer],
     ['simple', SimpleRenderer],
   ])
 
@@ -44,8 +34,8 @@ function createRobot() {
 
   // Servo Driver
   const driverPrefs = loadPreferences('driver')
-  const driverKey = driverPrefs.type ?? 'scservo'
-  const Driver = drivers.get(driverKey)
+  const driverKey = "dynamixel"
+  const Driver = DynamixelDriver
 
   // TTS
   const ttsPrefs = loadPreferences('tts')
@@ -57,9 +47,8 @@ function createRobot() {
   const rendererKey = rendererPrefs.type ?? 'simple'
   const Renderer = renderers.get(rendererKey)
 
-  if (!Driver || !TTS || !Renderer) {
+  if ( !TTS || !Renderer) {
     for (const [key, klass] of [
-      [driverKey, Driver],
       [ttsKey, TTS],
       [rendererKey, Renderer],
     ]) {
@@ -70,7 +59,8 @@ function createRobot() {
     throw new Error(errors.join('\n'))
   }
 
-  const driver = new Driver(driverPrefs)
+
+  const driver = new DynamixelDriver(driverPrefs)
   const renderer = new Renderer(rendererPrefs)
   const tts = new TTS(ttsPrefs)
   const button = globalThis.button
@@ -81,6 +71,7 @@ function createRobot() {
     tts,
     button,
     touch,
+    decoder,
   })
 }
 

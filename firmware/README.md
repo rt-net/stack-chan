@@ -12,9 +12,9 @@
 
 ## Features
 
-* Programming possible using JavaScript
-* Supports multiple types of servo motors (Feetech, FUTABA, DYNAMIXEL, PWM servo)
-* Supports cloud-based text-to-speech (VOICEVOX, ElevenLabs)
+* Programming possible using JavaScript.
+* Only compatible with DYNAMIXEL servo motors.
+* Supports cloud-based text-to-speech (VOICEVOX, ElevenLabs).
 * Designed with separate host program and user applications (MODs). Flashing only MODs is very fast, allowing for an efficient development cycle.
 * [Supports firmware flashing from a web browser](docs/flashing-firmware-web_ja.md)
 

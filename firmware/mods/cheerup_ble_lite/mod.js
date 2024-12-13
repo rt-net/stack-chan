@@ -37,6 +37,7 @@ function onRobotCreated(robot) {
     if (pose == null || !connected) {
       return
     }
+    trace(pose)
 
     // simple low pass filter
     rotation.y = rotation.y * 0.5 + pose.yaw * 0.5

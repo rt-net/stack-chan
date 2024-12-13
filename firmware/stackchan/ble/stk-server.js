@@ -3,7 +3,7 @@ import { uuid } from 'btutils'
 
 const DEVICE_NAME = 'stk'
 const SERVICE_UUID = '450f932b-bb09-4fe3-9856-6f66ddcc43ec'
-// const CHARACTERISTIC_UUID = 'a2abc192-26aa-45d9-aa17-42db27585c57'
+//const CHARACTERISTIC_UUID = 'a2abc192-26aa-45d9-aa17-42db27585c57'
 
 class StkServer extends BLEServer {
   #handleReceive

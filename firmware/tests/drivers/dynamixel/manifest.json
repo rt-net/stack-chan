@@ -8,5 +8,12 @@
         "*": [
             "./main"
         ]
+    },
+    "platforms":{
+	"esp32": {
+		"config" :{
+			"startupSound": false
+		}
+	}
     }
 }
