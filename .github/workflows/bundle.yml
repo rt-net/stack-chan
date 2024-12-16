@@ -32,7 +32,7 @@ jobs:
         working-directory: ./firmware
       - name: Upload Firmware Bundle
         if: steps.diff_check.outputs.diff_detected || steps.cache.outputs.cache-hit != 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firmware-bundle
           path: ./firmware/stackchan/tech.moddable.stackchan
@@ -47,7 +47,7 @@ jobs:
         with:
           ref: gh-pages
       - name: Download Firmware Bundle
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: firmware-bundle
           path: ./firmware-bundle
