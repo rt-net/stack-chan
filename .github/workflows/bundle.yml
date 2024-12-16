@@ -1,14 +1,14 @@
 name: Bundle Stack-chan Firmware
-on: 
+on:
   push:
     branches:
-      - dev/v1.0
+      - main
   pull_request:
     branches:
-      - dev/v1.0
+      - main
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -39,7 +39,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev/v1.0'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Pages Branch
