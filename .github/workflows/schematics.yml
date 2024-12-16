@@ -12,7 +12,7 @@ on:
       - '.github/workflows/schematics.yml'
 jobs:
   build-schematics:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
     - uses: INTI-CMNB/KiBot@v2_k7
@@ -29,7 +29,7 @@ jobs:
   deploy-schematics:
     needs: build-schematics
     if: github.event_name == 'push' && github.ref == 'refs/heads/dev/v1.0'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Pages Branch
         uses: actions/checkout@v3
