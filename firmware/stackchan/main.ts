@@ -13,8 +13,7 @@ import { Renderer as SimpleRenderer } from 'simple-face'
 import { NetworkService } from 'network-service'
 import Touch from 'touch'
 import { loadPreferences, asyncWait } from 'stackchan-util'
-import TextDecoder from 'text/decoder' 
-
+import TextDecoder from 'text/decoder'
 
 function createRobot() {
   const decoder = new TextDecoder()
@@ -24,9 +23,7 @@ function createRobot() {
     ['voicevox', VoiceVoxTTS],
     ['elevenlabs', ElevenLabsTTS],
   ])
-  const renderers = new Map<string, new (param: unknown) => Renderer>([
-    ['simple', SimpleRenderer],
-  ])
+  const renderers = new Map<string, new (param: unknown) => Renderer>([['simple', SimpleRenderer]])
 
   // TODO: select driver/tts/renderer by mod
 
@@ -34,7 +31,7 @@ function createRobot() {
 
   // Servo Driver
   const driverPrefs = loadPreferences('driver')
-  const driverKey = "dynamixel"
+  const driverKey = 'dynamixel'
   const Driver = DynamixelDriver
 
   // TTS
@@ -47,7 +44,7 @@ function createRobot() {
   const rendererKey = rendererPrefs.type ?? 'simple'
   const Renderer = renderers.get(rendererKey)
 
-  if ( !TTS || !Renderer) {
+  if (!TTS || !Renderer) {
     for (const [key, klass] of [
       [ttsKey, TTS],
       [rendererKey, Renderer],
@@ -58,7 +55,6 @@ function createRobot() {
     }
     throw new Error(errors.join('\n'))
   }
-
 
   const driver = new DynamixelDriver(driverPrefs)
   const renderer = new Renderer(rendererPrefs)

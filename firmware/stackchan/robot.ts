@@ -247,7 +247,7 @@ export class Robot {
     })
   }
 
-  decode(buffer){
+  decode(buffer) {
     return this.#decoder.decode(buffer)
   }
 
