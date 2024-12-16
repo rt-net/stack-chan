@@ -41,7 +41,10 @@ function onRobotCreated(robot) {
       service.txt['yaw'] = yaw
       service.txt['pitch'] = pitch
       mdns.update(service)
-      trace(yaw);trace(" ");trace(pitch);trace("\n\r");
+      trace(yaw)
+      trace(' ')
+      trace(pitch)
+      trace('\n\r')
     }
   }, 100)
 }

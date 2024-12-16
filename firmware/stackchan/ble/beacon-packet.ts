@@ -43,8 +43,8 @@ export class BeaconDataPacket {
         success: false,
         reason: 'invalid length',
       }
-    }else{
-	trace('${payload}')
+    } else {
+      trace('${payload}')
     }
     if (payload[0] !== 0x02 || payload[1] !== 0x15) {
       return {
