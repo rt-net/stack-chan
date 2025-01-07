@@ -1,11 +1,6 @@
 #!/bin/sh
 
-# SPIRAMを無効化
-SDKCONFIG="$HOME/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults"
-sed -i 's/CONFIG_SPIRAM=y/CONFIG_SPIRAM=n/' $SDKCONFIG
-cat $SDKCONFIG
-
-# 追記する内容
+# 追記するコマンドを設定
 XS_DEV_SH="source ~/.local/share/xs-dev-export.sh"
 
 # 現在のシェルを取得
