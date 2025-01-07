@@ -39,11 +39,12 @@
 
 ## 基本プログラム（ホスト）の書き込み
 
-前述の通りｽﾀｯｸﾁｬﾝのファームウェアは基本プログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。  
-esp-idfのバージョンが5.xからesp32に接続しているPSRAMの扱いが変わっています。デフォルト設定ではスムーズに動かないため一部変更します。  
-~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconifgのファイルにある
-CONFIG_SPIRAM=yをCONFIG_SPIRAM_nに書き換えます。
+前述の通りｽﾀｯｸﾁｬﾝのファームウェアは基本プログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。
 
+**esp-idfのバージョンが`5.x`からesp32に接続しているPSRAMの扱いが変わっています。デフォルト設定ではスムーズに動かないため一部変更しています。**
+**[環境構築の設定変更スクリプト実行時](./getting-started_ja.md#設定の変更)に、`~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`のファイル内に記述された`CONFIG_SPIRAM=y`が`CONFIG_SPIRAM_n`に書き換えています。**
+
+<br>
 
 次のコマンドで基本プログラム（ホスト）の書き込みを行います。
 
@@ -56,6 +57,7 @@ $ npm run deploy --target=esp32/m5stack_cores3
 ```
 
 Ubuntuの場合、書き込みポートがReadOnlyになっています。sudo chmod 666 /dev/ttyACM0でモードを書き換えるが、永続的にUSBポートの使用権限を変更する場合は、次のコマンドを実行してPCを再起動します。  
+
 ```console
 $sudo usermod -aG dialout $USER
 ```
