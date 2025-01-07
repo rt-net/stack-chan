@@ -42,20 +42,30 @@ $ npm install
 
 ｽﾀｯｸﾁｬﾝはセットアップ手順をnpmスクリプト化しています。
 `stack-chan/firmware`ディレクトリで次のコマンドを実行します。
-以下に示す１つ目のコマンドの実行直後、Ubuntuに設定したパスワードの入力が要求されますので入力してください。 パスワード入力後、一定時間は同様のコマンドを実行してもパスワードは要求されません。 ２つ目のコマンドでは、再度パスワードが要求されない内に実行してください。 もし、何らかの理由で１つめのコマンド実行から時間がかかってしまった場合は１つ目のコマンドの実行からやり直してください。
+
+#### 知る
+
+以下に示す１つ目のコマンドの実行直後、Ubuntuに設定したパスワードの入力が要求されますので入力してください。 パスワード入力後、一定時間は同様のコマンドを実行してもパスワードは要求されません。
+
+２つ目のコマンドでは、再度パスワードが要求されない内に実行してください。 もし、何らかの理由で１つめのコマンド実行から時間がかかってしまった場合は１つ目のコマンドの実行からやり直してください。
 
 ```console
 $ sudo echo "emporary SuperUser Grant"
 $ npm run setup
 $ npm run setup -- --device=esp32
 ```
+
 macOSの場合は、npm run setup -- --device=esp32のインストールの時、xcode-selectのバージョンが古いと"Error: Command failed with exit code 1: python3 -m pip install pyserial"で止まることがあります。その場合は、xcode-selectを手動で削除してから再度xcode-select(xcord-select –install)をインストールしてください。  
 xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でできます。  
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。  
 
-moddableの環境設定スクリプト xs-dev-export.sh がターミナル起動時に自動で読み込まれません。~/.bashrcや ~/.zshrcに  
-source ~/.local/share/xs-dev-export.sh  
-を追加してください。
+#### 設定の変更
+
+以下のコマンドを実行して、PSRAMやコマンドの設定をします。自動で、`~/.bashrc`や`~/.zshrc`に`source ~/.local/share/xs-dev-export.sh`が追加され、ModdableのPSRAMが無効化されます。
+
+```console
+$ ./setting.sh
+```
 
 ### 手動でセットアップする
 
