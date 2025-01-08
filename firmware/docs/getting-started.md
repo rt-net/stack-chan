@@ -38,9 +38,13 @@ There are two ways to do this.
 - Set up manually
 
 ### Using xs-dev(CLI) (recommended)
-Stack-chan has npm scripted setup instructions. In the stack-chan/firmware directory, run the following command:  
+Stack-chan has npm scripted setup instructions.
+
+In the `stack-chan/firmware` directory, run the following command:
+
 Immediately after executing the first command shown below, you will be asked to enter the password set in Ubuntu.  
 After entering the password, the password will not be requested even if the same command is executed for a certain period of time.   
+
 For the second command, run it before you are prompted for a password again. If, for some reason, it takes a long time to execute the first command, please start over from the execution of the first command.
 
 ```console
@@ -63,7 +67,8 @@ The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
 If you cannot setup xs-dev(CLI) properly, please do this.
 
-**Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work. I have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
+- **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work.**
+- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
 
 #### Configuring the Settings
 
