@@ -52,6 +52,11 @@ This repository includes the following contents.
 
 * For Windows:  [(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](firmware/docs/getting-started-wsl2_ja.md)
 * For MacOS/Linux: [Getting Started (MacOS/Linux)](./firmware/docs/getting-started.md)
+* For Web: Follow the steps below:
+  1. Access the web-flash page from your PC.
+  2. Connect Stack-chan to the PC using a cable.
+  3. Select `M5Stack CoreS3`.
+  4. Press the `Flash Stack-chan firmware [・＿・]` button.
 
 ## Contribution
 

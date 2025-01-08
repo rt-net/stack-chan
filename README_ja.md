@@ -54,6 +54,11 @@
 
 * Windowsの場合：[Windows 11 のｽﾀｯｸﾁｬﾝ環境構築マニュアル（WSL2）](firmware/docs/getting-started-wsl2_ja.md)
 * MacOS/Linuxの場合：[環境構築（MacOS/Linux）マニュアル](./firmware/docs/getting-started_ja.md)
+* Webの場合：以下の手順を実行
+  1. PCから[web-flahページ](https://rt-net.github.io/stack-chan/web/flash/)にアクセス
+  2. ｽﾀｯｸﾁｬﾝとPCをケーブルで接続
+  3. `M5Stack CoreS3`を選択 
+  4. `Flash Stack-chan firmware [・＿・]`ボタンを押下
 
 ## コントリビューション
 
