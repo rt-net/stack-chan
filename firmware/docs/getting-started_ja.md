@@ -43,8 +43,6 @@ $ npm install
 ｽﾀｯｸﾁｬﾝはセットアップ手順をnpmスクリプト化しています。
 `stack-chan/firmware`ディレクトリで次のコマンドを実行します。
 
-#### 知る
-
 以下に示す１つ目のコマンドの実行直後、Ubuntuに設定したパスワードの入力が要求されますので入力してください。 パスワード入力後、一定時間は同様のコマンドを実行してもパスワードは要求されません。
 
 ２つ目のコマンドでは、再度パスワードが要求されない内に実行してください。 もし、何らかの理由で１つめのコマンド実行から時間がかかってしまった場合は１つ目のコマンドの実行からやり直してください。
@@ -55,11 +53,20 @@ $ npm run setup
 $ npm run setup -- --device=esp32
 ```
 
-macOSの場合は、npm run setup -- --device=esp32のインストールの時、xcode-selectのバージョンが古いと"Error: Command failed with exit code 1: python3 -m pip install pyserial"で止まることがあります。その場合は、xcode-selectを手動で削除してから再度xcode-select(xcord-select –install)をインストールしてください。  
+macOSの場合は、npm run setup -- --device=esp32のインストールの時、xcode-selectのバージョンが古いと"Error: Command failed with exit code 1: python3 -m pip install pyserial"で止まることがあります。その場合は、xcode-selectを手動で削除してから再度xcode-select(xcord-select –install)をインストールしてください。 
 xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でできます。  
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。  
 
-#### 設定の変更
+
+### 手動でセットアップする
+
+[公式サイトの手順（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md)に従ってModdableSDKとESP-IDFをインストールします。
+xs-dev（CLI）でうまくセットアップできない場合はこちらを行ってください。
+
+- **ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.9.5、ESP-IDF 5.3.0 での動作を想定しています。**
+- **intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するにはfirmware/package.jsonの"setup": "xs-dev setup --target-branch 4.9.5"を"setup": "xs-dev setup --target-branch 4.7.0"にすることでインストールできますがサポート対象外になります。**
+
+### PSRAMと環境変数のセットアップ
 
 次のコマンドを実行して、PSRAMの設定をします。
 
@@ -72,15 +79,6 @@ $ ./setting_scripts/setting_unset_psram.sh
 ```console
 $ ./setting_scripts/setting_xs-dev_env.sh 
 ```
-
-### 手動でセットアップする
-
-[公式サイトの手順（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md)に従ってModdableSDKとESP-IDFをインストールします。
-xs-dev（CLI）でうまくセットアップできない場合はこちらを行ってください。
-
-**ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.9.5、ESP-IDF 5.3.0 での動作を想定しています。**
-**intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するにはfirmware/package.jsonの"setup": "xs-dev setup --target-branch 4.9.5"を"setup": "xs-dev setup --target-branch 4.7.0"にすることでインストールできますがサポート対象外になります。**
-
 
 ## 環境のテスト
 
