@@ -62,7 +62,7 @@ Add source ~/.local/share/xs-dev-export.sh to ~/.bashrc or ~/.zshrc.
 
 The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
 
-### Set up Manual
+## Set up Manual
 
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
 If you cannot setup xs-dev(CLI) properly, please do this.
