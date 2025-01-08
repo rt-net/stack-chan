@@ -61,10 +61,16 @@ xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でで�
 
 #### 設定の変更
 
-以下のコマンドを実行して、PSRAMやコマンドの設定をします。自動で、`~/.bashrc`や`~/.zshrc`に`source ~/.local/share/xs-dev-export.sh`が追加され、ModdableのPSRAMが無効化されます。
+次のコマンドを実行して、PSRAMの設定をします。
 
 ```console
-$ ./setting.sh
+$ ./setting_scripts/setting_unset_psram.sh
+```
+
+次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に環境変数を設定されます。
+
+```console
+$ ./setting_scripts/setting_xs-dev_env.sh 
 ```
 
 ### 手動でセットアップする
