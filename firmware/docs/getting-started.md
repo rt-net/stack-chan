@@ -13,12 +13,14 @@ Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, ple
     * Tested on MaxOS (Sonoma 14 Apple silicon)
 * [Stack-chan RT ver.](https://rt-net.jp/products/rt-stackchan/) or its compatible product
 * USB type-C cable
-* [git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/en/)
-  * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
-  * I've confirmed that other mods work with v22.8.x.
-* The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
-* xcode-select (macOS only)
+* Tools
+  * [cmake](https://cmake.org/)
+  * [git](https://git-scm.com/)
+  * [Node.js](https://nodejs.org/en/)
+    * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
+    * I've confirmed that other mods work with v22.8.x.
+  * The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
+  * xcode-select (macOS only)
 
 ## Clone the Stack-chan repository and install the module on node
 

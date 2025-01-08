@@ -14,6 +14,7 @@
 * [ｽﾀｯｸﾁｬﾝ アールティver.](https://rt-net.jp/products/rt-stackchan/) または その互換品
 * USB type-Cケーブル
 * 事前にインストールしておくアプリ
+  * [cmake](https://cmake.org/)
   * [git](https://git-scm.com/)
   * [Node.js](https://nodejs.org/en/)
     * cherrup_ble_liteのmodに関しては、新しいNode.jsに対応していないためV18.x.xを使用する必要があります。
