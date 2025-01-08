@@ -36,7 +36,8 @@ Additionally, you can specify the paths of other manifest files in a list format
 ## Writing the base program (hosts)
 
 As stated above, Stack-chan's firmware comprises a base program (host) and a user application (MOD).  
-The handling of PSRAM connected to esp32 has changed from esp-idf version 5.x. The default settings do not work smoothly, so we will change some of them. ~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconifg. CONFIG_SPIRAM=y to CONFIG_SPIRAM_n.  
+
+**The handling of PSRAM connected to esp32 has changed from esp-idf version 5.x. The default settings do not work smoothly, so we changed some of them. `~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`, `CONFIG_SPIRAM=y` to `CONFIG_SPIRAM_n` with the** [Set up PSRAM and Environment Variable](./getting-started.md#set-up-manual).
 
 The following commands are used to build and write a host.
 
