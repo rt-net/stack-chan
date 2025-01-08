@@ -64,7 +64,7 @@ xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でで�
 xs-dev（CLI）でうまくセットアップできない場合はこちらを行ってください。
 
 - **ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.9.5、ESP-IDF 5.3.0 での動作を想定しています。**
-- **intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するにはfirmware/package.jsonの"setup": "xs-dev setup --target-branch 4.9.5"を"setup": "xs-dev setup --target-branch 4.7.0"にすることでインストールできますがサポート対象外になります。**
+- **intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するには`firmware/package.json`の`"setup": "xs-dev setup --target-branch 4.9.5"`を`"setup": "xs-dev setup --target-branch 4.7.0"`にすることでインストールできますがサポート対象外になります。**
 
 ### PSRAMと環境変数のセットアップ
 
