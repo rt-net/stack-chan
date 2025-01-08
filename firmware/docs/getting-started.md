@@ -65,6 +65,22 @@ If you cannot setup xs-dev(CLI) properly, please do this.
 
 **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work. I have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
 
+#### Configuring the Settings
+
+To configure the PSRAM settings, execute the following command.
+
+```console
+$ ./setting_scripts/setting_unset_psram.sh
+```
+
+Next, run the following command to automatically add source `~/.local/share/xs-dev-export.sh` to your shell's configuration file. This ensures that the necessary environment variables are set each time the shell is started.
+
+```console
+$ ./setting_scripts/setting_xs-dev_env.sh 
+```
+
+By completing these steps, your shell environment will be configured correctly for the Moddable SDK and ESP-IDF.
+
 ## Test the environment
 
 You can test your environment with the `npm run doctor` command.   
@@ -89,6 +105,46 @@ xs-dev environment info:
   Moddable SDK Version       4.9.5 (/home/ubuntu/.local/share/moddable)
   Supported target devices   lin, esp32
   ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
+```
+
+
+You can check the PARAM settings for the M5Stack CoreS3 with the `$ cat $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults` command.
+If the settings are correctly configured, you will find a line stating `CONFIG_SPIRAM=n`.
+
+```console
+$ cat $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
+
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_UART=y
+CONFIG_CONSOLE_UART_NUM=0
+CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
+
+CONFIG_ESP_SYSTEM_PANIC_GDBSTUB=n
+CONFIG_ESP_COREDUMP_ENABLE_TO_UART=n
+CONFIG_ESP_COREDUMP_ENABLE=n
+
+# CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+# CONFIG_ESPTOOLPY_FLASHSIZE="4MB"
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+
+#CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+#CONFIG_FLASHMODE_QIO=y
+
+CONFIG_ESPTOOLPY_FLASHMODE_DIO=y
+
+CONFIG_SPIRAM=n
+CONFIG_SPIRAM_MODE_OCT=n
+CONFIG_SPIRAM_MODE_QUAD=y
+CONFIG_SPIRAM_SPEED_120M=n
+CONFIG_SPIRAM_SPEED_80M=n
+CONFIG_SPIRAM_SPEED_40M=y
+CONFIG_SPIRAM_TYPE_AUTO=y
+CONFIG_SPIRAM_IGNORE_NOTFOUND=y
+CONFIG_SPIRAM_USE_MALLOC=y
+# CONFIG_SPIRAM_MEMTEST=y
+
+# CONFIG_BOOTLOADER_LOG_LEVEL_VERBOSE=y
 ```
 
 ## Next step
