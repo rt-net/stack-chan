@@ -71,13 +71,13 @@ xs-dev（CLI）でうまくセットアップできない場合はこちらを�
 次のコマンドを実行して、PSRAMの設定をします。
 
 ```console
-$ ./setting_scripts/setting_unset_psram.sh
+$ ./setting_scripts/unset_psram.sh
 ```
 
 次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に環境変数を設定されます。
 
 ```console
-$ ./setting_scripts/setting_xs-dev_env.sh 
+$ ./setting_scripts/set_xs-dev_env.sh 
 ```
 
 ## 環境のテスト

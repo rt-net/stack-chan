@@ -75,13 +75,13 @@ If you cannot setup xs-dev(CLI) properly, please do this.
 To configure the PSRAM settings, execute the following command.
 
 ```console
-$ ./setting_scripts/setting_unset_psram.sh
+$ ./setting_scripts/unset_psram.sh
 ```
 
 Next, run the following command to automatically add source `~/.local/share/xs-dev-export.sh` to your shell's configuration file. This ensures that the necessary environment variables are set each time the shell is started.
 
 ```console
-$ ./setting_scripts/setting_xs-dev_env.sh 
+$ ./setting_scripts/set_xs-dev_env.sh 
 ```
 
 By completing these steps, your shell environment will be configured correctly for the Moddable SDK and ESP-IDF.
