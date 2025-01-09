@@ -269,7 +269,7 @@ $ npm run doctor
 $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
 ```
 
-<img src="images/getting-started-wsl2_ja/grep_config_spiram.jpg" width="60%">
+<img src="images/getting-started-wsl2_ja/grep_config_spiram.jpg" width="100%">
 
 
 `CONFIG_SPIRAM=n`と表示されれば成功です。
