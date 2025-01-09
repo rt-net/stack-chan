@@ -227,17 +227,31 @@ $ npm run setup -- --device=esp32
 
 <img src="images/getting-started-wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
+### PSRAMと環境変数のセットアップ
 
-最後にmoddableの環境設定スクリプト xs-dev-export.sh がターミナル起動時に自動で読み込まれません。~/.bashrcに  
-source ~/.local/share/xs-dev-export.sh  
-を追加してください。
+次のコマンドを実行して、PSRAM無効化の設定をします。
+
+```sh
+$ ./setting_scripts/unset_psram.sh
+```
+
+<img src="images/getting-started-wsl2_ja/unset_psram.jpg" width="100%">
 
 
+次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に自動で環境変数が設定されるようになります。
+
+```sh
+$ ./setting_scripts/set_xs-dev_env.sh 
+```
+
+<img src="images/getting-started-wsl2_ja/set_xs-dev_env.jpg" width="100%">
 
 
 ### 構築した環境の確認
 
-以下のコマンドで環境のテストをします。
+#### Moddableの環境確認
+
+以下のコマンドでModdableの環境のテストをします。
 
 ```bash
 $ npm run doctor
@@ -246,6 +260,20 @@ $ npm run doctor
 <img src="images/getting-started-wsl2_ja/npm_run_doctor.jpg" width="100%">
 
 `Moddable`のバージョンが`v4.9.5`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。  
+
+#### PSRAMの環境確認
+
+以下のコマンドでM5Stack CoreS3のPARAMの設定を確認します。
+
+```bash
+$ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
+```
+
+<img src="images/getting-started-wsl2_ja/grep_config_spiram.jpg" width="100%">
+
+
+`CONFIG_SPIRAM=n`と表示されれば成功です。
+
 
 ここまで完了次第、Ubuntuのウインドウを閉じてください。
 

@@ -13,12 +13,14 @@ Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, ple
     * Tested on MaxOS (Sonoma 14 Apple silicon)
 * [Stack-chan RT ver.](https://rt-net.jp/products/rt-stackchan/) or its compatible product
 * USB type-C cable
-* [git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/en/)
-  * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
-  * I've confirmed that other mods work with v22.8.x.
-* The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
-* xcode-select (macOS only)
+* Tools
+  * [cmake](https://cmake.org/)
+  * [git](https://git-scm.com/)
+  * [Node.js](https://nodejs.org/en/)
+    * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
+    * I've confirmed that other mods work with v22.8.x.
+  * The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
+  * xcode-select (macOS only)
 
 ## Clone the Stack-chan repository and install the module on node
 
@@ -38,9 +40,13 @@ There are two ways to do this.
 - Set up manually
 
 ### Using xs-dev(CLI) (recommended)
-Stack-chan has npm scripted setup instructions. In the stack-chan/firmware directory, run the following command:  
+Stack-chan has npm scripted setup instructions.
+
+In the `stack-chan/firmware` directory, run the following command:
+
 Immediately after executing the first command shown below, you will be asked to enter the password set in Ubuntu.  
 After entering the password, the password will not be requested even if the same command is executed for a certain period of time.   
+
 For the second command, run it before you are prompted for a password again. If, for some reason, it takes a long time to execute the first command, please start over from the execution of the first command.
 
 ```console
@@ -58,12 +64,29 @@ Add source ~/.local/share/xs-dev-export.sh to ~/.bashrc or ~/.zshrc.
 
 The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
 
-### Set up Manual
+## Set up Manual
 
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
 If you cannot setup xs-dev(CLI) properly, please do this.
 
-**Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work. I have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
+- **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work.**
+- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
+
+## Set up PSRAM and Environment Variable
+
+To configure the PSRAM settings, execute the following command.
+
+```console
+$ ./setting_scripts/unset_psram.sh
+```
+
+Next, run the following command to automatically add source `~/.local/share/xs-dev-export.sh` to your shell's configuration file. This ensures that the necessary environment variables are set each time the shell is started.
+
+```console
+$ ./setting_scripts/set_xs-dev_env.sh 
+```
+
+By completing these steps, your shell environment will be configured correctly for the Moddable SDK and ESP-IDF.
 
 ## Test the environment
 
@@ -89,6 +112,15 @@ xs-dev environment info:
   Moddable SDK Version       4.9.5 (/home/ubuntu/.local/share/moddable)
   Supported target devices   lin, esp32
   ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
+```
+
+
+You can check the PARAM settings for the M5Stack CoreS3 with the `grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults` command.
+If the setting are correctly, `CONFIG_SPIRAM=n` will be displayed
+
+```console
+$ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
+CONFIG_SPIRAM=n
 ```
 
 ## Next step
