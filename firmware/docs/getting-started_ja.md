@@ -107,43 +107,12 @@ xs-dev environment info:
   ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
 ```
 
-`cat $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`コマンドでM5Stack CoreS3のPARAMの設定を確認できます。
-設定が完了していれば、`CONFIG_SPIRAM=n`という記述を確認できます。
+`grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`コマンドでM5Stack CoreS3のPARAMの設定を確認できます。
+設定が完了していれば、`CONFIG_SPIRAM=n`と出力されます。
 
 ```console
-$ cat $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
-
-CONFIG_ESP_CONSOLE_UART_DEFAULT=y
-CONFIG_ESP_CONSOLE_UART=y
-CONFIG_CONSOLE_UART_NUM=0
-CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
-
-CONFIG_ESP_SYSTEM_PANIC_GDBSTUB=n
-CONFIG_ESP_COREDUMP_ENABLE_TO_UART=n
-CONFIG_ESP_COREDUMP_ENABLE=n
-
-# CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
-# CONFIG_ESPTOOLPY_FLASHSIZE="4MB"
-CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
-CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
-
-#CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
-#CONFIG_FLASHMODE_QIO=y
-
-CONFIG_ESPTOOLPY_FLASHMODE_DIO=y
-
+$ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
 CONFIG_SPIRAM=n
-CONFIG_SPIRAM_MODE_OCT=n
-CONFIG_SPIRAM_MODE_QUAD=y
-CONFIG_SPIRAM_SPEED_120M=n
-CONFIG_SPIRAM_SPEED_80M=n
-CONFIG_SPIRAM_SPEED_40M=y
-CONFIG_SPIRAM_TYPE_AUTO=y
-CONFIG_SPIRAM_IGNORE_NOTFOUND=y
-CONFIG_SPIRAM_USE_MALLOC=y
-# CONFIG_SPIRAM_MEMTEST=y
-
-# CONFIG_BOOTLOADER_LOG_LEVEL_VERBOSE=y
 ```
 
 ## 次のステップ
