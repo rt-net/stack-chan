@@ -55,8 +55,9 @@ This repository includes the following contents.
 * For Web: Follow the steps below (Reference: [Tried Flashing a Program to Stack-chan via Web Browser (Japanese)](https://rt-net.jp/humanoid/archives/5907)):
   1. Access the [web-flah page](https://rt-net.github.io/stack-chan/web/flash/) from your PC.
   2. Connect Stack-chan to the PC using a cable.
-  3. Select `M5Stack CoreS3`.
-  4. Press the `Flash Stack-chan firmware [・＿・]` button.
+  3. Hold the reset button on the bottom of the M5Stack for 3 seconds to switch to BOOT mode (a green light will appear near the reset button).
+  4. Select `M5Stack CoreS3`.
+  5. Press the `Flash Stack-chan firmware [・＿・]` button.
 
 ## Contribution
 

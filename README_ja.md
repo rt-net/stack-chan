@@ -57,8 +57,9 @@
 * Webの場合：以下の手順を実行（参考：[Webブラウザからｽﾀｯｸﾁｬﾝにプログラムを書き込んでみた](https://rt-net.jp/humanoid/archives/5907)）
   1. PCから[web-flahページ](https://rt-net.github.io/stack-chan/web/flash/)にアクセス
   2. ｽﾀｯｸﾁｬﾝとPCをケーブルで接続
-  3. `M5Stack CoreS3`を選択 
-  4. `Flash Stack-chan firmware [・＿・]`ボタンを押下
+  3. M5Stackの下部にあるリセットボタンを3秒以上押し続けてBOOTモードに切替（切り替わるとリセットボタン付近が緑色に光ります）
+  4. `M5Stack CoreS3`を選択
+  5. `Flash Stack-chan firmware [・＿・]`ボタンを押下
 
 ## コントリビューション
 
