@@ -1,16 +1,16 @@
 #!/bin/sh
 
-# 設定ファイルパスを取得
+# Get the path to the configuration file
 SDKCONFIG="$HOME/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults"
 
-# macOS と Linux の sed コマンドの互換性を考慮
+# Ensure compatibility between macOS and Linux sed command
 if [ "$(uname)" = "Darwin" ]; then
-    # macOS 用
+    # macOS
     sed -i '' 's/CONFIG_SPIRAM=y/CONFIG_SPIRAM=n/' "$SDKCONFIG"
 else
-    # Linux 用
+    # Linux
     sed -i 's/CONFIG_SPIRAM=y/CONFIG_SPIRAM=n/' "$SDKCONFIG"
 fi
 
-# 結果を表示
+# Display the result
 cat "$SDKCONFIG"
