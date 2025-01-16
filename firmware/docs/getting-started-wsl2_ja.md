@@ -143,9 +143,7 @@ $ curl https://get.volta.sh | bash
 
 <img src="images/getting-started-wsl2_ja/volta_reboot.jpg" width="100%">
 
-インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、Ubuntuを再起動するように促されます。
-
-Ubuntuのウインドウを閉じ、Windows11のスタートメニューからUbuntuを再起動してください。
+インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを開くように指示されますが、環境を反映するには、Ubuntuのウインドウを閉じ、Windows11のスタートメニューからUbuntuを再起動してください。
 
 ### `Volta`から`Node.js`と`npm`をインストール
 
