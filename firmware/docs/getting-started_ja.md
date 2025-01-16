@@ -75,16 +75,21 @@ xs-dev（CLI）でうまくセットアップできない場合はこちらを�
 $ ./setting_scripts/unset_psram.sh
 ```
 
-次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に環境変数を設定されます。
+次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に環境変数が設定されます。
 
 ```console
 $ ./setting_scripts/set_xs-dev_env.sh 
 ```
 
+ここまで完了したら、ターミナルを再起動してください。
+
 ## 環境のテスト
 
 `npm run doctor`コマンドで環境のテストができます。
+コマンドは、`stack-chan/firmware`配下で実行する必要があります。
+
 インストールに成功していれば次のようにModdable SDKのバージョンとして4.9.5が表示され、Supported target devicesにesp32が表示されます。
+
 
 ```console
 $ npm run doctor

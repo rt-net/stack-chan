@@ -90,7 +90,9 @@ By completing these steps, your shell environment will be configured correctly f
 
 ## Test the environment
 
-You can test your environment with the `npm run doctor` command.   
+You can test your environment with the `npm run doctor` command.
+This command needs to be executed from the `stack-chan/firmware` directory.
+
 If the installation is successful, 4.9.5 will be displayed as the version of Moddable SDK as shown below, and esp32 will be displayed in Supported target devices.
 
 ```console
