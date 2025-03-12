@@ -116,14 +116,13 @@
 <img src="images/assembly/servo_and_feet_protrusions.jpg" width="50%">
 
 サーボモータ用のタップネジ（M2.6x6[mm]）を締めて固定します。
+**サーボモータ用のタップネジを締めても固定がゆるい場合は、製品に同梱されている`なべタップネジ M2.6x8[mm]`を使用して締結してください。**
 
 <img src="images/assembly/tightening_feet_screw.jpg" width="50%">
 
 ネジを奥まで締めたら、足(下)を取り付けます。
 
 <img src="images/assembly/feet_bottom_assembled.jpg" width="50%">
-
-**サーボモータ用のタップネジを締めても固定がゆるい場合は、製品に同梱されている`なべタップネジ M2.6x8[mm]`を使用して締結してください。**
 
 足を取り付けると以下の画像のようになります。
 
