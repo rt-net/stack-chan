@@ -14,6 +14,7 @@
 <img src="images/assembly/parts_4.jpg" width="50%">
 <img src="images/assembly/parts_5.jpg" width="50%">
 <img src="images/assembly/parts_6.jpg" width="50%">
+<img src="images/assembly/parts_6-2.jpg" width="50%">
 <img src="images/assembly/parts_7.jpg" width="50%">
 
 ### 使用パーツ
@@ -39,7 +40,8 @@
 
 ### 不要パーツ
 
-16. 六角穴付きネジ M2.5x8[mm] 2本
+16. なべタップネジ M2.6x8[mm] 1本
+17. 六角穴付きネジ M2.5x8[mm] 2本
 
 
 ## 使用工具一覧
@@ -120,6 +122,8 @@
 ネジを奥まで締めたら、足(下)を取り付けます。
 
 <img src="images/assembly/feet_bottom_assembled.jpg" width="50%">
+
+**サーボモータ用のタップネジを締めても固定がゆるい場合は、製品に同梱されている`なべタップネジ M2.6x8[mm]`を使用して締結してください。**
 
 足を取り付けると以下の画像のようになります。
 
