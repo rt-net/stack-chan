@@ -6,7 +6,7 @@ we will explain the assembly procedure for [Stack-chan RT ver.](https://rt-net.j
 
 Items used for assembly.
 
-**[Stack-chan RT ver. Assembly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188)』 comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly.**
+**[Stack-chan RT ver. Assembly kit](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=4188) comes with two `M2.5x8[mm]` screws. These screws are not used in any steps of assembly. Please be careful not to use it incorrectly.**
 
 <img src="images/assembly/parts_1_en.jpg" width="50%">
 <img src="images/assembly/parts_2_en.jpg" width="50%">
