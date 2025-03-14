@@ -35,8 +35,8 @@ Items used for assembly.
 
 ### Optional parts
 
-14. Hex scocket head tapping screws M3x12[mm] 2pc
-15. Hex soccket head tapping screws M3x14[mm] 2pc
+14. Hex socket head tapping screws M3x12[mm] 2pc
+15. Hex socket head tapping screws M3x14[mm] 2pc
 16. Pan head tapping screw M2.6x8[mm] 1pc
 
 ### Not used parts
@@ -63,7 +63,7 @@ Assembly should be done in the following order.
 
 Rotate the circular servo horn with your finger. The **two notches on** the circular servo horn should be aligned with the notches on the servo motor 1 body.
 
-**Notice: The bule line is an explicit illustration of the notch position and is therefore not drawn on the actual servo motor.**
+**Notice: The blue line is an explicit illustration of the notch position and is therefore not drawn on the actual servo motor.**
 
 <img src="images/assembly/disk_horn_rotation_1_en.png" width="30%">
 
@@ -81,7 +81,7 @@ Remove the tapping screw (M2.6x6[mm]) attached to Servo motor1 and Servo motor2.
 
 <img src="images/assembly/disassembling_screw.jpg" width="50%">
 
-Place the removed screws in a safe place as they will be used later. **The parts on the left side of the image (parts marked 'not used') will not be required to build Statck-chan RT ver.**
+Place the removed screws in a safe place as they will be used later. **The parts on the left side of the image (parts marked 'not used') will not be required to build Stack-chan RT ver.**
 
 <img src="images/assembly/disassembling_servo.jpg" width="50%">
 
@@ -89,11 +89,11 @@ Place the removed screws in a safe place as they will be used later. **The parts
 
 Connect servo motor1 and servo motor2 as shown in the picture.
 
-Servo motor1 and servo motor2 have the pre-assignatikon ID1 and ID2 respectively and are used as individual identification in the software when communicating with the M5Stack. As a marker, a blue sticker is attached to ID 1 and a green stcker to ID2. Make sure to install them correctly.
+Servo motor1 and servo motor2 have the pre-assignment ID1 and ID2 respectively and are used as individual identification in the software when communicating with the M5Stack. As a marker, a blue sticker is attached to ID 1 and a green sticker to ID2. Make sure to install them correctly.
 
 <img src="images/assembly/servo_wired.jpg" width="50%">
 
-Fix the part that will become the body with servo brackets for  servo motor1 and servo motor2. Be careful not to pinch the cables, sandwich them between the servo bracket(front) and the servo bracker(rear). At this point, make sure that the lable on the servo that say's 'DYNAMIXEL XL330-M288-T' faces in the direction of the arrow.
+Fix the part that will become the body with servo brackets for  servo motor1 and servo motor2. Be careful not to pinch the cables, sandwich them between the servo bracket(front) and the servo bracket(rear). At this point, make sure that the label on the servo that says 'DYNAMIXEL XL330-M288-T' faces in the direction of the arrow.
 
 <img src="images/assembly/born_purge_en.jpg" width="50%">
 
@@ -102,11 +102,11 @@ Fix the two servo motors between the servo brackets.
 <img src="images/assembly/born_base.jpg" width="50%">
 
 
-### Attacjing feet
+### Attaching feet
 
 Attach the stack-chan feet to the body.
 
-Align the protrusions of the servo motort1 with the notches in the joint of the foot(top) and press firmly to fix it in place. If the protrusions and notches are not aligned correctly, the protrusions may break when pushed in. Check carefully before pushing it in.
+Align the protrusions of the servo motor1 with the notches in the joint of the foot(top) and press firmly to fix it in place. If the protrusions and notches are not aligned correctly, the protrusions may break when pushed in. Check carefully before pushing it in.
 
 <p>
     <img src="images/assembly/servo_protrusion_focus.jpg" width="20%"> <img src="images/assembly/feet_cutout.jpg" width="30%">
@@ -160,7 +160,7 @@ Once aligned,slide in the direction of the arrow.
 
 <img src="images/assembly/born_assembled.jpg" width="50%">
 
-### Exteror fitting
+### Exterior fitting
 
 Attach the shell, which serves as the exterior of Stack-chan.
 
@@ -172,7 +172,7 @@ Click by the prongs! Slide the unit until you feel a click.
 
 <img src="images/assembly/born_slide_shell.jpg" width="50%">
 
-When mounted and viewed from the reversed side, you should see as shown in the image below. The blue line outline the servo horn.
+When mounted and viewed from the reverse side, you should see as shown in the image below. The blue line outlines the servo horn.
 
 <img src="images/assembly/born_shell_assembled.jpg" width="50%">
 
@@ -184,9 +184,9 @@ Connect the TTL cable attached to the servo motor and the battery cable to the s
 
 <img src="images/assembly/cable_connecting.jpg" width="50%">
 
-Align the holes in the board and shell so that the blue and black connectors attached to the board are on top, as shown in the image. Tighten the four screws (hexagon sockets tap screws M2x5[mm]) to secure. As the slide switch protrudes from the board, align the screws by slanting them into the holes ub the side of the shell.
+Align the holes in the board and shell so that the blue and black connectors attached to the board are on top, as shown in the image. Tighten the four screws (hexagon sockets tap screws M2x5[mm]) to secure. As the slide switch protrudes from the board, align the screws by slanting them into the holes in the side of the shell.
 
-**Make sure that the screws don't touch the conductor(sliver parts). The battery terminals are connected and may short-cirduit.**
+**Make sure that the screws don't touch the conductor(silver parts). The battery terminals are connected and may short-circuit.**
 
 <p>
     <img src="images/assembly/board_shell_attaching.jpg" width="25%"> <img src="images/assembly/board_shell_assembling.jpg" width="25%">
@@ -207,7 +207,7 @@ Once successfully installed, the stack-chan assembly is complete.
 <img src="images/assembly/stack-chan_assembled.jpg" width="50%">
 
 
-### [Optiomal] Fixing M5Stack CoreS3
+### [Optional] Fixing M5Stack CoreS3
 
 If you want to secure the M5Stack CoreS3 firmly, use the four Allen screws supplied in the kit. Note that there are two different screw lengths.
 
@@ -217,6 +217,6 @@ Remove the battery pack from the servo bracket(rear) and disconnect the battery 
 
 <img src="images/assembly/assembling_back_screws.jpg" width="50%">
 
-**Always remove the battey before installing the hexagonal screws. Dropping the screws onto the board may cause a short circuit and damage the board.**
+**Always remove the battery before installing the hexagonal screws. Dropping the screws onto the board may cause a short circuit and damage the board.**
 
 **Always install the short hexagonal screws on the upper side and the long hexagonal screws on the lower side. If you make a mistake, the LCD may be damaged.**
