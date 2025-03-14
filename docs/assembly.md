@@ -14,6 +14,7 @@ Items used for assembly.
 <img src="images/assembly/parts_4_en.jpg" width="50%">
 <img src="images/assembly/parts_5_en.jpg" width="50%">
 <img src="images/assembly/parts_6_en.jpg" width="50%">
+<img src="images/assembly/parts6-2_en.jpg" width="50%">
 <img src="images/assembly/parts_7_en.jpg" width="50%">
 
 ### Used parts
@@ -30,16 +31,17 @@ Items used for assembly.
 10. TTL cables 2pc
 11. Battery pack
 12. Servo horn
-13. Hex socket head tapped screws M2x5[mm] 4pc
+13. Hex socket head tapping screws M2x5[mm] 4pc
 
 ### Optional parts
 
-14. Hex scocket head tapped screws M3x12[mm] 2pc
-15. Hex soccket head tapped screws M3x14[mm] 2pc
+14. Hex scocket head tapping screws M3x12[mm] 2pc
+15. Hex soccket head tapping screws M3x14[mm] 2pc
+16. Pan head tapping screw M2.6x8[mm] 1pc
 
 ### Not used parts
 
-16. Hex socket head tapped screws M2.5x8[mm] 2pc
+17. Hex socket head tapping screws M2.5x8[mm] 2pc
 
 
 ## List of required tools
@@ -75,7 +77,7 @@ Rotate the circular servo horn with your finger so that the angle of **one notch
 
 #### Removing screws and circular servo horn
 
-Remove the tap screw (M2.6x6[mm]) attached to Servo motor1 and Servo motor2.
+Remove the tapping screw (M2.6x6[mm]) attached to Servo motor1 and Servo motor2.
 
 <img src="images/assembly/disassembling_screw.jpg" width="50%">
 
@@ -112,7 +114,8 @@ Align the protrusions of the servo motort1 with the notches in the joint of the 
 
 <img src="images/assembly/servo_and_feet_protrusions.jpg" width="50%">
 
-Tighten the tapped screws (M2.6x6[mm]) and secure the servo motor.
+Tighten the tapping screw (M2.6x6[mm]) and secure the servo motor.
+If tightening the tapping screw does not firmly secure the servo motor, use the pan head tapping screw (M2.6x8[mm]) included with the product.
 
 <img src="images/assembly/tightening_feet_screw.jpg" width="50%">
 
@@ -138,7 +141,7 @@ Attach the servo motor2 and servo horn together with the part shaped as a gear. 
 
 <img src="images/assembly/servo_and_horn_protrusions.jpg" width="50%">
 
-Tighten the tap screws (M2.6x6[mm]) in the gear section jointed by aligning the protrussions.
+Tighten the tapping screw (M2.6x6[mm]) in the gear section jointed by aligning the protrussions.
 
 <img src="images/assembly/tightening_horn_screw.jpg" width="50%">
 
