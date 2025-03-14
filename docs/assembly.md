@@ -81,7 +81,7 @@ Remove the tapping screw (M2.6x6[mm]) attached to Servo motor1 and Servo motor2.
 
 <img src="images/assembly/disassembling_screw.jpg" width="50%">
 
-Place the removed screws in a safe place as they will be used later. The parts on the left side of the image (parts marked 'not used') will not be required to build Statck-chan RT ver.
+Place the removed screws in a safe place as they will be used later. **The parts on the left side of the image (parts marked 'not used') will not be required to build Statck-chan RT ver.**
 
 <img src="images/assembly/disassembling_servo.jpg" width="50%">
 
