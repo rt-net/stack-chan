@@ -14,6 +14,7 @@
 <img src="images/assembly/parts_4.jpg" width="50%">
 <img src="images/assembly/parts_5.jpg" width="50%">
 <img src="images/assembly/parts_6.jpg" width="50%">
+<img src="images/assembly/parts_6-2.jpg" width="50%">
 <img src="images/assembly/parts_7.jpg" width="50%">
 
 ### 使用パーツ
@@ -36,10 +37,11 @@
 
 14. 六角穴付きネジ M3x12[mm] 2本
 15. 六角穴付きネジ M3x14[mm] 2本
+16. なべタップネジ M2.6x8[mm] 1本
 
 ### 不要パーツ
 
-16. 六角穴付きネジ M2.5x8[mm] 2本
+17. 六角穴付きネジ M2.5x8[mm] 2本
 
 
 ## 使用工具一覧
@@ -114,6 +116,7 @@
 <img src="images/assembly/servo_and_feet_protrusions.jpg" width="50%">
 
 サーボモータ用のタップネジ（M2.6x6[mm]）を締めて固定します。
+**サーボモータ用のタップネジを締めても固定がゆるい場合は、製品に同梱されている`なべタップネジ M2.6x8[mm]`を使用して締結してください。**
 
 <img src="images/assembly/tightening_feet_screw.jpg" width="50%">
 
