@@ -250,7 +250,7 @@ $ ./setting_scripts/set_xs-dev_env.sh
 Ubuntuを度再起動（Ubuntuのウインドウを閉じてから再度開く）し、以下の`cd`コマンドで作業フォルダを移動してください。
 
 ```bash
-$ cd stack-chan/firmware`
+$ cd stack-chan/firmware
 ```
 
 #### Moddableの環境確認
