@@ -119,10 +119,12 @@ $ sudo apt update
 
 ### `Python venv`のインストール
 
-Pythonの仮想環境を作成する際に使用するvenvツールが含まれているpython3.10-venvをインストールします。
+Pythonの仮想環境を作成する際に使用するため、`Python venv`をインストールします。
+現在PCにインストールされているPythonのバージョンに合わせた`Python Venv`がインストールされます。
 
-```=bash
-$  sudo apt install -y python3.10-venv
+```bash
+$ PYVER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+$ sudo apt install -y python${PYVER}-venv
 ```
 
 <br>
