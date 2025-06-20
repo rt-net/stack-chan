@@ -180,6 +180,11 @@ $ node -v
 
 <img src="images/getting-started-wsl2_ja/npm_node.jpg" width="100%">
 
+:::note warn
+補足
+実際に表示されるバージョンは、環境をセットアップした時期によって異なります。
+:::
+
 ## ｽﾀｯｸﾁｬﾝのプログラムのインストール
 
 ### ｽﾀｯｸﾁｬﾝのプログラムのダウンロード
