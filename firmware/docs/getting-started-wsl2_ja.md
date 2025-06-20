@@ -117,10 +117,10 @@ $ sudo apt update
 
 <img src="images/getting-started-wsl2_ja/apt_update.jpg" width="100%">
 
-### `Python venv`のインストール
+### Pythonの仮想環境ツール`venv`のインストール
 
-Pythonの仮想環境を作成する際に使用するため、`Python venv`をインストールします。
-現在PCにインストールされているPythonのバージョンに合わせた`Python Venv`がインストールされます。
+現在の python3 のバージョンに対応した venv パッケージをインストールします。
+venv は Python の仮想環境を作成するためのツールです。
 
 ```bash
 $ PYVER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
