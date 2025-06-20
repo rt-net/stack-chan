@@ -127,6 +127,14 @@ $ PYVER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_
 $ sudo apt install -y python${PYVER}-venv
 ```
 
+### usb
+
+USBデバイスの情報を表示するコマンドを含むパッケージ`usbutils`をインストールします。
+
+```bash
+$ sudo apt install usbutils
+```
+
 <br>
 
 ## `Node.js`と`npm`のインストール
