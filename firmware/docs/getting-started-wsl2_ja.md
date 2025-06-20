@@ -117,7 +117,7 @@ $ sudo apt update
 
 <img src="images/getting-started-wsl2_ja/apt_update.jpg" width="100%">
 
-### Pythonの仮想環境ツール`venv`のインストール
+### `venv`のインストール
 
 現在の python3 のバージョンに対応した venv パッケージをインストールします。
 venv は Python の仮想環境を作成するためのツールです。
@@ -134,6 +134,7 @@ USBデバイスの情報を表示するコマンドを含むパッケージ`usbu
 ```bash
 $ sudo apt install usbutils
 ```
+
 
 <br>
 
