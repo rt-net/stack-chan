@@ -135,8 +135,13 @@ USBデバイスの情報を表示するコマンドを含むパッケージ`usbu
 $ sudo apt install usbutils
 ```
 
+### `dialout`グループの設定
 
-<br>
+USB接続デバイスに書き込めるようにするために、現在のユーザーに必要なアクセス権限を追加します。
+
+```bash
+sudo usermod -aG dialout $(whoami)
+```
 
 ## `Node.js`と`npm`のインストール
 
