@@ -322,14 +322,29 @@ $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkco
 
 <img src="images/getting-started-wsl2_ja/usb-ipd_install_3.jpg" width="60%">
 
+## ｽﾀｯｸﾁｬﾝをWSL2上から認識できるようにする
+
+**`Windows PowerShell`と`Ubuntu`を両方起動します。**`Windows PowerShell`は、管理者権限で実行します。
+
+> [!NOTE]
+> これ以降の手順では、**`Windows PowerShell`と`Ubuntu`の両方を起動させ続けておく必要があります。**
+
+### `vhci_hcd`モジュールのロード
+
+`Ubuntu`側で以下のコマンドを実行し、`vhci_hcd`モジュールをロードします。実行の際はパスワードの入力を要求されます。
+
+```bash
+$ sudo modprobe vhci_hcd
+```
+
+> [!NOTE]
+> 上記のコマンドは、`Ubuntu`を再起動するたびに実行する必要があります。
+
 ### `ｽﾀｯｸﾁｬﾝ`の`BUSID`を確認する
 
-`Windows PowerShell`と`Ubuntu`を起動します。
+ｽﾀｯｸﾁｬﾝのBUSIDを取得します。
 
-`Windows PowerShell`は管理者権限で起動し、以下のコマンドを順番に入力してください。
-
-
-USBポートに接続されたデバイスリスト出力します。
+`Windows PowerShell`側で`usbipd list`コマンドを実行し、USBポートに接続されたデバイスリスト出力します。
 
 ```PS
 PS C:\WINDOWS\system32> usbipd list
@@ -352,7 +367,7 @@ PS C:\WINDOWS\system32> usbipd list
 
 <br>
 
-ｽﾀｯｸﾁｬﾝを起動する前と同様に、`usbipd list`コマンドを実行して再度USBデバイスリスト出力します。
+`Windows PowerShell`側で、再度`usbipd list`コマンドを実行してUSBデバイスリスト出力します。
 
 ```PS
 PS C:\WINDOWS\system32> usbipd list
@@ -366,7 +381,10 @@ PS C:\WINDOWS\system32> usbipd list
 
 ｽﾀｯｸﾁｬﾝを`bind`します。
 
-以下に示すように、コマンドの`<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行した後、再度USBデバイスリスト出力してください。
+`Windows PowerShell`側で、`usbipd bind`コマンドと`usbipd list`コマンドを実行します。
+
+`usbipd bind`コマンドを実行する際は、以下に示すようにコマンドの`<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行します。
+その後、`usbipd list`コマンドを実行して再度USBデバイスリスト出力してください。
 
 ```PS
 PS C:\WINDOWS\system32> usbipd bind --busid <ｽﾀｯｸﾁｬﾝのBUSID>
@@ -451,7 +469,8 @@ $ npm run deploy --target=esp32/m5stack_cores3
 
 <br>
 
-**[注意！]リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) も再度実行する必要があります。**
+> [!NOTE]
+> **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) も再度実行する必要があります。**
 
 ## 最初からやり直したい場合
 
@@ -463,7 +482,7 @@ $ npm run deploy --target=esp32/m5stack_cores3
 PS C:\WINDOWS\system32>  wsl --unregister Ubuntu
 ```
 
-上記のコマンドで`Ubuntu`を削除した後、Windows11のスタートメニューから`Ubuntu`を選択します。
+上記のコマンドで`Ubuntu`を削除した後、Windows11のスタートメニューから、再度`Ubuntu`を選択します。
 自動で`Ubuntu`のインストールが開始され、しばらく待つとインストールが完了します。
 しばらくすると`Ubuntu`インストール後の時点と同じ状態になりますので、再度構築を開始してください。
 
