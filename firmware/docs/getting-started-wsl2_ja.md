@@ -16,9 +16,14 @@
 
 <img src="images/getting-started-wsl2_ja/ubuntu.jpg" width=100%>
 
-## `WSL2`+`Ubuntu22.04`のインストール
+## `WSL2`+`Ubuntu22.04 LTS`のインストール
 
-`WSL2`と`Ubuntu22.04`をインストールします。
+`WSL2`と`Ubuntu 22.04 LTS`をインストールします。
+
+> [!CAUTION]
+> `Ubuntu 24.04 LTS`でも動作することを確認済みですが、アールティ版ｽﾀｯｸﾁｬﾝでは`Ubuntu 22.04 LTS`上での動作を推奨しています。
+
+<br>
 
 以下の3つの手順によって、`Windows PowerShell`を管理者権限で開いてください。
 1. Windowsキーを押す
