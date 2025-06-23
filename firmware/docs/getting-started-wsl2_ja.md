@@ -76,13 +76,13 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 <br>
 <br>
 
-### **[注意！]初期設定に失敗した場合**
-
-`Ubuntu`起動時、`root@"...:~#`のように表示される場合、ユーザー作成の設定は失敗しています。
-
-<img src="images/getting-started-wsl2_ja/root_boot.jpg" width="100%">
-
-この状態に遭遇された際には本マニュアルの末尾の[最初からやり直したい場合](#最初からやり直したい場合)の節を参照し、再度Ubuntuのインストールを行ってください。
+> [!WARNING]
+> 
+> `Ubuntu`起動時、`root@"...:~#`のように表示される場合、ユーザー作成の設定は失敗しています。
+> 
+> <img src="images/getting-started-wsl2_ja/root_boot.jpg" width="100%">
+> 
+> この状態に遭遇された際には本マニュアルの末尾の[最初からやり直したい場合](#最初からやり直したい場合)の節を参照し、再度Ubuntuのインストールを行ってください。
 
 <br>
 
@@ -93,17 +93,14 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 コマンドは画像の通り、`$`の後に続けて入力し、Enterキーで実行します。
 
-<br>
-
-### コピー＆ペーストを行う際の注意！
-
-**`Ubuntu`では`Windows PowerShell`と違い、キーボードによるコピー&ペーストは`shift`キーも押す必要があります。**
-
-コピー：`ctrl + shift + c`
-
-ペースト：`ctrl + shift + v`
-
-特に、`ctrl + c`をUbuntu上で実行すると、プロセス（現在実行しているコマンド・プログラム）の終了となりますのでご注意ください。
+> [!IMPORTANT]
+>　**`Ubuntu`では`Windows PowerShell`と違い、キーボードによるコピー&ペーストは`shift`キーも押す必要があります。**
+> 
+> コピー：`ctrl + shift + c`
+> 
+> ペースト：`ctrl + shift + v`
+> 
+> 特に、`ctrl + c`をUbuntu上で実行すると、プロセス（現在実行しているコマンド・プログラム）の終了となりますのでご注意ください。
 
 <br>
 
@@ -180,7 +177,7 @@ $ node -v
 
 <img src="images/getting-started-wsl2_ja/npm_node.jpg" width="100%">
 
-> [!NOTE]
+> [!CAUTION]
 > 実際に表示されるバージョンは、環境をセットアップした時期によって異なります。
 
 ## ｽﾀｯｸﾁｬﾝのプログラムのインストール
@@ -326,7 +323,7 @@ $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkco
 
 **`Windows PowerShell`と`Ubuntu`を両方起動します。**`Windows PowerShell`は、管理者権限で実行します。
 
-> [!NOTE]
+> [!IMPORTANT]
 > これ以降の手順では、**`Windows PowerShell`と`Ubuntu`の両方を起動させ続けておく必要があります。**
 
 ### `vhci_hcd`モジュールのロード
@@ -337,7 +334,7 @@ $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkco
 $ sudo modprobe vhci_hcd
 ```
 
-> [!NOTE]
+> [!CAUTION]
 > 上記の`modprobe`コマンドは、`Ubuntu`を再起動するたびに実行する必要があります。
 
 ### `ｽﾀｯｸﾁｬﾝ`の`BUSID`を確認する
@@ -401,8 +398,6 @@ USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Shared`とな�
 
 ｽﾀｯｸﾁｬﾝを`attach`します。
 
-### [注意！]プログラムを書き込みする際は、ｽﾀｯｸﾁｬﾝとPCのUSBケーブルを再接続（挿し直し）したり、ｽﾀｯｸﾁｬﾝのリセットボタンを押すたびに本手順を実行する必要があります。
-
 以下に示すように、ｽﾀｯｸﾁｬﾝの`attach`コマンドを実行した後、再度USBデバイスリスト出力してください。
 
 （今回も`bind`のときと同様、<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行します。）
@@ -415,6 +410,10 @@ PS C:\WINDOWS\system32> usbipd list
 USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Attached`となっていれば完了です。
 
 <img src="images/getting-started-wsl2_ja/usbipd_list_4.jpg" width="100%">
+
+> [!CAUTION]
+> 本手順は、ｽﾀｯｸﾁｬﾝとPCのUSBケーブルを再接続（挿し直し）したり、ｽﾀｯｸﾁｬﾝのリセットボタンを押すたびに再度実行する必要があります。
+
 
 ### `WSL2`から`ｽﾀｯｸﾁｬﾝ`を認識できていることを確認する
 
@@ -469,8 +468,8 @@ $ npm run deploy --target=esp32/m5stack_cores3
 
 <br>
 
-> [!NOTE]
-> **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) も再度実行する必要があります。**
+> [!CAUTION]
+> **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) の手順も再度実行する必要があります。**
 
 ## 最初からやり直したい場合
 
