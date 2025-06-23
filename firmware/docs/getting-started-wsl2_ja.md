@@ -44,7 +44,10 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 
 <img src="images/getting-started-wsl2_ja/install_ubuntu22.jpg" width="100%">
 
-しばらくすると、ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
+<br>
+
+この状態でしばらく待つと、ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
+
 ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
 
 > [!NOTE]
@@ -65,12 +68,15 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 
 <img src="images/getting-started-wsl2_ja/launch_ubuntu22.jpg" width="80%">
 
+<br>
+
 > [!WARNING]
 > 起動するのは`Ubuntu 22.04 LTS`です。以下の画像のようなバージョンが書かれていない`Ubuntu`は違うものですので注意してください。
 >
 > ただし、これ以降は`Ubuntu 22.04.x LTS`を簡略化し、`Ubuntu`と呼称しますのでお気をつけください。
 > <img src="images/getting-started-wsl2_ja/launch_ubuntu22_latest.jpg" width="80%">
 
+<br>
 <br>
 
 `Ubuntu`を起動後、末尾が`$`記号の文字列が表示されていれば`Ubuntu`の設定は完了です。
@@ -163,7 +169,9 @@ $ curl https://get.volta.sh | bash
 
 インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを再起動するように指示されます。
 
-`Ubuntu`を再起動します。`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、Windows11のスタートメニューから`Ubuntu 22.04.x LTS`を選択してを起動してください。
+`Ubuntu`を再起動します。`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、Windows11のスタートメニューから`Ubuntu 22.04.x LTS`を選択して起動してください。
+
+<br>
 
 ### `Volta`から`Node.js`と`npm`をインストール
 
@@ -186,6 +194,8 @@ $ node -v
 
 > [!CAUTION]
 > 実際に表示されるバージョンは、環境をセットアップした時期によって異なります。
+
+<br>
 
 ## ｽﾀｯｸﾁｬﾝのプログラムのインストール
 
@@ -344,7 +354,7 @@ $ sudo modprobe vhci_hcd
 ```
 
 > [!CAUTION]
-> 上記の`modprobe`コマンドは、`Ubuntu`を再起動するたびに実行する必要があります。
+> `modprobe`コマンドは、`Ubuntu`を再起動するたびに実行する必要があります。
 
 <br>
 
@@ -495,8 +505,11 @@ $ npm run deploy --target=esp32/m5stack_cores3
 PS C:\WINDOWS\system32>  wsl --unregister Ubuntu
 ```
 
+<br>
+
 上記のコマンドで`Ubuntu`を削除した後、Windows11のスタートメニューから、再度`Ubuntu`を選択します。
 自動で`Ubuntu`のインストールが開始され、しばらく待つとインストールが完了します。
+
 しばらくすると`Ubuntu`インストール後の時点と同じ状態になりますので、再度構築を開始してください。
 
 
