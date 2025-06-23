@@ -32,48 +32,47 @@
 開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。
 
 コマンドは画像の通り、`PS C:\WINDOWS\system32>`の後に続けて入力し、Enterキーで実行します。
+
 ```=powershell
 PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 ```
 
 <img src="images/getting-started-wsl2_ja/install_ubuntu22.jpg" width="100%">
 
-<br>
-<br>
+しばらくすると、ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
+ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
 
-インストールが完了したら、PCを再起動してください。
+> [!NOTE]
+> ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。また、パスワードは確認も合わせて2回の入力を要求されます。
+
+<img src="images/getting-started-wsl2_ja/sucessed_install_ubuntu22.jpg" width="100%">
+
+`Installation successful!`と表示されればインストールは完了です。ウインドウ右上の`×`アイコンをクリックして閉じた後、PCを再起動してください。
+
+<br>
 
 PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 自動で立ち上がらない場合は、以下の3つの手順によって、`Ubuntu`を開きます。（`Ubuntu`は管理者権限で起動せずに通常通りに起動してください）
 
 1. Windowsキーを押す
-2. 検索欄に「ubuntu」と入力する
-3. `Ubuntu`のアイコンが出てくるので「開く」を選択してください。
+2. 検索欄に「ubuntu 22」と入力する
+3. `Ubuntu 22.04.x LTS`のアイコンが出てくるので「開く」を選択してください。
 
-<img src="images/getting-started-wsl2_ja/launch_ubuntu2.jpg" width="80%">
+<img src="images/getting-started-wsl2_ja/launch_ubuntu22.jpg" width="80%">
 
-<br>
-<br>
-
-ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
-ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
-ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。
-
-
-<img src="images/getting-started-wsl2_ja/ubuntu22_1st_launch.jpg" width="100%">
+> [!WARNING]
+> 起動するのは`Ubuntu 22.04 LTS`です。以下の画像のようなバージョンが書かれていない`Ubuntu`は違うものですので注意してください。
+>
+> ただし、これ以降は`Ubuntu 22.04.x LTS`を簡略化し、`Ubuntu`と呼称しますのでお気をつけください。
+> <img src="images/getting-started-wsl2_ja/launch_ubuntu22_latest.jpg" width="80%">
 
 <br>
-<br>
 
-設定が完了したら`Ubuntu`を再起動します。
-`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、再度スタートメニューから`Ubuntu`を選択してを起動してください。
-
-末尾が`$`記号の文字列が表示されていればUbuntuの設定は完了です。
+`Ubuntu`を起動後、末尾が`$`記号の文字列が表示されていれば`Ubuntu`の設定は完了です。
 成功していれば、`<設定したUbuntuのユーザー名>@...:~$`表示されています。
 
 <img src="images/getting-started-wsl2_ja/setted_ubuntu.jpg" width="100%">
 
-<br>
 <br>
 
 > [!WARNING]
@@ -157,7 +156,9 @@ $ curl https://get.volta.sh | bash
 
 <img src="images/getting-started-wsl2_ja/volta_reboot.jpg" width="100%">
 
-インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを開くように指示されますが、環境を反映するには、Ubuntuのウインドウを閉じ、Windows11のスタートメニューからUbuntuを再起動してください。
+インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを再起動するように指示されます。
+
+`Ubuntu`を再起動します。`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、Windows11のスタートメニューから`Ubuntu 22.04.x LTS`を選択してを起動してください。
 
 ### `Volta`から`Node.js`と`npm`をインストール
 
