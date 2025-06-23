@@ -327,6 +327,8 @@ $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkco
 > [!IMPORTANT]
 > これ以降の手順では、**`Windows PowerShell`と`Ubuntu`の両方を起動させ続けておく必要があります。**
 
+<br>
+
 ### `vhci_hcd`モジュールのロード
 
 `Ubuntu`側で以下のコマンドを実行し、`vhci_hcd`モジュールをロードします。実行の際はパスワードの入力を要求されます。
@@ -337,6 +339,8 @@ $ sudo modprobe vhci_hcd
 
 > [!CAUTION]
 > 上記の`modprobe`コマンドは、`Ubuntu`を再起動するたびに実行する必要があります。
+
+<br>
 
 ### `ｽﾀｯｸﾁｬﾝ`の`BUSID`を確認する
 
@@ -415,6 +419,7 @@ USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Attached`とな
 > [!CAUTION]
 > 本手順は、ｽﾀｯｸﾁｬﾝとPCのUSBケーブルを再接続（挿し直し）したり、ｽﾀｯｸﾁｬﾝのリセットボタンを押すたびに再度実行する必要があります。
 
+<br>
 
 ### `WSL2`から`ｽﾀｯｸﾁｬﾝ`を認識できていることを確認する
 
@@ -471,6 +476,8 @@ $ npm run deploy --target=esp32/m5stack_cores3
 
 > [!CAUTION]
 > **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) の手順も再度実行する必要があります。**
+
+<br>
 
 ## 最初からやり直したい場合
 
