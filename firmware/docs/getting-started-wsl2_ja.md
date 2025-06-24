@@ -34,11 +34,29 @@
 
 <br>
 
-開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。
+### `WSL2`のインストール
 
-コマンドは画像の通り、`PS C:\WINDOWS\system32>`の後に続けて入力し、Enterキーで実行します。
+`WSL2`をインストールします。
 
-```=powershell
+開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。コマンドは画像の通り、`PS C:\WINDOWS\system32>`の後に続けて入力し、Enterキーで実行します。
+
+```PS
+PS C:\WINDOWS\system32> wsl --install
+```
+
+<img src="images/getting-started-wsl2_ja/install_wsl2.jpg" width="100%">
+
+インストールが正常に終了したら、`Windows PowerShell`のウインドウを閉じます。その後、PCを再起動してください。
+
+<br>
+
+### `Ubuntu 22.04`のインストール
+
+`Ubuntu 22.04`をインストールします。
+
+PCを再起動したら、再度`Windows PowerShell`を開き、以下のコマンドを入力して実行してください。
+
+```PS
 PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 ```
 
@@ -46,21 +64,22 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 
 <br>
 
-この状態でしばらく待つと、ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
-
-ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
+この状態でしばらく待つと、`Ubuntu`で使用するユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
 
 > [!NOTE]
 > ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。また、パスワードは確認も合わせて2回の入力を要求されます。
 
 <img src="images/getting-started-wsl2_ja/sucessed_install_ubuntu22.jpg" width="100%">
 
-`Installation successful!`と表示されればインストールは完了です。ウインドウ右上の`×`アイコンをクリックして閉じた後、PCを再起動してください。
+<br>
+
+ユーザー名とパスワードの設定が完了し、`Installation successful!`と表示されればインストールは成功です。ウインドウ右上の`×`アイコンをクリックして`Windows PowerShell`を閉じてください。
 
 <br>
 
-PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
-自動で立ち上がらない場合は、以下の3つの手順によって、`Ubuntu`を開きます。（`Ubuntu`は管理者権限で起動せずに通常通りに起動してください）
+### `Ubuntu 22.04`の起動
+
+以下の3つの手順によって、`Ubuntu`を開きます。（`Ubuntu`は管理者権限で起動せずに通常通りに起動してください）
 
 1. Windowsキーを押す
 2. 検索欄に「ubuntu 22」と入力する
@@ -81,7 +100,7 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 <br>
 <br>
 
-`Ubuntu`を起動後、末尾が`$`記号の文字列が表示されていれば`Ubuntu`の設定は完了です。
+`Ubuntu`を起動後、末尾が`$`記号の文字列が表示されていれば`Ubuntu`のインストールと設定は完了です。
 成功していれば、`<設定したUbuntuのユーザー名>@...:~$`表示されています。
 
 <img src="images/getting-started-wsl2_ja/setted_ubuntu.jpg" width="100%">
@@ -100,7 +119,7 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 ## `Ubuntu`のパッケージリストの更新と必要パッケージのインストール
 
 `Ubuntu`にｽﾀｯｸﾁｬﾝの開発環境を構築します。
-`Ubuntu`のウインドウ上で以下のコマンドを順番に入力してください。
+先程開いた`Ubuntu`のウインドウ上で以下のコマンドを順番に入力してください。
 
 コマンドは、`$`の後に続けて入力し、Enterキーで実行します。
 
