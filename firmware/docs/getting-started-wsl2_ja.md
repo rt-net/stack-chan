@@ -107,7 +107,7 @@ PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
 <br>
 
 > [!IMPORTANT]
->　`Ubuntu`では`Windows PowerShell`と違い、**ーボードによるコピー&ペーストは`shift`キーも押す必要があります。**
+>　`Ubuntu`では`Windows PowerShell`と違い、**キーボードによるコピー&ペーストは`shift`キーも押す必要があります。**
 > 
 > コピー：`ctrl + shift + c`
 > 
@@ -243,7 +243,7 @@ $ npm run setup
 
 <img src="images/getting-started-wsl2_ja/npm_run_setup.jpg" width="100%">
 
-### `M5Stack`向けに`Moddable`をにセットアップ
+### `M5Stack`向けに`Moddable`をセットアップ
 
 以下のコマンドで`Moddable`の環境を`M5Stack`向けにセットアップします。
 `npm run setup -- --device=esp32`はスクリプトを実行し、自動で環境のセットアップを行います。
