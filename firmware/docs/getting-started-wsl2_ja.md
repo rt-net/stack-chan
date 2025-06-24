@@ -504,7 +504,7 @@ $ npm run deploy --target=esp32/m5stack_cores3
 その場合、管理者権限で開いた`Windows PowerShell`上で以下のコマンドを実行することで現在の`Ubuntu`を削除することができます。
 
 ```PS
-PS C:\WINDOWS\system32>  wsl --unregister Ubuntu
+PS C:\WINDOWS\system32>  wsl --unregister Ubuntu-22.04
 ```
 
 <br>
