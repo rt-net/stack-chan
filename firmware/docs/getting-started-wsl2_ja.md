@@ -301,7 +301,7 @@ $ ./setting_scripts/set_xs-dev_env.sh
 
 ### 構築した環境の確認
 
-Ubuntuを度再起動（Ubuntuのウインドウを閉じてから再度開く）し、以下の`cd`コマンドで作業フォルダを移動してください。
+`Ubuntu`を再起動（Ubuntuのウインドウを閉じてから再度開く）し、以下の`cd`コマンドで作業フォルダを移動してください。
 
 ```bash
 $ cd stack-chan/firmware
