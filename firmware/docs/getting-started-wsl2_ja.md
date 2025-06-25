@@ -110,7 +110,7 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 > [!WARNING]
 > 
 > `Ubuntu`起動時、`root@"...:~#`のように表示される場合、ユーザー作成の設定は失敗しています。
-> この状態に遭遇された際には本マニュアルの末尾の[最初からやり直したい場合](#最初からやり直したい場合)の節を参照し、再度Ubuntuのインストールを行ってください。
+> この状態に遭遇された際には本マニュアルの末尾の[最初からやり直す場合](#最初からやり直す場合)の節を参照し、再度Ubuntuのインストールを行ってください。
 > 
 > <img src="images/getting-started-wsl2_ja/root_boot.jpg" width="100%">
 
@@ -140,7 +140,7 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 
 最新パッケージのリストを更新します。
 
-```=bash
+```bash
 $ sudo apt update
 ```
 
@@ -279,7 +279,7 @@ $ npm run setup -- --device=esp32
 
 <img src="images/getting-started-wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
-### PSRAMと環境変数のセットアップ
+### PSRAM無効化と環境変数のセットアップ
 
 次のコマンドを実行して、PSRAM無効化の設定をします。
 
@@ -321,7 +321,7 @@ $ npm run doctor
 
 #### PSRAMの環境確認
 
-以下のコマンドでM5Stack CoreS3のPARAMの設定を確認します。
+以下のコマンドでM5Stack CoreS3のPSRAMの設定を確認します。
 
 ```bash
 $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
@@ -366,12 +366,12 @@ $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkco
 
 <br>
 
-### `vhci_hcd`モジュールのロード
+### `vhci-hcd`モジュールのロード
 
 `Ubuntu`側で以下のコマンドを実行し、`vhci_hcd`モジュールをロードします。実行の際はパスワードの入力を要求されます。
 
 ```bash
-$ sudo modprobe vhci_hcd
+$ sudo modprobe vhci-hcd
 ```
 
 > [!CAUTION]
@@ -512,11 +512,11 @@ $ npm run deploy --target=esp32/m5stack_cores3
 <br>
 
 > [!CAUTION]
-> **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) の手順も再度実行する必要があります。**
+> **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする](#ｽﾀｯｸﾁｬﾝをattachする) 手順も再度実行する必要があります。**
 
 <br>
 
-## 最初からやり直したい場合
+## 最初からやり直す場合
 
 マニュアルの手順通りに進められなかったり、エラーが出力されてしまった場合は、エラー内容に従ったり調べたりすることで解決に繋がる場合があります。
 ですが、`Ubuntu`を一旦アンインストールし、きれいな環境で最初から実行するという手段もあります。
@@ -537,7 +537,7 @@ PS C:\WINDOWS\system32>  wsl --unregister Ubuntu-22.04
 
 ## よくある質問
 
-### リリースファイルの有効期限エラー
+### リリースファイルの有効期限切れエラー
 
 WSL2とPCの設定時間がずれていると、`sudo apt update`コマンド実行の際に以下の画像のようにセキュリティ上のエラーが起きます。
 
