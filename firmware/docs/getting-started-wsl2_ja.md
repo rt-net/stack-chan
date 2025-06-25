@@ -83,7 +83,7 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 
 1. Windowsキーを押す
 2. 検索欄に「ubuntu 22」と入力する
-3. `Ubuntu 22.04.x LTS`のアイコンが出てくるので「開く」を選択してください。
+3. `Ubuntu 22.04.x LTS`のアイコンが出てくるので「開く」を選択する
 
 <img src="images/getting-started-wsl2_ja/launch_ubuntu22.jpg" width="80%">
 
@@ -190,7 +190,7 @@ $ curl https://get.volta.sh | bash
 
 インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを再起動するように指示されます。
 
-`Ubuntu`を再起動します。`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、Windows11のスタートメニューから`Ubuntu 22.04.x LTS`を選択して起動してください。
+`Ubuntu`を再起動します。`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、Windows11のスタートメニューから`Ubuntu`を選択して起動してください。
 
 <br>
 
