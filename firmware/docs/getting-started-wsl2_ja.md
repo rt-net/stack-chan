@@ -90,7 +90,7 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 <br>
 
 > [!WARNING]
-> 本マニュアルでは **Ubuntu 22.04 LTS** を起動します。以下の画像のような、バージョン未指定の`Ubuntu`には最新リリースが導入されるため、コマンドやツールの仕様が異なる場合があります。アールティ版ｽﾀｯｸﾁｬﾝは`Ubuntu 22.04`上で動作確認済みですので、手順通りに実行するために`Ubuntu 22.04 LTS`環境をご用意ください。
+> 本マニュアルでは **Ubuntu 22.04 LTS** を起動します。以下の画像のような、バージョン未指定の`Ubuntu`には最新版が導入されるため、コマンドやツールの仕様が異なる場合があります。アールティ版ｽﾀｯｸﾁｬﾝは`Ubuntu 22.04`上で動作確認済みですので、手順通りに実行するために`Ubuntu 22.04 LTS`環境をご用意ください。
 > 
 > <img src="images/getting-started-wsl2_ja/launch_ubuntu22_latest.jpg" width="80%">
 
@@ -138,7 +138,7 @@ PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 
 ### パッケージリストの更新
 
-最新パッケージのリストを更新します。
+最新のパッケージのリストを更新します。
 
 ```bash
 $ sudo apt update
