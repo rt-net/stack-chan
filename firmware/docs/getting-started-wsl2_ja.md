@@ -16,9 +16,14 @@
 
 <img src="images/getting-started-wsl2_ja/ubuntu.jpg" width=100%>
 
-## `WSL2`+`Ubuntu22.04`のインストール
+## `WSL2`+`Ubuntu22.04 LTS`のインストール
 
-`WSL2`と`Ubuntu22.04`をインストールします。
+`WSL2`と`Ubuntu 22.04 LTS`をインストールします。
+
+> [!CAUTION]
+> `Ubuntu 24.04 LTS`でも動作することを確認済みですが、アールティ版ｽﾀｯｸﾁｬﾝでは`Ubuntu 22.04 LTS`上での動作を推奨しています。
+
+<br>
 
 以下の3つの手順によって、`Windows PowerShell`を管理者権限で開いてください。
 1. Windowsキーを押す
@@ -29,103 +34,143 @@
 
 <br>
 
-開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。
+### `WSL2`のインストール
 
-コマンドは画像の通り、`PS C:\WINDOWS\system32>`の後に続けて入力し、Enterキーで実行します。
-```=powershell
+`WSL2`をインストールします。
+
+開いた`Windows PowerShell`上に、以下のコマンドを入力し、実行してください。コマンドは画像の通り、`PS C:\WINDOWS\system32>`の後に続けて入力し、Enterキーで実行します。
+
+```PS
+PS C:\WINDOWS\system32> wsl --install
+```
+
+<img src="images/getting-started-wsl2_ja/install_wsl2.jpg" width="100%">
+
+インストールが正常に終了したら、`Windows PowerShell`のウインドウを閉じます。その後、PCを再起動してください。
+
+<br>
+
+### `Ubuntu 22.04`のインストール
+
+`Ubuntu 22.04`をインストールします。
+
+PCを再起動したら、再度`Windows PowerShell`を開き、以下のコマンドを入力して実行してください。
+
+```PS
 PS C:\WINDOWS\system32> wsl --install -d Ubuntu-22.04
 ```
 
 <img src="images/getting-started-wsl2_ja/install_ubuntu22.jpg" width="100%">
 
 <br>
+
+この状態でしばらく待つと、`Ubuntu`で使用するユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
+
+> [!NOTE]
+> ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。また、パスワードは確認も合わせて2回の入力を要求されます。
+
+<img src="images/getting-started-wsl2_ja/sucessed_install_ubuntu22.jpg" width="100%">
+
 <br>
 
-インストールが完了したら、PCを再起動してください。
+ユーザー名とパスワードの設定が完了し、`Installation successful!`と表示されればインストールは成功です。ウインドウ右上の`×`アイコンをクリックして`Windows PowerShell`を閉じてください。
 
-PCを再起動すると、自動的に`Ubuntu`が立ち上がります。
-自動で立ち上がらない場合は、以下の3つの手順によって、`Ubuntu`を開きます。（`Ubuntu`は管理者権限で起動せずに通常通りに起動してください）
+<br>
+
+### `Ubuntu 22.04`の起動
+
+以下の3つの手順によって、`Ubuntu`を開きます。（`Ubuntu`は管理者権限で起動せずに通常通りに起動してください）
 
 1. Windowsキーを押す
-2. 検索欄に「ubuntu」と入力する
-3. `Ubuntu`のアイコンが出てくるので「開く」を選択してください。
+2. 検索欄に「ubuntu 22」と入力する
+3. `Ubuntu 22.04.x LTS`のアイコンが出てくるので「開く」を選択する
 
-<img src="images/getting-started-wsl2_ja/launch_ubuntu2.jpg" width="80%">
+<img src="images/getting-started-wsl2_ja/launch_ubuntu22.jpg" width="80%">
+
+<br>
+
+> [!WARNING]
+> 本マニュアルでは **Ubuntu 22.04 LTS** を起動します。以下の画像のような、バージョン未指定の`Ubuntu`には最新の安定版リリースが導入されるため、コマンドやツールの仕様が異なる場合があります。アールティ版ｽﾀｯｸﾁｬﾝは`Ubuntu 22.04`上で動作確認済みですので、手順通りに実行するために`Ubuntu 22.04 LTS`環境をご用意ください。
+> 
+> <img src="images/getting-started-wsl2_ja/launch_ubuntu22_latest.jpg" width="80%">
+
+> [!CAUTION]
+>　以降、本マニュアル内の「`Ubuntu`」の記述は、すべて`Ubuntu 22.04.x LTS`を指します。
 
 <br>
 <br>
 
-ユーザー名とパスワードの入力を求められますので任意の文字列を入力してください。
-ここで入力するユーザー名とパスワードは`Windows11`のものではなく、`Ubuntu`に設定するユーザー名とパスワードです。
-ユーザー名では全角文字と大文字は使用できないため、小文字のみの半角文字の文字列で設定してください。
-
-
-<img src="images/getting-started-wsl2_ja/ubuntu22_1st_launch.jpg" width="100%">
-
-<br>
-<br>
-
-設定が完了したら`Ubuntu`を再起動します。
-`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、再度スタートメニューから`Ubuntu`を選択してを起動してください。
-
-末尾が`$`記号の文字列が表示されていればUbuntuの設定は完了です。
+`Ubuntu`を起動後、末尾が`$`記号の文字列が表示されていれば`Ubuntu`のインストールと設定は完了です。
 成功していれば、`<設定したUbuntuのユーザー名>@...:~$`表示されています。
 
 <img src="images/getting-started-wsl2_ja/setted_ubuntu.jpg" width="100%">
 
 <br>
-<br>
 
-### **[注意！]初期設定に失敗した場合**
-
-`Ubuntu`起動時、`root@"...:~#`のように表示される場合、ユーザー作成の設定は失敗しています。
-
-<img src="images/getting-started-wsl2_ja/root_boot.jpg" width="100%">
-
-この状態に遭遇された際には本マニュアルの末尾の[最初からやり直したい場合](#最初からやり直したい場合)の節を参照し、再度Ubuntuのインストールを行ってください。
+> [!WARNING]
+> 
+> `Ubuntu`起動時、`root@"...:~#`のように表示される場合、ユーザー作成の設定は失敗しています。
+> この状態に遭遇された際には本マニュアルの末尾の[最初からやり直す場合](#最初からやり直す場合)の節を参照し、再度Ubuntuのインストールを行ってください。
+> 
+> <img src="images/getting-started-wsl2_ja/root_boot.jpg" width="100%">
 
 <br>
 
 ## `Ubuntu`のパッケージリストの更新と必要パッケージのインストール
 
 `Ubuntu`にｽﾀｯｸﾁｬﾝの開発環境を構築します。
-`Ubuntu`のウインドウ上で以下のコマンドを順番に入力してください。
+先程開いた`Ubuntu`のウインドウ上で以下のコマンドを順番に入力してください。
 
-コマンドは画像の通り、`$`の後に続けて入力し、Enterキーで実行します。
+コマンドは、`$`の後に続けて入力し、Enterキーで実行します。
 
 <br>
 
-### コピー＆ペーストを行う際の注意！
-
-**`Ubuntu`では`Windows PowerShell`と違い、キーボードによるコピー&ペーストは`shift`キーも押す必要があります。**
-
-コピー：`ctrl + shift + c`
-
-ペースト：`ctrl + shift + v`
-
-特に、`ctrl + c`をUbuntu上で実行すると、プロセス（現在実行しているコマンド・プログラム）の終了となりますのでご注意ください。
+> [!IMPORTANT]
+>　`Ubuntu`では`Windows PowerShell`と違い、**キーボードによるコピー&ペーストは`shift`キーも押す必要があります。**
+> 
+> コピー：`ctrl + shift + c`
+> 
+> ペースト：`ctrl + shift + v`
+> 
+> 特に、`ctrl + c`をUbuntu上で実行してしまうと、プロセス（現在実行しているコマンド・プログラム）の終了となりますのでご注意ください。
 
 <br>
 
 ### パッケージリストの更新
 
-最新パッケージのリストを更新します。
+最新のパッケージのリストを更新します。
 
-```=bash
+```bash
 $ sudo apt update
 ```
 
 <img src="images/getting-started-wsl2_ja/apt_update.jpg" width="100%">
 
-### `Python venv`のインストール
+### `venv`のインストール
 
-Pythonの仮想環境を作成する際に使用するvenvツールが含まれているpython3.10-venvをインストールします。
+現在の python3 のバージョンに対応した venv パッケージをインストールします。
+venv は Python の仮想環境を作成するためのツールです。
 
-```=bash
-$  sudo apt install -y python3.10-venv
+```bash
+$ PYVER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+$ sudo apt install -y python${PYVER}-venv
 ```
 
-<br>
+### `usbutils`のインストール
+
+USBデバイスの情報を表示するコマンドを含むパッケージ`usbutils`をインストールします。
+
+```bash
+$ sudo apt install usbutils
+```
+
+### `dialout`グループの設定
+
+USB接続デバイスに書き込めるようにするために、現在のユーザーに必要なアクセス権限を追加します。
+
+```bash
+sudo usermod -aG dialout $(whoami)
+```
 
 ## `Node.js`と`npm`のインストール
 
@@ -143,7 +188,11 @@ $ curl https://get.volta.sh | bash
 
 <img src="images/getting-started-wsl2_ja/volta_reboot.jpg" width="100%">
 
-インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを開くように指示されますが、環境を反映するには、Ubuntuのウインドウを閉じ、Windows11のスタートメニューからUbuntuを再起動してください。
+インストールに成功すると`success: Setup complete. Open a new terminal to start using Volta!`と表示され、新しいターミナルを再起動するように指示されます。
+
+`Ubuntu`を再起動します。`Ubuntu`のウインドウ右上の`×`アイコンをクリックして閉じた後、Windows11のスタートメニューから`Ubuntu`を選択して起動してください。
+
+<br>
 
 ### `Volta`から`Node.js`と`npm`をインストール
 
@@ -163,6 +212,11 @@ $ node -v
 ```
 
 <img src="images/getting-started-wsl2_ja/npm_node.jpg" width="100%">
+
+> [!CAUTION]
+> 実際に表示されるバージョンは、環境をセットアップした時期によって異なります。
+
+<br>
 
 ## ｽﾀｯｸﾁｬﾝのプログラムのインストール
 
@@ -208,7 +262,7 @@ $ npm run setup
 
 <img src="images/getting-started-wsl2_ja/npm_run_setup.jpg" width="100%">
 
-### `M5Stack`向けに`Moddable`をにセットアップ
+### `M5Stack`向けに`Moddable`をセットアップ
 
 以下のコマンドで`Moddable`の環境を`M5Stack`向けにセットアップします。
 `npm run setup -- --device=esp32`はスクリプトを実行し、自動で環境のセットアップを行います。
@@ -225,7 +279,7 @@ $ npm run setup -- --device=esp32
 
 <img src="images/getting-started-wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
-### PSRAMと環境変数のセットアップ
+### PSRAM無効化と環境変数のセットアップ
 
 次のコマンドを実行して、PSRAM無効化の設定をします。
 
@@ -247,10 +301,10 @@ $ ./setting_scripts/set_xs-dev_env.sh
 
 ### 構築した環境の確認
 
-Ubuntuを度再起動（Ubuntuのウインドウを閉じてから再度開く）し、以下の`cd`コマンドで作業フォルダを移動してください。
+`Ubuntu`を再起動（Ubuntuのウインドウを閉じてから再度開く）し、以下の`cd`コマンドで作業フォルダを移動してください。
 
 ```bash
-$ cd stack-chan/firmware`
+$ cd stack-chan/firmware
 ```
 
 #### Moddableの環境確認
@@ -267,7 +321,7 @@ $ npm run doctor
 
 #### PSRAMの環境確認
 
-以下のコマンドでM5Stack CoreS3のPARAMの設定を確認します。
+以下のコマンドでM5Stack CoreS3のPSRAMの設定を確認します。
 
 ```bash
 $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
@@ -303,14 +357,33 @@ $ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkco
 
 <img src="images/getting-started-wsl2_ja/usb-ipd_install_3.jpg" width="60%">
 
+## ｽﾀｯｸﾁｬﾝをWSL2上から認識できるようにする
+
+**`Windows PowerShell`と`Ubuntu`を両方起動します。**`Windows PowerShell`は、管理者権限で実行します。
+
+> [!IMPORTANT]
+> これ以降の手順では、**`Windows PowerShell`と`Ubuntu`の両方を起動させ続けておく必要があります。**
+
+<br>
+
+### `vhci-hcd`モジュールのロード
+
+`Ubuntu`側で以下のコマンドを実行し、`vhci_hcd`モジュールをロードします。実行の際はパスワードの入力を要求されます。
+
+```bash
+$ sudo modprobe vhci-hcd
+```
+
+> [!CAUTION]
+> `modprobe`コマンドは、`Ubuntu`を再起動するたびに実行する必要があります。
+
+<br>
+
 ### `ｽﾀｯｸﾁｬﾝ`の`BUSID`を確認する
 
-`Windows PowerShell`と`Ubuntu`を起動します。
+ｽﾀｯｸﾁｬﾝのBUSIDを取得します。
 
-`Windows PowerShell`は管理者権限で起動し、以下のコマンドを順番に入力してください。
-
-
-USBポートに接続されたデバイスリスト出力します。
+`Windows PowerShell`側で`usbipd list`コマンドを実行し、USBポートに接続されたデバイスリスト出力します。
 
 ```PS
 PS C:\WINDOWS\system32> usbipd list
@@ -333,7 +406,7 @@ PS C:\WINDOWS\system32> usbipd list
 
 <br>
 
-ｽﾀｯｸﾁｬﾝを起動する前と同様に、`usbipd list`コマンドを実行して再度USBデバイスリスト出力します。
+`Windows PowerShell`側で、再度`usbipd list`コマンドを実行してUSBデバイスリスト出力します。
 
 ```PS
 PS C:\WINDOWS\system32> usbipd list
@@ -347,7 +420,10 @@ PS C:\WINDOWS\system32> usbipd list
 
 ｽﾀｯｸﾁｬﾝを`bind`します。
 
-以下に示すように、コマンドの`<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行した後、再度USBデバイスリスト出力してください。
+`Windows PowerShell`側で、`usbipd bind`コマンドと`usbipd list`コマンドを実行します。
+
+`usbipd bind`コマンドを実行する際は、以下に示すようにコマンドの`<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行します。
+その後、`usbipd list`コマンドを実行して再度USBデバイスリスト出力してください。
 
 ```PS
 PS C:\WINDOWS\system32> usbipd bind --busid <ｽﾀｯｸﾁｬﾝのBUSID>
@@ -364,8 +440,6 @@ USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Shared`とな�
 
 ｽﾀｯｸﾁｬﾝを`attach`します。
 
-### [注意！]プログラムを書き込みする際は、ｽﾀｯｸﾁｬﾝとPCのUSBケーブルを再接続（挿し直し）したり、ｽﾀｯｸﾁｬﾝのリセットボタンを押すたびに本手順を実行する必要があります。
-
 以下に示すように、ｽﾀｯｸﾁｬﾝの`attach`コマンドを実行した後、再度USBデバイスリスト出力してください。
 
 （今回も`bind`のときと同様、<ｽﾀｯｸﾁｬﾝのBUSID>`部分を自身のｽﾀｯｸﾁｬﾝの`BUSID`と置き換えて実行します。）
@@ -378,6 +452,11 @@ PS C:\WINDOWS\system32> usbipd list
 USBデバイスリスト上のｽﾀｯｸﾁｬﾝの`BUSID`が`Attached`となっていれば完了です。
 
 <img src="images/getting-started-wsl2_ja/usbipd_list_4.jpg" width="100%">
+
+> [!CAUTION]
+> 本手順（[ｽﾀｯｸﾁｬﾝをattachする](#ｽﾀｯｸﾁｬﾝをattachする)）は、ｽﾀｯｸﾁｬﾝとPCのUSBケーブルを再接続（挿し直し）したり、ｽﾀｯｸﾁｬﾝのリセットボタンを押すたびに再度実行する必要があります。
+
+<br>
 
 ### `WSL2`から`ｽﾀｯｸﾁｬﾝ`を認識できていることを確認する
 
@@ -432,26 +511,33 @@ $ npm run deploy --target=esp32/m5stack_cores3
 
 <br>
 
-**[注意！]リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする手順](#ｽﾀｯｸﾁｬﾝをattachする) も再度実行する必要があります。**
+> [!CAUTION]
+> **リセットボタンを押下した場合、再度プログラムを書き込むためには、[ｽﾀｯｸﾁｬﾝをattachする](#ｽﾀｯｸﾁｬﾝをattachする) 手順も再度実行する必要があります。**
 
-## 最初からやり直したい場合
+<br>
 
-どこからかマニュアル通りにいかず、エラーが出力されていまった場合、エラーに従ったり調べるすることで解決に繋がります。
+## 最初からやり直す場合
+
+マニュアルの手順通りに進められなかったり、エラーが出力されてしまった場合は、エラー内容に従ったり調べたりすることで解決に繋がる場合があります。
 ですが、`Ubuntu`を一旦アンインストールし、きれいな環境で最初から実行するという手段もあります。
-その場合、管理者権限で開いた`Windows PowerShell`上で以下のコマンドを実行することで現在の`Ubuntu`を削除することができます。
+
+管理者権限で開いた`Windows PowerShell`上で以下のコマンドを実行することで現在の`Ubuntu`を削除することができます。
 
 ```PS
-PS C:\WINDOWS\system32>  wsl --unregister Ubuntu
+PS C:\WINDOWS\system32>  wsl --unregister Ubuntu-22.04
 ```
 
-上記のコマンドで`Ubuntu`を削除した後、Windows11のスタートメニューから`Ubuntu`を選択します。
+<br>
+
+上記のコマンドで`Ubuntu`を削除した後、Windows11のスタートメニューから、再度`Ubuntu`を選択します。
 自動で`Ubuntu`のインストールが開始され、しばらく待つとインストールが完了します。
+
 しばらくすると`Ubuntu`インストール後の時点と同じ状態になりますので、再度構築を開始してください。
 
 
 ## よくある質問
 
-### リリースファイルの有効期限エラー
+### リリースファイルの有効期限切れエラー
 
 WSL2とPCの設定時間がずれていると、`sudo apt update`コマンド実行の際に以下の画像のようにセキュリティ上のエラーが起きます。
 
