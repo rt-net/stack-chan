@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            async function request_tts(){
+                var txt = document.getElementById("tts").value;
+                var url ="/tts"
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8",
+                    },
+                    body: txt
+                }
+                );
+                console.log(response);
+            }
+
+            async function request_asr(){
+                var max_seconds = Number(document.getElementById("max_seconds").value);
+                var max_count = Number(document.getElementById("max_count").value);
+                var threshold = Number(document.getElementById("threshold").value);
+                var url ="/asr"
+
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8",
+                    },
+                    body: JSON.stringify({'max_seconds': max_seconds, 'max_count': max_count, 'threshold': threshold})
+                }
+                );
+                console.log(response);
+            }
+        </script>
+        <title>音声認識＆音声合成</title>
+    </head>
+    <body>
+        <h1>音声合成</h1>
+        発話する文字列: <input type="text" id="tts" value=""><button onclick="request_tts()">TTS</button>
+
+        <h1>音声認識音声認識</h1>
+        最大録音時間（秒）:<input type="text" id="max_seconds" size="2" value="5"/><br>
+        発話区間推定　閾値:<input type="text" id="threshold" size="5" value="41"/><br>
+        発話区間推定　連続検出回数<input type="text" id="max_count" size="2" value="1"/><br>
+        <button onclick="request_asr()">スタート</button>
+
+        <hr>
+        <a href="/">Back to Top</a>
+    </body>
+</html>

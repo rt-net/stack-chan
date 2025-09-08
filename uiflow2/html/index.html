@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>Hello Stack-chan</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta charset="utf-8">
+
+        <script type="text/javascript" src="js/joy.min.js"></script>
+        <script type="text/javascript">
+            async function get_camera_image(){
+                const res = await fetch('/get_camera_image', {
+                    method: "POST", body: ""
+                });
+                const { width, height, data } = await res.json();
+                const canvas = document.getElementById('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                const imageData = ctx.createImageData(width, height);
+
+                const binary = atob(data); // Base64 → binary
+                const buffer = new Uint8Array(binary.length);
+                for (let i = 0; i < binary.length; i++) {
+                    buffer[i] = binary.charCodeAt(i);
+                }
+
+                for (let i = 0, j = 0; i < buffer.length; i += 2, j += 4) {
+                    const value = (buffer[i] << 8) | buffer[i + 1];
+
+                    // RGB565 → 8bit RGB変換
+                    const r = ((value >> 11) & 0x1F) << 3;
+                    const g = ((value >> 5) & 0x3F) << 2;
+                    const b = (value & 0x1F) << 3;
+
+                    imageData.data[j] = r;
+                    imageData.data[j + 1] = g;
+                    imageData.data[j + 2] = b;
+                    imageData.data[j + 3] = 255; // Alpha
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+            }
+
+            async function move(){
+                var pn = document.getElementById('pan').value;
+                var tlt = document.getElementById('tilt').value;
+
+                const res = await fetch('/move', {
+                    method: "POST",
+                    body: "[" + pn + "," + tlt +"]"
+                });
+            }
+
+            async function move_angle(x, y){
+                var pn =  Math.trunc(x * 0.6);
+                var tlt = Math.trunc(Math.max(Math.min(-y*0.3, 5), -25));
+                const res = await fetch('/move', {
+                    method: "POST",
+                    body: "[" + pn + "," + tlt +"]"
+                });
+            }
+
+            async function face(){
+                var face_ = document.getElementById('face').value;
+                const res = await fetch('/face', {
+                    method: "POST",
+                    body: face_
+                });
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>アールティ版<br>スタックチャンの操作</h1>
+        <h3>首振り操作</h3>
+		<div >
+			水平方向:<input id="joyX" type="text" value="0"/></br>
+			垂直方向:<input id="joyY" type="text" value="0"/>
+		</div>
+		<div id="joyDiv" style="width:200px;height:200px;margin:10px;"></div>
+
+        <script type="text/javascript">
+            var joyX = document.getElementById("joyX");
+            var joyY = document.getElementById("joyY");
+    
+            var joyParam = { "title": "joystick", "autoReturnToCenter": false };
+            var Joy = new JoyStick('joyDiv', joyParam);
+        
+            setInterval(function(){
+                if (joyX.value != Joy.GetX() || joyY.value != Joy.GetY()){
+                    move_angle(Joy.GetX(), Joy.GetY());
+                }
+                joyX.value=Joy.GetX(); 
+                joyY.value=Joy.GetY();  
+            }, 1000);
+        </script>
+        <h3>Face</h3>
+        顔の表情:
+         <select id="face" onchange="face()">
+            <option value="normal">通常（瞬きあり）</option>
+            <option value="smile">笑い</option>
+            <option value="anger">怒り</option>
+            <option value="unhappy">悲しみ</option>
+            <option value="surprise">驚き</option>
+            <option value="wink_r">ウィンク（右）</option>
+            <option value="wink_l">ウィンク（左）</option>
+            <option value="look_r">右を見る</option>
+            <option value="look_l">左を見る</option>
+            <option value="look_u">見上げる</option>
+            <option value="look_d">見下ろす</option>
+        </select><br>
+        <!-- <img src="images/face.png" > -->
+        <button onclick="get_camera_image()">カメラで撮影</button><br>
+        <canvas id="canvas"></canvas>
+
+        <h3>リンク</h3>
+        <ul>
+            <li><a href="asr_tts.html">音声認識＆音声合成</a></li>
+        </ul>
+
+
+    </body>
+</html>
