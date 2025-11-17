@@ -25,41 +25,89 @@ The RT version introduces the following updates:
 * The DYNAMIXEL XL330-M288-T servo motor has been integrated.
 * The robot's exterior casing is produced using injection molding.
 
+## Abaou this repository
+This repository include programs for Stack-chan RT ver. implemented in UIFlow2.
+
+UIFlow2 is a GUI-based programing environment officially supported by M5Stack.
+
 ## Features
+With this implementatio, following features supported.
 
-* :neutral_face:     Show cute face
-* :smile:            Expression(Happy, Angry, Sad etc.)
-* :smiley_cat:       Customize face
-* :eyes:             Glance/stare/gaze
-* :speech_balloon:   Say things
-* :bulb:             Addon M5Units
-* :cyclone:          Drive Serial(TTL)/PWM servos
-* :game_die:         Make applications on your own
++ **Variaous faces**
+    * Normal(with blinking), Smiling, Anger,  Sad, Winking,  Rotation and moving, and Custmizables.
+    
+    ![Stack-chan-faces](uiflow2/html/images/face.png)
 
-## Contents
-
-This repository includes the following contents.
-
-* __firmware__ : Source codes of the firmware.
++ **Serual motor control**
+    * Dynamixel or SG90 compatilble motor support
++ **Text to speech**
+    * Google Text-to-speech API supported
++ **Speech recognition**
+    * Google Speech-to-text API supported
++ **Web serivce**
+    * Original web service implementation with customizable REST API supported
++ **Image capture**
+    * Camera image capture via Web service
 
 ## Installation
 
 ### Assemble board
-
 * See [Stack-chan RT ver. Assembly Manual](docs/assembly.md)
 
+
 ### Flash firmware to M5Stack
+Install the UIFlow2 firmware provided on the official website.
+- [Instaration the firmware for Core3](https://docs.m5stack.com/ja/uiflow2/m5cores3/program)
 
-* For Windows:  [(WSL2) Windows 11 Stack-chan Environment Setup Manual (Japanese)](firmware/docs/getting-started-wsl2_ja.md)
-* For MacOS/Linux: [Getting Started (MacOS/Linux)](./firmware/docs/getting-started.md)
-* For Web: Follow the steps below (Reference: [Tried Flashing a Program to Stack-chan via Web Browser (Japanese)](https://rt-net.jp/humanoid/archives/5907)):
-  1. Access the [web-flah page](https://rt-net.github.io/stack-chan/web/flash/) from your PC.
-  2. Connect Stack-chan to the PC using a cable.
-  3. Hold the reset button on the bottom of the M5Stack for 3 seconds to switch to BOOT mode (a green light will appear near the reset button).
-  4. Select `M5Stack CoreS3`.
-  5. Press the `Flash Stack-chan firmware [・＿・]` button.
+### Upload files
+#### Upload programs
+Upload the Python programs(except main.py) placed under 'uiflow2/scripts' to '/flush/libs' on Core3.
+Similarly, upload 'scripts/main.py' under the directory '/flash'.
 
-## Contribution
+#### Customize configurtion files
+The following three configuration files required.
+The default configuration files is in the directory 'uiflow2/conf/', so please modify to suit your envisonments.
+
+- stackchan.json
+- wlan.json
+- apikey.txt
+
+###### stackchan.json
+This file configuration for type of motor, servie settings for  text-to-speech and speech recognition.
+
+The default configyrations for RT ver. is in the uiflow2/conf/stackchan.json.
+
+- **motor**: "Dynamixel" or "SG90"
+- **tts**: "google"
+- **asr**: "google"
+
+###### wlan.json
+This fiile can contein settings for three Wi-fi connections: Home, Work and Mobile connections.
+When the this program starts, it will scan for access points and automatically connect.
+
+```
+{
+    "Home": {"essid": "", "passwd": ""},
+    "Work": {"essid": "", "passwd": ""},
+    "Mobile": {"essid": "", "passwd": ""}
+}
+```
+###### apikey.txt
+This file contains the API keys for GoogleCloud Service: Speech API and Gemini API.
+Enter the API key of speech API in *OPENHRI_KEY*, and that of the Gemini serives in *GEMINI_KEY*.
+
+```
+OPENHRI_KEY=
+GEMINI_KEY=
+```
+
+##### Upload configuration files
+Upload these three configuration files:stackchan.json, wlan.json, apikey.txt to the SD-card (/sd).
+
+#### Upload HTML files
+This package support for Web service including REST-API functions.
+The default contents are in '/uilflow2/html', please upload all files under the SD-card as '/sd/html'.
+
 
 We accept __feature requests / bug reports__ through the [issues](https://github.com/rt-net/stack-chan/issues) page.
 
