@@ -74,7 +74,7 @@ export class DynamixelDriver {
   constructor(param: DynamixelDriverProps) {
     this._pan = new Dynamixel({ id: param.panId, baudrate: param.baud })
     this._tilt = new Dynamixel({ id: param.tiltId, baudrate: param.baud })
-    this._controls = [new PControl(this._pan, 1.0, 80, 40, 'pan'), new PControl(this._tilt, 4, 800, 0, 'tilt')]
+    this._controls = [new PControl(this._pan, 1.0, 80, 60, 'pan'), new PControl(this._tilt, 4, 800, 10, 'tilt')]
     this._torque = true
     this._initialized = false
     this._running = false
