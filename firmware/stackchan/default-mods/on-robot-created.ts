@@ -41,13 +41,16 @@ export const onRobotCreated: StackchanMod['onRobotCreated'] = (robot) => {
     robot.lookAt([x, y, z])
   }
   Timer.repeat(targetLoop, 5000)
-  robot.button.a.onChanged = async function () {
-    if (this.read()) {
-      isFollowing = !isFollowing
-      const text = isFollowing ? 'looking' : 'look away'
-      robot.showBalloon(text)
-      await asyncWait(1000)
-      robot.hideBalloon()
+  if (robot.button.a != null) {
+    robot.button.a.onChanged = async function () {
+      if (this.read()) {
+        isFollowing = !isFollowing
+        robot.driver.setTorque(isFollowing)
+        const text = isFollowing ? 'looking' : 'look away'
+        robot.showBalloon(text)
+        await asyncWait(1000)
+        robot.hideBalloon()
+      }
     }
   }
 
@@ -67,13 +70,15 @@ export const onRobotCreated: StackchanMod['onRobotCreated'] = (robot) => {
     robot.hideBalloon()
   }
   let isMoving = false
-  robot.button.b.onChanged = async function () {
-    if (this.read() && !isMoving) {
-      isFollowing = false
-      robot.lookAway()
-      isMoving = true
-      await testMotion()
-      isMoving = false
+  if (robot.button.b != null) {
+    robot.button.b.onChanged = async function () {
+      if (this.read() && !isMoving) {
+        isFollowing = false
+        robot.lookAway()
+        isMoving = true
+        await testMotion()
+        isMoving = false
+      }
     }
   }
 
@@ -81,17 +86,19 @@ export const onRobotCreated: StackchanMod['onRobotCreated'] = (robot) => {
    * Button C ... Change color
    */
   let flag = false
-  robot.button.c.onChanged = function () {
-    if (this.read()) {
-      trace('pressed C\n')
-      if (flag) {
-        robot.setColor('primary', 0xff, 0xff, 0xff)
-        robot.setColor('secondary', 0x00, 0x00, 0x00)
-      } else {
-        robot.setColor('primary', 0x00, 0x00, 0x00)
-        robot.setColor('secondary', 0xff, 0xff, 0xff)
+  if (robot.button.c != null) {
+    robot.button.c.onChanged = function () {
+      if (this.read()) {
+        trace('pressed C\n')
+        if (flag) {
+          robot.setColor('primary', 0xff, 0xff, 0xff)
+          robot.setColor('secondary', 0x00, 0x00, 0x00)
+        } else {
+          robot.setColor('primary', 0x00, 0x00, 0x00)
+          robot.setColor('secondary', 0xff, 0xff, 0xff)
+        }
+        flag = !flag
       }
-      flag = !flag
     }
   }
 }

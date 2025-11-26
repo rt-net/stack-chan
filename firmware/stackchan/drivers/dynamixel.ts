@@ -1,6 +1,10 @@
 import Serial from 'embedded:io/serial'
 import Timer from 'timer'
+
+import SingleWaitSlot from 'single-wait-slot'
 import config from 'mc/config'
+
+import { PayloadBuffer } from './payload-buffer'
 
 type Maybe<T> =
   | {
@@ -35,7 +39,7 @@ const INSTRUCTION = {
   BULK_READ: 0x92,
   BULK_WRITE: 0x93,
 } as const
-type Instruction = typeof INSTRUCTION[keyof typeof INSTRUCTION]
+type Instruction = (typeof INSTRUCTION)[keyof typeof INSTRUCTION]
 
 export const BAUDRATE = {
   BAUD_9600: 0x00,
@@ -44,7 +48,7 @@ export const BAUDRATE = {
   BAUD_1000000: 0x03,
   BAUD_2000000: 0x04,
 } as const
-type Baudrate = typeof BAUDRATE[keyof typeof BAUDRATE]
+type Baudrate = (typeof BAUDRATE)[keyof typeof BAUDRATE]
 
 export const OPERATING_MODE = {
   CURRENT: 0x00,
@@ -54,7 +58,7 @@ export const OPERATING_MODE = {
   CURRENT_BASED_POSITION: 0x05,
   PWM: 0x10,
 } as const
-type OperatingMode = typeof OPERATING_MODE[keyof typeof OPERATING_MODE]
+type OperatingMode = (typeof OPERATING_MODE)[keyof typeof OPERATING_MODE]
 
 const ADDRESS = {
   MODEL_NUMBER: 0,
@@ -76,25 +80,27 @@ const ADDRESS = {
   PRESENT_VELOCITY: 128,
   PRESENT_POSITION: 132,
 } as const
-type Address = typeof ADDRESS[keyof typeof ADDRESS]
+type Address = (typeof ADDRESS)[keyof typeof ADDRESS]
 
 const RX_STATE = {
   SEEK: 0,
   HEAD: 1,
   BODY: 2,
 } as const
-type RxState = typeof RX_STATE[keyof typeof RX_STATE]
+type RxState = (typeof RX_STATE)[keyof typeof RX_STATE]
 
 class PacketHandler extends Serial {
-  #callbacks: Map<number, (bytes: Uint8Array) => void>
+  #callbacks: Map<number, (buffer: Uint8Array, length: number) => void>
   #rxBuffer: Uint8Array
+  #payloadBuffer: PayloadBuffer
   #idx: number
   #state: RxState
   #id: number
   #count: number
   constructor(option) {
-    const onReadable = function (this: PacketHandler, bytes: number) {
+    const onReadable = function (this: PacketHandler, bytesReadable: number) {
       const rxBuf = this.#rxBuffer
+      let bytes = bytesReadable
       while (bytes > 0) {
         // NOTE: We can safely read a number
         rxBuf[this.#idx++] = this.read() as number
@@ -130,13 +136,21 @@ class PacketHandler extends Serial {
               const id = rxBuf[4]
               const command = rxBuf[7] as Instruction
               if (command === INSTRUCTION.WRITE || command === INSTRUCTION.READ) {
-                // trace(`got echo.  ... ${rxBuf.slice(0, this.#idx)} ignoring\n`)
+                // trace(`got echo.  ... ${rxBuf.subarray(0, this.#idx)} ignoring\n`)
               } else if (command === INSTRUCTION.STATUS) {
-                // trace(`got response for ${id}. triggering callback ... ${rxBuf.slice(0, this.#idx)} \n`)
-                this.#callbacks.get(id)?.(rxBuf.slice(7, this.#idx - 1))
+                // trace(`got response for ${id}. triggering callback ... ${rxBuf.subarray(0, this.#idx)} \n`)
+                const payloadLength = this.#idx - 8
+                const payloadView = this.#payloadBuffer.copyFrom(rxBuf, payloadLength, 7)
+                const payload = new Uint8Array(payloadLength)
+                payload.set(payloadView.subarray(0, payloadLength))
+                this.#callbacks.get(id)?.(payload, payloadLength)
               } else {
-                // trace(`something wrong for ${id}. ${rxBuf.slice(0, this.#idx)} \n`)
-                this.#callbacks.get(id)?.(rxBuf.slice(7, this.#idx - 1))
+                // trace(`something wrong for ${id}. ${rxBuf.subarray(0, this.#idx)} \n`)
+                const payloadLength = this.#idx - 8
+                const payloadView = this.#payloadBuffer.copyFrom(rxBuf, payloadLength, 7)
+                const payload = new Uint8Array(payloadLength)
+                payload.set(payloadView.subarray(0, payloadLength))
+                this.#callbacks.get(id)?.(payload, payloadLength)
               }
               this.#idx = 0
               this.#state = RX_STATE.SEEK
@@ -156,15 +170,16 @@ class PacketHandler extends Serial {
       format: 'number',
       onReadable,
     })
-    this.#callbacks = new Map<number, () => void>()
+    this.#callbacks = new Map<number, (buffer: Uint8Array, length: number) => void>()
     this.#rxBuffer = new Uint8Array(64)
+    this.#payloadBuffer = new PayloadBuffer(32)
     this.#idx = 0
     this.#state = RX_STATE.SEEK
   }
   hasCallbackOf(id: number): boolean {
     return this.#callbacks.has(id)
   }
-  registerCallback(id: number, callback: (bytes: Uint8Array) => void) {
+  registerCallback(id: number, callback: (buffer: Uint8Array, length: number) => void) {
     this.#callbacks.set(id, callback)
   }
   removeCallback(id: number) {
@@ -177,8 +192,7 @@ class PacketHandler extends Serial {
  * @param arr - packet array except checksum
  * @returns checksum number
  */
-function checksum(arr: number[] | Uint8Array, start = 0, end): number {
-  end = end ?? arr.length
+function checksum(arr: number[] | Uint8Array, start = 0, end = arr.length): number {
   let crc16 = 0
   for (let i = start; i < end; i++) {
     const n = arr[i]
@@ -206,31 +220,29 @@ class Dynamixel {
     // Dynamixel.packetHandler = new PacketHandler({
     packetHandler?.close()
     packetHandler = new PacketHandler({
-      receive: 6,
-      transmit: 7,
-      baud: 1_000_000,
+      receive: config.serial?.receive ?? 6,
+      transmit: config.serial?.transmit ?? 7,
+      baud: baud,
       port: 1,
     })
   }
   #id: number
-  #onCommandRead: (values: Uint8Array) => void
+  #onCommandRead: (buffer: Uint8Array, length: number) => void
   #txBuf: Uint8Array
-  #promises: Array<[(values: Uint8Array) => void, Timer]>
+  #waitSlot: SingleWaitSlot<Uint8Array>
+  #queueTail: Promise<void>
   constructor({ id, baudrate = 1_000_000 }: DynamixelConstructorParam) {
     this.#id = id
-    this.#promises = []
-    this.#onCommandRead = (values) => {
-      if (this.#promises.length > 0) {
-        const [resolver, timeoutId] = this.#promises.shift()
-        Timer.clear(timeoutId)
-        resolver(values)
-      }
+    this.#waitSlot = new SingleWaitSlot<Uint8Array>(Timer.set, Timer.clear)
+    this.#queueTail = Promise.resolve()
+    this.#onCommandRead = (values, _length) => {
+      this.#waitSlot.resolve(values)
     }
     this.#txBuf = new Uint8Array(64)
     if (packetHandler == null) {
       packetHandler = new PacketHandler({
-        receive: 6,
-        transmit: 7,
+        receive: config.serial?.receive ?? 6,
+        transmit: config.serial?.transmit ?? 7,
         baud: baudrate,
         port: 1,
       })
@@ -247,7 +259,11 @@ class Dynamixel {
     return this.#id
   }
 
-  async #sendCommand(instruction: Instruction, address?: Address, ...parameters: number[]): Promise<Uint8Array> {
+  async #dispatchCommand(
+    instruction: Instruction,
+    address?: Address,
+    ...parameters: number[]
+  ): Promise<Uint8Array | undefined> {
     this.#txBuf[0] = 0xff
     this.#txBuf[1] = 0xff
     this.#txBuf[2] = 0xfd
@@ -280,23 +296,35 @@ class Dynamixel {
     this.#txBuf[idx++] = (crc >> 8) & 0xff
     /*
     trace('writing: ')
-    for (const n of this.#txBuf.slice(0, idx)) {
+    for (const n of this.#txBuf.subarray(0, idx)) {
       trace(Number(n).toString(16).padStart(2, '0'))
       trace(' ')
     }
     trace('\n')
     */
-    for (let i = 0; i < idx; i++) {
-      packetHandler.write(this.#txBuf[i])
+    const originalFormat = packetHandler.format
+    packetHandler.format = 'buffer'
+    try {
+      packetHandler.write(this.#txBuf.subarray(0, idx))
+    } finally {
+      packetHandler.format = originalFormat
     }
-    return new Promise((resolve) => {
-      const id = Timer.set(() => {
-        this.#promises.shift()
-        trace(`timeout. ${this.#promises.length}\n`)
-        resolve(undefined)
-      }, 200)
-      this.#promises.push([resolve, id])
+    return this.#waitSlot.wait(200, () => {
+      trace('timeout.\n')
     })
+  }
+
+  async #sendCommand(
+    instruction: Instruction,
+    address?: Address,
+    ...parameters: number[]
+  ): Promise<Uint8Array | undefined> {
+    const run = this.#queueTail.then(() => this.#dispatchCommand(instruction, address, ...parameters))
+    this.#queueTail = run.then(
+      () => undefined,
+      () => undefined,
+    )
+    return run
   }
 
   /**
@@ -399,10 +427,7 @@ class Dynamixel {
    * @param angle - offset angle
    */
   async setOffsetAngle(angle: number): Promise<unknown> {
-    if (angle < 0) {
-      angle *= -1
-    }
-    const value = (angle * 360) / 4096
+    const value = (Math.abs(angle) * 360) / 4096
     return this.#sendCommand(INSTRUCTION.WRITE, ADDRESS.HOMING_OFFSET, ...le(value))
   }
 
@@ -442,7 +467,14 @@ class Dynamixel {
    */
   async readModelNumber(): Promise<number> {
     const values = await this.#sendCommand(INSTRUCTION.READ, ADDRESS.MODEL_NUMBER, 2)
-    return el(values[0], values[1])
+    if (values == null || values.length < 4) {
+      throw new Error('failed to read model number')
+    }
+    if (values[1] !== 0) {
+      throw new Error(`servo returned error code: ${values[1]} while reading model number`)
+    }
+    // payload layout: [instruction/status, status_code, low, high]
+    return el(values[3], values[2])
   }
 
   /**
@@ -451,18 +483,17 @@ class Dynamixel {
    */
   async readFirmwareVersion(): Promise<Maybe<{ version: number }>> {
     const values = await this.#sendCommand(INSTRUCTION.READ, ADDRESS.VERSION_OF_FIRMWARE, 1)
-    if (values != null && values[1] == 0) {
+    if (values != null && values.length >= 3 && values[1] === 0) {
       return {
         success: true,
         value: {
           version: values[2],
         },
       }
-    } else {
-      return {
-        success: false,
-        reason: 'failed to read firmware version',
-      }
+    }
+    return {
+      success: false,
+      reason: 'failed to read firmware version',
     }
   }
 
@@ -472,6 +503,9 @@ class Dynamixel {
    */
   async readOffsetAngle(): Promise<number> {
     const values = await this.#sendCommand(INSTRUCTION.READ, ADDRESS.HOMING_OFFSET, 2)
+    if (values == null || values.length < 2) {
+      throw new Error('failed to read offset angle')
+    }
     const isCcw = Boolean(values[0] & 0x8000)
     let offset = ((values[1] & 0x7fff) << 8) | values[0]
     if (isCcw) {
@@ -486,8 +520,8 @@ class Dynamixel {
    */
   async readPresentCurrent(): Promise<Maybe<{ current: number }>> {
     const values = await this.#sendCommand(INSTRUCTION.READ, ADDRESS.PRESENT_CURRENT, 2)
-    if (values != null) {
-      if (values[1] != 0) {
+    if (values != null && values.length >= 4) {
+      if (values[1] !== 0) {
         return {
           success: false,
           reason: `servo returned error code: ${values[1]}`,
@@ -500,10 +534,9 @@ class Dynamixel {
           current: current >= 0x8000 ? current - 0x10000 : current,
         },
       }
-    } else {
-      return {
-        success: false,
-      }
+    }
+    return {
+      success: false,
     }
   }
 
@@ -514,8 +547,8 @@ class Dynamixel {
    */
   async readPresentVelocity(): Promise<Maybe<number>> {
     const values = await this.#sendCommand(INSTRUCTION.READ, ADDRESS.PRESENT_VELOCITY, 4)
-    if (values != null) {
-      if (values[1] != 0) {
+    if (values != null && values.length >= 4) {
+      if (values[1] !== 0) {
         return {
           success: false,
           reason: `servo returned error code: ${values[1]}`,
@@ -526,10 +559,9 @@ class Dynamixel {
         success: true,
         value: velocity >= 0x8000 ? velocity - 0x10000 : velocity,
       }
-    } else {
-      return {
-        success: false,
-      }
+    }
+    return {
+      success: false,
     }
   }
 
@@ -539,8 +571,8 @@ class Dynamixel {
    */
   async readPresentPosition(): Promise<Maybe<number>> {
     const values = await this.#sendCommand(INSTRUCTION.READ, ADDRESS.PRESENT_POSITION, 4)
-    if (values != null) {
-      if (values[1] != 0) {
+    if (values != null && values.length >= 4) {
+      if (values[1] !== 0) {
         return {
           success: false,
           reason: `servo returned error code: ${values[1]}`,
@@ -551,10 +583,9 @@ class Dynamixel {
         success: true,
         value: position >= 0x8000 ? position - 0x10000 : position,
       }
-    } else {
-      return {
-        success: false,
-      }
+    }
+    return {
+      success: false,
     }
   }
 }
