@@ -10,6 +10,8 @@
   },
   "preload": [
     "dynamixel",
-    "dynamixel-driver"
+    "dynamixel-driver",
+    "payload-buffer",
+    "internal/single-wait-slot"
   ]
 }
