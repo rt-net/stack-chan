@@ -166,7 +166,6 @@ Some MODs require a network connection or an external server to run.
 - Windows is not covered because the Wi-Fi bridge does not work properly.
 - A paid plan is required to run ChatGPT from the app.
 - The node version required by the simple-stt-server is 20 instead of 16.
-- Long sentences are not possible, due to not using PSRAM. 
 - Configuration on the -PC side
     - Windows requires installation of “pulseaudo” on windows side for the following voice recognition.
         - Installation on Windows 11 side

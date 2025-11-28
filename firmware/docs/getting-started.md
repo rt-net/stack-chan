@@ -72,15 +72,11 @@ If you cannot setup xs-dev(CLI) properly, please do this.
 - **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work.**
 - **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
 
-## Set up PSRAM and Environment Variable
+## Set up Environment Variables
 
-To configure the PSRAM settings, execute the following command.
+To configure the  environment variables, execute the following command.
 
-```console
-$ ./setting_scripts/unset_psram.sh
-```
-
-Next, run the following command to automatically add source `~/.local/share/xs-dev-export.sh` to your shell's configuration file. This ensures that the necessary environment variables are set each time the shell is started.
+Run the following command to automatically add source `~/.local/share/xs-dev-export.sh` to your shell's configuration file. This ensures that the necessary environment variables are set each time the shell is started.
 
 ```console
 $ ./setting_scripts/set_xs-dev_env.sh 

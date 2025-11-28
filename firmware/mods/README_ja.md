@@ -163,7 +163,6 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
 - windowsはWi-Fiブリッジが正常に動作しないため対象外になります。
 - アプリからChatGPTを起動するには有料プランが必要になります。
 - 使用するsimple-stt-serverが要求しているnodeのversionが16から20になっています
-- PSRAMを使用していないため長い文章を話すことができない状態です。
 -PC側の設定
 	- Windowsは以下の音声認識のためwindows側でpulseaudoのインストールが必要になります。
 		- Windows11側のインストール

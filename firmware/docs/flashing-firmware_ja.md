@@ -41,11 +41,6 @@
 
 前述の通りｽﾀｯｸﾁｬﾝのファームウェアは基本プログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。
 
-**esp-idfのバージョンが`5.x`からesp32に接続しているPSRAMの扱いが変わっています。デフォルト設定ではスムーズに動かないため一部変更しています。**
-**[環境構築の設定変更スクリプト実行時](./getting-started_ja.md#設定の変更)に、`~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`に記述された`CONFIG_SPIRAM=y`を`CONFIG_SPIRAM=n`に書き換えています。**
-
-<br>
-
 次のコマンドで基本プログラム（ホスト）の書き込みを行います。
 
 _コマンドに`sudo`をつける必要はありません。_
