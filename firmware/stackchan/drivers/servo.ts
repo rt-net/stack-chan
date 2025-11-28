@@ -40,7 +40,7 @@ const COMMAND = {
   WRITE: 0x03,
   READ: 0x02,
 } as const
-type Command = (typeof COMMAND)[keyof typeof COMMAND]
+type Command = typeof COMMAND[keyof typeof COMMAND]
 
 const ADDRESS = {
   ID: 5,
@@ -52,14 +52,14 @@ const ADDRESS = {
   LOCK: 48,
   PRESENT_POSITION: 56,
 } as const
-type Address = (typeof ADDRESS)[keyof typeof ADDRESS]
+type Address = typeof ADDRESS[keyof typeof ADDRESS]
 
 const RX_STATE = {
   SEEK: 0,
   HEAD: 1,
   BODY: 2,
 } as const
-type RxState = (typeof RX_STATE)[keyof typeof RX_STATE]
+type RxState = typeof RX_STATE[keyof typeof RX_STATE]
 
 class PacketHandler extends Serial {
   #callbacks: Map<number, (buffer: Uint8Array, length: number) => void>
@@ -118,8 +118,8 @@ class PacketHandler extends Serial {
             }
             break
           default: {
-            // @ts-ignore 6113
-            let _state: never
+            // Fail fast if we ever reach an unexpected RX state
+            throw new Error(`Unknown RX state: ${this.#state}`)
           }
         }
         // noop
@@ -234,7 +234,7 @@ class SCServo {
     const run = this.#queueTail.then(() => this.#dispatchCommand(command, address, ...values))
     this.#queueTail = run.then(
       () => undefined,
-      () => undefined,
+      () => undefined
     )
     return run
   }
