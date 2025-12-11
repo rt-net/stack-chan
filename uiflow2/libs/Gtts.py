@@ -133,7 +133,10 @@ class Gtts(Command):
                 if self.parent:
                     self.parent.face.stop_talk()              
             except:
-                print(result)
+                try:
+                    print(result)
+                except:
+                    print("Unknown error")
                 res_ = False
             res_ = True
             response.close()
