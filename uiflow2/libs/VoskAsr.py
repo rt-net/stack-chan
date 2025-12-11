@@ -29,12 +29,15 @@ class VoskAsr(Command):
     self.audio_segments = []
 
     self._sample_width=2
-    self._frame_rate=8000
-    self._channels=1
+    self._frame_rate = 8000
+    self._channels = 1
 
-    self._prebuf= b''
-    self.silent_power=38
-    self.silence=bytearray(8000*5)
+    self._prebuf = b''
+    self.silent_power = 38
+    self.silence = bytearray(8000*5)
+    
+    self.parent = None
+    self.request = None
   #
   #
   def calc_power(self, indata):
@@ -69,8 +72,12 @@ class VoskAsr(Command):
     headers = {  'Content-Type' : 'application/json; charset=utf-8' }
     audio_data = binascii.b2a_base64(data, newline=False)
     request_data = audio_data.decode()
-    response = requests2.post(url, json=request_data, headers=headers)
-    return response.text
+    try:
+      response = requests2.post(url, json=request_data, headers=headers)
+      return response.text
+    except:
+      print("Error in rewuest")
+      return None
   #
   #
   def record_audio(self, tm=10, thr=-1):
@@ -110,17 +117,20 @@ class VoskAsr(Command):
     data=self.record_audio(max_seconds, thr)
     print("Reuqest ASR")
     if len(data) > 0:
-      res=self.request_speech_recog(data)
+      self.show_message("音声認識中…")
       try:
+        res=self.request_speech_recog(data)
+        if res is None: return None
         print("RESPONSE:", res)
         return { 'result': res , 'error': ''}
       except:
+
         print("==== Fail")
         pass
       return { 'result': '', 'error': 'Fail to recoginze' }
     else:
       print("==== No sound")
-    return { 'result': '', 'error': 'No sound' }
+    return None
   #
   #
   def run(self):
@@ -136,3 +146,26 @@ class VoskAsr(Command):
       except:
         return { 'result': '', 'error': 'Invalid params' }
     return False
+
+  #
+  #
+  def set_request(self, data):
+      self.request = data
+      return True
+  #
+  #
+  def check_request(self):
+      if self.request:
+          self.show_message("音声入力…", 0x8888ff)
+          param=json.loads(self.request)
+          #print(param)
+          res=self.do_process(param['max_seconds'], param['threshold'])
+          if res is None:
+            self.request=None
+          self.show_message("")
+          return res
+      return False
+  
+  def show_message(self, msg='', color=0xffff00):
+    if self.parent:
+        self.parent.print_info(msg, color)

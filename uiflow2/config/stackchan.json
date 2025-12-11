@@ -1,10 +1,27 @@
 {
+    ## 使用しているモータの種別 ( Dynamixel or SG90 )
     "motor": "Dynamixel",
-    "sg90_pan": "2",
-    "sg90_tilt": "9",
-    "tts" : "google",
-    "tts_ip": "192.168.0.100",
+    "SG90": {"pan": 2, "tilt": 9, "offset": 56},
+    ## 音声合成のエンジン (google or voicevox)
+    "tts" : "google", 
+    "google": {
+        "lang": "ja-JP", "speakingRate": "1.2", "ssmlGender": "FEMALE",
+        "voiceName": "ja-JP-Wavent-B", "pitch": "5.0", "volumeGain": "0",
+        "sampleRate": "8000", "effectsProfileId": "", "sampleRateHertz": 8000},
+    "voicevox": {"host": "192.168.0.100", "voice_id": 1},
+    ## 音声合成のエンジン (google or vosk)
     "asr": "google",
-    "asr_ip": "192.168.0.100",
-    "web_server": "80"
+    "vosk": {"host": "192.168.0.100"},
+    ## Webサーバーのポート番号
+    "web_server": 80,
+    ## Cameraの初期化
+    "camera_setup": true,
+    ## カメラ画像を180度回転
+    "vflip": false,
+    ## 音声対話エンジン (gemini or openai)
+    "dialog": "gemini",
+    "gemini": {"model": "/gemini-2.5-flash:generateContent", "lang": "ja_JP"},
+    "openai": {"model": "gpt-5"},
+    ## 生成AIのプロンプト
+    "prompt": "あたなは、小さなスーパーロボット「スタックチャン」です。現在、東京にいます。対話の応答は、東京にいることを前提に、30字以内で答えてください。"
 }

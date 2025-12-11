@@ -27,12 +27,24 @@ class Thread:
         self.args = args
         self.kwargs = {} if kwargs is None else kwargs
 
+    #def __delete__(self):
+    #    _thread.exit()
+  
     def start(self):
-        _thread.start_new_thread(self.run, ())
+        try:
+          _thread.start_new_thread(self.run, ())
+        except:
+          self.run()
 
     def run(self):
         self.target(*self.args, **self.kwargs)
 
+
+#def start_thread(obj):
+#  _thread.start_new_thread(obj.run, ())
+#
+#def stop_thread():
+#  _thread.exit()
 #
 # Raw Socket Adaptor
 #
@@ -170,17 +182,21 @@ class SocketPort(Thread):
   #  Background job ( message receiver )
   def message_receiver(self, timeout=1.0):
     while self.mainloop:
+      #print("-- message_recv")
       data = self.receive_data(timeout=timeout)
 
       if data  == -1:
         self.terminate()
+        return
       elif data or data is None:
         if data is None or self.reader.parse(data):
           self.mainloop=False
       else :
         print("Umm...: %s" % self.name)
         print(data)
-
+    #print("terminate")
+    gc.collect()
+    gc.mem_free()
     self.terminate()
     return
   #
@@ -205,6 +221,7 @@ class SocketPort(Thread):
   #
   #  Stop background job
   def terminate(self):
+    #print("Call terminate", self)
     try:
       self.reader.terminate()
     except:
@@ -262,12 +279,17 @@ class SocketServer(SocketPort):
       reader = self.reader.duplicate()
       newadaptor = SocketService(self, reader, name, conn, addr)
       if flag :
-        newadaptor.start()
+        #newadaptor.start()
+        newadaptor.run()
         return None
       return newadaptor
-    except:
+    except (Exception) as e:
       print("ERROR in accept_service")
-      pass
+      try:
+        from utility import print_error_msg
+        print_error_msg(e)
+      except:
+        pass
     return None
   #
   #  Wait request from a client 
@@ -285,7 +307,7 @@ class SocketServer(SocketPort):
     return 
   #
   #
-  def spin_once(self, timeout=10.0):
+  def spin_once(self, timeout=1.0):
     res = self.wait_for_read(timeout) 
     if res == 1:
       self.accept_service()
@@ -309,6 +331,7 @@ class SocketServer(SocketPort):
   #
   #  Thread operations....
   def run(self):
+    #self.mainloop=True
     self.accept_service_loop(timeout=-1)
     return
   #
@@ -342,10 +365,11 @@ class SocketService(SocketPort):
     self.socket = sock
     self.server_adaptor = server
     self.name=''
-    server.com_ports.append(self)
+    #self.server_adaptor.com_ports.append(self)
   #
   # Threading...
   def run(self):
+    self.mainloop=True
     self.message_receiver(timeout=1.0)
     return
   #
@@ -356,6 +380,9 @@ class SocketService(SocketPort):
   #
   def terminate(self):
     self.mainloop=False
+    super().terminate()
+    # self.server_adaptor.com_ports.remove(self)
+    gc.mem_free()
     return
   
 ##########################
@@ -545,14 +572,17 @@ class HttpReader(CommReader):
     self.clearResponse()
     cmd = header["Http-Command"]
     fname = header["Http-FileName"].split('?')
-
     if cmd == "GET":
       contents = get_file_contents(fname[0], self.dirname)
       ctype = get_content_type(fname[0])
+
       if contents is None:
         response = response404()
       else:
-        response = response200(ctype, contents)
+        if ctype.startswith('image'):
+          response = response200(ctype, contents)
+        else:
+          response = response200(ctype, contents.decode())
       self.sendResponse(response)
 
     elif cmd == "POST":
@@ -580,7 +610,7 @@ class HttpReader(CommReader):
       response = response400()
       self.sendResponse(response)
 
-    return
+    return True
   #
   #
   def registerCommand(self, ctype, obj):
@@ -774,12 +804,11 @@ class HttpCommand(CommCommand):
 def get_file_contents(fname, dirname="."):
   contents = None
   try:
-    f=open(dirname+fname,'rb')
-    contents = f.read()
-    f.close()
+    with open(dirname+fname,'rb') as file:
+      contents = file.read()
   except:
     pass
-  return contents.decode()
+  return contents
 #
 #
 def get_content_type(fname):
@@ -787,6 +816,7 @@ def get_content_type(fname):
   htmext=["htm", "html"]
   ctype = "text/plain"
   ext=fname.split(".")[-1]
+
   if htmext.count(ext) > 0:
     ctype = "text/html"
   elif ext == "txt" :
@@ -799,7 +829,9 @@ def get_content_type(fname):
     ctype = "text/csv"
   elif ext == "jpg" :
     ctype = "image/jpeg"
-  elif imgext.count(ext) > 0:
+  elif ext == "ico" :
+    ctype = "image/x-icon"
+  elif ext in imgext:
     ctype = "image/"+ext
   else:
     pass
@@ -853,10 +885,14 @@ def response200(ctype="text/plain", contents=""):
   res  = "HTTP/1.0 200 OK\r\n"
   res += "Date: "+date+"\r\n"
   res += "Content-Type: "+ctype+"\r\n"
-  res += "Content-Length: "+str(len(contents.encode()))+"\r\n"
-  res += "\r\n"
-  res += contents
-  return res
+  if type(contents) is str:
+    res += "Content-Length: "+str(len(contents.encode()))+"\r\n"
+    res += "\r\n"
+    return res + contents
+  else:
+    res += "Content-Length: "+str(len(contents))+"\r\n"
+    res += "\r\n"
+    return res.encode() + contents 
 #
 #
 def response404():
@@ -897,8 +933,8 @@ class Command:
 ######################################
 #  HTTP Server
 #
-def create_httpd(num=80, top="/sd/html/", command=None, host=""):
-  mount_sd()
+def create_httpd(num=80, top="/flash/html/", command=None, host=""):
+  #mount_sd()
   if type(num) == str: num = int(num)
   reader = HttpReader(top)
   return SocketServer(reader, "Web", host, num)

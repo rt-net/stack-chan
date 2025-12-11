@@ -33,6 +33,8 @@ class Voicevox(Command):
         self.setUrl(host, id)
         self.requesting=False
         self._volume = 50
+        self.request = ""
+        self.parent = None
     #
     #
     def setUrl(self, host=None, id=1):
@@ -54,7 +56,7 @@ class Voicevox(Command):
     def request_tts(self, txt):
         if self.requesting:
             return False
-
+        #print("voicevox", txt)
         self.requesting=True
         encode_txt=["%%%X" % x for x in txt.encode('utf-8')]
         res = requests2.post(self.query_url+"&text="+"".join(encode_txt), headers=self.header)
@@ -81,8 +83,10 @@ class Voicevox(Command):
         return self.request_tts(txt)
     #
     #
-    def play_wav(self, data, rate=8000):
-        if data[:4].decode() == 'RIFF' and data[8:12].decode == "WAVE":
+    def play_wav(self, data, rate=24000):
+        if self.parent:
+            self.parent.face.start_talk()
+        if data[:4].decode() == 'RIFF' and data[8:12].decode() == "WAVE":
             fmt=struct.unpack("H", data[20:22])[0]
             start=44
             if fmt != 1:
@@ -91,5 +95,34 @@ class Voicevox(Command):
             rate=struct.unpack("I", data[24:28])[0]
             play_audio(data[start:], rate, self._volume)
         else:
+            print("Unknown format")
             play_audio(data, rate, self._volume)
+
+        if self.parent:
+            self.parent.face.stop_talk()
         return
+    
+    #
+    #
+    def set_request(self, data):
+        self.request = data
+        return True
+    #
+    #
+    def check_request(self):
+        if self.request:
+            self.show_message("応答中…")
+            request = self.request.replace("!", "!\n")
+            request = self.request.replace("?","?\n" )
+            req = request.replace("\n", "。").split("。")
+            for msg in req:
+                if msg:
+                    self.request_tts(msg)
+            self.request=None
+            self.show_message()
+        return
+    #
+    #
+    def show_message(self, msg='', color=0xffff00):
+      if self.parent:
+          self.parent.print_info(msg, color)

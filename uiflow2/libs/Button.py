@@ -1,4 +1,5 @@
 import M5
+import time
 
 #
 # Unvisible Button
@@ -10,6 +11,7 @@ class Button:
     self.callback=self.print_name
     self.tap_x = -1
     self.tap_y = -1
+    self.event_time = time.time()
   #
   # Check tapped
   def is_tapped(self, x, y):
@@ -19,6 +21,9 @@ class Button:
   #
   #  Execute callback function
   def check(self):
+    if time.time() - self.event_time < 2:
+      return
+    self.event_time = time.time()
     if self.callback:
         if self.is_tapped(self.tap_x, self.tap_y):
             if self.tapped:
@@ -32,14 +37,32 @@ class Button:
         print("Callback not fount")
     self.tapped = False
     return
+  
+  def execute(self):
+    if time.time() - self.event_time < 2:
+      return
+    self.event_time = time.time()
+    if self.callback:
+      try:
+        self.callback()
+      except:
+        print("Fail to execute callback")
+      self.tap_x = -1
+      self.tap_y = -1
+    else:
+        print("Callback not fount")
+    self.tapped = False
+    return
   #
   # Check tap button and set flag
   def check_tap(self):
     self.tap_x = M5.Touch.getX()
     self.tap_y = M5.Touch.getY()
     if self.is_tapped(self.tap_x, self.tap_y):
-       self.tapped=True
-    return
+      self.tapped=True
+    else:
+      self.tapped=False
+    return self.tapped
   #
   # Dummy callback
   def print_name(self, val=None):

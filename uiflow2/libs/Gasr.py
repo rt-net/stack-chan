@@ -19,8 +19,8 @@ class Gasr(Command):
   #  Constructor
   def __init__(self, node=None, language='ja-JP'):
     self._endpoint = 'https://speech.googleapis.com/v1/speech:recognize'
-    self.conf = util.load_conf("/sd/apikey.txt")
-    self._apikey = self.conf['OPENHRI_KEY']
+    self.key_config = util.load_conf("/flash/apikey.txt")
+    self._apikey = self.key_config.get('GOOGLE_SPEECH_KEY')
 
     self._lang=language
 
@@ -34,6 +34,14 @@ class Gasr(Command):
 
     self._prebuf= b''
     self.request=None
+    self.parent = None
+    self.response = None
+  #
+  def set_config(self, conf):
+    self._lang = util.get_config(conf, "google/lang", "ja-JP")
+    self._frame_rate = util.get_config(conf, "google/sampleRateHertz",8000)
+    #print("Gasr:", self._lang, self._frame_rate)
+    return
   #
   #
   def calc_power(self, indata):
@@ -59,13 +67,17 @@ class Gasr(Command):
                         'content' : audio_data.decode('utf-8')
                           }
             }
-
-    response = requests2.post(url, json=request_data, headers=headers)
-    return response.text
+    try:
+      self.response = requests2.post(url, json=request_data, headers=headers)
+      return self.response.text
+    except:
+      return ""
   #
   #
   def record_audio(self, tm=5, thr=41, max_count=1 ):
-      Mic.begin()
+      if not Mic.begin():
+        print("Mic not work")
+        return []
       ds=0.5
       tm0=time.time()+tm
       res=b""
@@ -75,8 +87,10 @@ class Gasr(Command):
         rec_data_ = bytearray(int(8000 * ds))
         Mic.record(rec_data_, 8000, False)
         while Mic.isRecording():
-          time.sleep_ms(100)
-        if self.calc_power(rec_data_) > thr:
+          time.sleep_ms(50)
+        power = self.calc_power(rec_data_)
+        #print(power)
+        if power > thr:
           flag=True
           res +=rec_data_
           count=0
@@ -97,15 +111,16 @@ class Gasr(Command):
     data=self.record_audio(max_seconds, thr, max_count)
 
     if len(data) > 0:
+      self.show_message("音声認識中…")
       res_=self.request_speech_recog(data)
-      response=json.loads(res_)
       try:
+        response=json.loads(res_)
         res=response['results'][0]['alternatives'][0]['transcript']
         print("RESPONSE:", res)
         return { 'result': res , 'error': ''}
       except:
         print("==== Fail")
-        pass
+        #return None
       return  { 'result': '', 'error': 'Fail to recoginze' }
     else:
       print("==== No sound")
@@ -123,18 +138,29 @@ class Gasr(Command):
   #
   #
   def set_request(self, data):
-      self.request = data
-      return True
+    self.request = data
+    return True
   #
   #
   def check_request(self):
-      if self.request:
-          param=json.loads(self.request)
-          print(param)
-          res=self.do_process(param['max_seconds'], param['threshold'], param['max_count'])
-          self.request=None
-          return res
-      return None
+    if self.request:
+      self.show_message("音声入力…", 0x8888ff)
+      param=json.loads(self.request)
+      #print(param)
+      res=self.do_process(param['max_seconds'], param['threshold'], param['max_count'])
+      if res is None:
+        self.request=None
+      self.show_message("")
+      if self.response:
+        self.response.close()
+        self.response=None
+      return res
+    return False
+  
+  def show_message(self, msg='', color=0xffff00):
+    if self.parent:
+      self.parent.print_info(msg, color)
+
 ####################
 #
 def main():

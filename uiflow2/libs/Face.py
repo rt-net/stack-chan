@@ -27,9 +27,8 @@ class Face:
     def __init__(self):
         self.buffer=Display.newCanvas(320,188,16,True)
         self.blink=-100
-        self.blink_start_flag=0
         self.update_rate=1
-        self.next_blink=(200 + random.random()*40)*self.update_rate
+        self.blink_time = time.time() + int(random.random() * 15+ 5)
         self.top=26
         self.center=[160,120-self.top]
         self.eye_=[self.center[0],self.center[1]-20]
@@ -40,8 +39,7 @@ class Face:
         self.mouse_flag=0
         self.talk_intval=0.1
         self.count=0
-        self.talk_timer=machine.Timer(0)
-        self.blink_timer=machine.Timer(1)
+        self.motion_timer=machine.Timer(1)
         self.motions_all=['', 'look_r', 'look_l', 'look_u', 'look_d', 'wink_r', 'wink_l', 'anger', 'surprise', 'unhappy', 'smile']
         self.motions=['', 'look_d','smile']
         self.top_buffer=Display.newCanvas(320,26,16,True)
@@ -55,6 +53,9 @@ class Face:
         self.moving = False
         self.start_time=time.time_ns()
         self.buffer.setFont(Widgets.FONTS.EFontJA24)
+        self.pos_x=0
+        self.pos_y=0
+        self.shaking=False
     #
     #
     def set_center(self, x, y):
@@ -75,41 +76,32 @@ class Face:
         return x2+center[0], y2+center[1]
     #
     #
-    def callback_blink(self, tm):
-        if self.blink > 6:
-            self.blink_timer.deinit()
-            self.stop_blink()
-            return
-        self.blink += 2
-        self.drawFace()
-        return
-    #
-    #
-    def start_blink(self):
-        self.moving = True
-        self.blink=0
-        self.blink_start_flag = -100
-        self.blink_timer.init(mode=machine.Timer.PERIODIC,
-                              period=50,
-                              callback=self.callback_blink)
-        return
-    #
-    #
-    def stop_blink(self):
-        self.blink_start_flag=0
-        self.next_blink=80 + random.random()*40
-        self.blink=-100
-        self.draw(self.current_face)
-        self.moving = False
-        self.print_message()
-        self.print_info()
-        return
-    #
-    #
     def random_type(self):
         try:
             idx=int(random.random() * len(self.motions))
             return self.motions[idx]
+        except:
+            return ""
+        
+    def start_talk(self, period=100):
+        if self.moving: time.sleep(0.5)
+        if self.moving: return
+        self.moving=True
+        self.motion_timer.init(mode=machine.Timer.PERIODIC, period=period, callback=self.callback_talk)
+        self.draw(self.current_face)
+
+    #
+    def stop_talk(self):
+        self.motion_timer.deinit()
+        self.moving=False
+        self.draw(self.current_face)
+        return
+    
+    def callback_talk(self, tm):
+        try:
+            idx=list(self.mouse_type.keys())[int(random.random() * len(self.mouse_type))]
+            self.drawFace(idx)
+            #time.sleep(self.talk_intval)
         except:
             return ""
     #
@@ -119,7 +111,7 @@ class Face:
         self.moving=True
         self.current_angle = 0
         self.move_reverse = direction
-        self.blink_timer.init(mode=machine.Timer.PERIODIC,
+        self.motion_timer.init(mode=machine.Timer.PERIODIC,
                               period=40,
                               callback=self.callback_motion)
         self.draw(self.current_face)
@@ -134,7 +126,7 @@ class Face:
         elif self.current_angle < -10:
             self.move_reverse = 1
         if self.current_angle == 0:
-            self.blink_timer.deinit()
+            self.motion_timer.deinit()
             self.stop_motion()
         return
     #
@@ -193,7 +185,10 @@ class Face:
     #
     #
     def check_blink_time(self):
-        return (self.blink_start_flag > self.next_blink)
+        if self.current_face in ['normal', 'smile']:
+            return (time.time() > self.blink_time)
+
+        return False
     #
     #
     def is_blinking(self):
@@ -204,13 +199,13 @@ class Face:
         if self.blink > thr:
             self.stop_blinking()
         self.blink += 10
+        time.sleep(0.05)
         return
     #
     #
     def stop_blinking(self):
         self.blink=-100
-        self.blink_start_flag=0
-        self.next_blink=(200 + random.random()*100)*self.update_rate
+        self.blink_time = time.time() + int(random.random() * 15+ 5)
         if self.message: self.print_message()
         if self.info: self.print_info()
         return
@@ -369,18 +364,16 @@ class Face:
     #
     #
     def flush(self):
-        self.buffer.push(0,self.top)
-        #self.top_buffer.push(0,0)
-        #self.bottom_buffer.push(0,214)
+        self.buffer.push(0+self.pos_x,self.top+self.pos_y)
         return
     #
     #
-    def print_message(self, msg=''):
+    def print_message(self, msg='', color=0xffffff):
         self.message=msg
         if msg:
-            self.top_buffer.fillRect(0,0,320,26,0xffffff)
+            self.top_buffer.fillRect(0,0,320,26,color)
             self.top_buffer.setCursor(0,2)
-            self.top_buffer.setTextColor(0, 0xffffff)
+            self.top_buffer.setTextColor(0, color)
             self.top_buffer.print(msg)
             self.top_buffer.push(0,0)
         else:
@@ -389,34 +382,41 @@ class Face:
         return
     #
     #
-    def print_info(self, msg=''):
+    def print_info(self, msg='',color=0xffff00):
         self.info=msg
         if msg:
-            self.bottom_buffer.fillRect(0,0,320,26,0xffff00)
+            self.bottom_buffer.fillRect(0,0,320,26,color)
             self.bottom_buffer.setCursor(0,2)
-            self.bottom_buffer.setTextColor(0, 0xffff00)
+            self.bottom_buffer.setTextColor(0, color)
             self.bottom_buffer.print(msg)
         else:
             self.bottom_buffer.clear()
         self.bottom_buffer.push(0,214)
         return
     #
+    def random_face(self):
+        if self.current_face == 'normal':
+            idx = int(len(self.motions_all) * random.random())
+            self.set_face_id(self.motions_all[idx])
+        else:
+            self.set_face_id('normal')
+        self.draw(self.current_face)
+    #
     #
     def update_motion_interval(self):
-        if self.current_face == 'normal':
-            self.blink_start_flag += 1
-        else:
-            self.blink_start_flag=0
+        if self.check_blink_time() and self.current_face == 'smile':
+            self.start_motion(1)
+            self.blink_time = time.time() + int(random.random() * 15+ 5)
+        if self.shaking:
+            self.pos_x = int(random.random() * 5)
+            self.pos_y = int(random.random() * 5)
+            self.flush()
         return
     #
     #
     def update(self):
         if self.moving: return
         if self.prev_face != self.current_face or self.check_blink_time():
-            #if (time.time_ns()-self.start_time)/1000000000 > 86400:
-            #    self.start_time=time.time_ns()
-            #print("draw", (time.time_ns()-self.start_time)/1000000000,
-            #       util.get_now_str2(), Power.getBatteryLevel())
             self.draw(self.current_face)
             self.set_face_id(self.current_face)
         self.update_motion_interval()

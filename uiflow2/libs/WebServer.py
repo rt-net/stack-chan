@@ -6,18 +6,21 @@ from M5 import *
 import machine
 import time
 import comm
+import json
 
 #####################
 #
 class WebServer:
   #
   #
-  def __init__(self, port=80, top="/sd/html"):
+  def __init__(self, port=80, top="/flash/html"):
     if type(port) == str: port = int(port)
     self.port = port
     self.reader = comm.HttpReader(top)
     self.server = comm.SocketServer(self.reader, "Web", "", port)
     self.started=False
+    self.registerCommand("/get_file", self.get_content)
+    self.registerCommand("/save_file", self.save_content)
   #
   #
   def renew(self):
@@ -37,6 +40,22 @@ class WebServer:
 
     self.server.reader.registerCommand(name, func)
     return
+  
+  def get_content(self, data):
+    param = json.loads(data)
+    #print(param)
+    response = {}
+    with open(param['file_name'], 'r') as file:
+      response['data'] = file.read()
+    return response
+  
+  def save_content(self, data):
+    param = json.loads(data)
+    res = False
+    with open(param['file_name'], 'w') as file:
+      file.write(param['data'])
+      res = True
+    return res
   #
   #
   def is_started(self):
@@ -59,5 +78,15 @@ class WebServer:
   #
   #
   def update(self, timeout=0.1):
-    self.server.spin_once(timeout)
-    return#
+    if self.started:
+      self.server.spin_once(timeout)
+    return
+  
+  def toggle_state(self):
+    if self.started:
+      self.started = False
+      return "Web Off"
+    else:
+      self.started = True
+      return "Web On"
+    

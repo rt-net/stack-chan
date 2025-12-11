@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            async function load_file(){
+                var name = document.getElementById("file_name").value;
+                var url ="/get_file"
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({'file_name': name})
+                }
+                );
+
+                const data = await response.json();
+                console.log(data);
+                document.getElementById("editarea").value=data['data'];
+            }
+            async function save_file(){
+                var name = document.getElementById("file_name").value;
+                var txt = document.getElementById("editarea").value;
+                var url ="/save_file"
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({'file_name': name, 'data': txt})
+                }
+                );
+                console.log(response);
+            }
+        </script>
+        <title>Edit file</title>
+    </head>
+    <body>
+        Filename:  <input type="text" id="file_name" />
+        <input type="button" onClick="load_file()" value="Load" style="font-size:12pt;width:100px;">
+        <input type="button" onClick="save_file()" value="Save" style="font-size:12pt;width:100px;">
+        <hr>
+        <textarea id="editarea" name="info" style="font-size:12pt;width:90%;height:500px;line-height:1.5em"></textarea>
+    </body>
+</html>

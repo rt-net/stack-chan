@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>Stack-chan params</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta charset="utf-8">
+
+        <script type="text/javascript" src="js/joy.min.js"></script>
+        <script type="text/javascript">
+            async function set_parameter(name, val){
+                var value = document.getElementById(val).value;
+                var data = {'cmd': 'set_param', 'name': name, 'value': value};
+                const res = await fetch('/command', {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                });
+            }
+
+            async function get_parameters(){
+                var data = {'cmd': 'get_params', 'name': name};
+                const res = await fetch('/command', {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                });
+                console.log(res);
+            }
+
+            async function get_params(name){
+                var url ="/command"
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({'cmd':'get_parameters', 'name': name})
+                } );
+
+                const data = await response.json();
+                restore_config(data);
+            }
+
+            function restore_config(data) {
+               console.log(data);
+               document.getElementById("motor_type").value = data['motor'];
+               document.getElementById("motor_pan").value = data['SG90']['pan'];
+               document.getElementById("motor_tilt").value = data['SG90']['tilt'];
+
+               document.getElementById("asr_type").value = data['asr'];
+               document.getElementById("tts_type").value = data['tts'];
+
+               document.getElementById("web_port").value = data['web_server'];
+            }
+        </script>
+    </head>
+    <body onload="get_params('config')">
+        <h1>アールティ版<br>スタックチャンの設定</h1>
+      <!--  <button onclick="get_params('config')">Get</button> -->
+        <h2>モータ</h2>
+           <ul>
+             <li>Type:　<select id="motor_type">
+                         <option value="Dynamixel" /> Dynamixel
+                         <option value="SG90" /> SG90
+                        </select></li>
+             <ul>SG90 options:
+             <li>Pan_port: <input id="motor_pan" value="" size="2"/></li>
+             <li>Tilt_port: <input id="motor_tilt" value="" size="2"> </li>
+             </ul>
+           </ul>
+
+        <h2>音声認識</h2>
+           <ul>
+             <li>Service:　<select id="asr_type">
+                         <option value="google" /> Google Speech API
+                         <option value="vosk" /> Vosk server(local)
+                        </select></li>
+           </ul>
+
+        <h2>音声合成</h2>
+           <ul>
+             <li>Service:　<select id="tts_type">
+                         <option value="google" /> Google Speech API
+                         <option value="voicevox" /> Voicevox_engine server(local)
+                        </select></li>
+           </ul>
+
+        <h2>Web Server</h2>
+           <ul>
+             <li>Port:　<input id="web_port" value="" size="8"> </li>
+           </ul>
+        <hr>
+        <a href="/">Back to Top</a>
+    </body>
+</html>
