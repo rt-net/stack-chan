@@ -13,8 +13,17 @@
                         "Content-Type": "application/json;charset=utf-8",
                     },
                     body: JSON.stringify({'file_name': name})
-                }
-                );
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        
+                        throw new Error(response.statusText);
+                    }
+                })
+                .catch(error =>{
+                    alert("ERROR");
+                    console.error('エラーが発生しました', error);
+                });
 
                 const data = await response.json();
                 console.log(data);
@@ -33,13 +42,13 @@
                 }
                 );
                 console.log(response);
+                alert("Save file:"+name)
             }
         </script>
         <title>Edit file</title>
     </head>
     <body>
-        Filename:  <input type="text" id="file_name" />
-        <input type="button" onClick="load_file()" value="Load" style="font-size:12pt;width:100px;">
+        Filename:  <input type="text" id="file_name" onChange="load_file()"/>
         <input type="button" onClick="save_file()" value="Save" style="font-size:12pt;width:100px;">
         <hr>
         <textarea id="editarea" name="info" style="font-size:12pt;width:90%;height:500px;line-height:1.5em"></textarea>
