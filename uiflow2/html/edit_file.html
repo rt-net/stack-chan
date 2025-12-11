@@ -13,22 +13,16 @@
                         "Content-Type": "application/json;charset=utf-8",
                     },
                     body: JSON.stringify({'file_name': name})
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        
-                        throw new Error(response.statusText);
-                    }
-                })
-                .catch(error =>{
+                }).catch(error =>{
                     alert("ERROR");
                     console.error('エラーが発生しました', error);
-                });
+                });;
 
                 const data = await response.json();
                 console.log(data);
                 document.getElementById("editarea").value=data['data'];
             }
+
             async function save_file(){
                 var name = document.getElementById("file_name").value;
                 var txt = document.getElementById("editarea").value;
@@ -42,13 +36,25 @@
                 }
                 );
                 console.log(response);
-                alert("Save file:"+name)
+            }
+
+
+            function load_file_event(e){
+                if (e.ket == "Enter"){
+                    load_file();
+                }
+            }
+
+            function init(){
+                const fname_form = document.getElementById('file_name');
+                fname_form.addEventListener("keydown", load_file_event);
             }
         </script>
         <title>Edit file</title>
     </head>
-    <body>
-        Filename:  <input type="text" id="file_name" onChange="load_file()"/>
+    <body onLoad="init()">
+        Filename:  <input type="text" id="file_name" />
+        <input type="button" onClick="load_file()" value="Load" style="font-size:12pt;width:100px;">
         <input type="button" onClick="save_file()" value="Save" style="font-size:12pt;width:100px;">
         <hr>
         <textarea id="editarea" name="info" style="font-size:12pt;width:90%;height:500px;line-height:1.5em"></textarea>
