@@ -46,9 +46,31 @@
                document.getElementById("motor_tilt").value = data['SG90']['tilt'];
 
                document.getElementById("asr_type").value = data['asr'];
+               document.getElementById("google_sampleRateHertz").value = data['google']['sampleRateHertz'];
+               document.getElementById("vosk_host").value = data['vosk']['host'];
+
                document.getElementById("tts_type").value = data['tts'];
+               document.getElementById("google_lang").value = data['google']['lang'];
+               document.getElementById("google_speakingRate").value = data['google']['speakingRate'];
+               document.getElementById("google_ssmlGender").value = data['google']['ssmlGender'];
+               document.getElementById("google_voiceName").value = data['google']['voiceName'];
+               document.getElementById("google_pitch").value = data['google']['pitch'];
+               document.getElementById("google_volumeGain").value = data['google']['volumeGain'];
+               document.getElementById("google_sampleRate").value = data['google']['sampleRate'];
+               document.getElementById("google_effectsProfileId").value = data['google']['google_effectsProfileId'];
+               document.getElementById("voicevox_host").value = data['voicevox']['host'];
+               document.getElementById("voicevox_voice_id").value = data['voicevox']['voice_id'];
+
+               document.getElementById("dialog_type").value = data['dialog'];
+               document.getElementById("gemini_model").value = data['gemini']['model'];
+               document.getElementById("gemini_lang").value = data['gemini']['lang'];
+               document.getElementById("openai_model").value = data['openai']['model'];
+               document.getElementById("prompt").value = data['prompt'];
+
 
                document.getElementById("web_port").value = data['web_server'];
+               document.getElementById("camera").value = data['camera_setup'];
+               document.getElementById("vflip").value = data['vflip'];
             }
         </script>
     </head>
@@ -66,28 +88,78 @@
              <li>Tilt_port: <input id="motor_tilt" value="" size="2"> </li>
              </ul>
            </ul>
-
+        <hr>
         <h2>音声認識</h2>
            <ul>
              <li>Service:　<select id="asr_type">
                          <option value="google" /> Google Speech API
                          <option value="vosk" /> Vosk server(local)
                         </select></li>
+             <ul>Google stt:
+                <li>sampleRateHertz: <input id="google_sampleRateHertz" value="" /></li>
+             </ul>
+            <ul>Vosk:
+                <li>Host: <input id="vosk_host" value="" /></li>
+             </ul>
            </ul>
-
+        <hr>
         <h2>音声合成</h2>
            <ul>
              <li>Service:　<select id="tts_type">
                          <option value="google" /> Google Speech API
                          <option value="voicevox" /> Voicevox_engine server(local)
                         </select></li>
-           </ul>
 
+             <ul>Google tts:
+                <li>Lang: <input id="google_lang" value="" /></li>
+                <li>speakingRate: <input id="google_speakingRate" value="" /></li>
+                <li>ssmlGender: <input id="google_ssmlGender" value="" /></li>
+                <li>voiceName: <input id="google_voiceName" value="" /></li>
+                <li>pitch: <input id="google_pitch" value="" /></li>
+                <li>volumeGain: <input id="google_volumeGain" value="" /></li>
+                <li>sampleRate: <input id="google_sampleRate" value="" /></li>
+                <li>effectsProfileId: <input id="google_effectsProfileId" value="" /></li>
+             </ul>
+             <ul>Voicevox:
+                <li>Host: <input id="voicevox_host" value="" /></li>
+                <li>Voice ID: <input id="voicevox_voice_id" value="" /></li>
+             </ul>
+           </ul>
+        <hr>
+        <h2>音声対話（LLM）</h2>
+            <ul>
+             <li>Service:　<select id="dialog_type">
+                         <option value="gemini" /> Google Gemini
+                         <option value="openai" /> OpenAI ChatGPT
+                        </select></li>
+             <ul>Gemini:
+                <li>Model: <input id="gemini_model" value="" /></li>
+                <li>Lang: <input id="gemini_lang" value="" /></li>
+             </ul>
+             <ul>ChatGPT:
+                <li>Model: <input id="openai_model" value="" /></li>
+             </ul>
+             <li>Prompt <textarea id="prompt" cols="80"></textarea></li>
+            </ul>
+        <hr>
         <h2>Web Server</h2>
            <ul>
              <li>Port:　<input id="web_port" value="" size="8"> </li>
            </ul>
         <hr>
+        <h2>Camera</h2>
+           <ul>
+             <li>Setup:　<select id="camera">
+                         <option value=True /> Enable
+                         <option value=False /> Disable
+                        </select></li>
+            <li>V Flip:　<select id="vflip">
+                    <option value=True /> Enable
+                    <option value=False /> Disable
+                </select></li>
+           </ul>
+        <hr>
+
         <a href="/">Back to Top</a>
     </body>
 </html>

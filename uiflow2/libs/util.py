@@ -11,6 +11,7 @@ import network
 import ntptime
 import socket
 import esp32
+import time
 
 #
 #
@@ -136,14 +137,15 @@ def setup_wlan(apoint="Home", passwd="", n=3):
     except:
         pass
     return wlan
+
 #
 #
 def connect_wlan(wlan=None,apoints=["Firmware", "Home", "Work", "Mobile"], retry=3):
     conf = get_wlan_conf()
     if wlan is None:
         wlan=network.WLAN(network.STA_IF)
-    if wlan.isconnected():
-        wlan.disconnect()
+    #if wlan.isconnected():
+    #    wlan.disconnect()
     wlan.config(reconnects=retry)
     aps_ = scan_wlan(wlan)
 
