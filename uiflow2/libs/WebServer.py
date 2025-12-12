@@ -5,6 +5,7 @@
 from M5 import *
 import machine
 import time
+import os
 import comm
 import json
 
@@ -21,6 +22,7 @@ class WebServer:
     self.started=False
     self.registerCommand("/get_file", self.get_content)
     self.registerCommand("/save_file", self.save_content)
+    self.registerCommand("/get_file_list", self.get_file_list)
   #
   #
   def renew(self):
@@ -56,6 +58,21 @@ class WebServer:
       file.write(param['data'])
       res = True
     return res
+  
+  def get_file_list(self, data):
+    param = json.loads(data)
+    dirname=param['dir_name']
+    dir_list=os.listdir(param['dir_name'])
+    lst=[]
+    for x in dir_list:
+        print(x)
+        if (os.stat(f"{dirname}/{x}")[0] & 0x8000) == 0:
+            lst.append(x+"/")
+        else:
+            lst.append(x)
+    response = {}
+    response['data'] = lst
+    return response
   #
   #
   def is_started(self):
