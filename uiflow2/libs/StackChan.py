@@ -119,6 +119,12 @@ class StackChan:
         return self.wlan_conf
       else:
         return self.config
+      
+    elif cmd_ == 'set_parameters':
+      params=param.get('data')
+      print(params)
+      return True
+
     elif cmd_ == 'set_key':
       if param.get('name'):
         util.set_config(self.apikeys, param.get("name"), param.get("value"))
@@ -126,12 +132,15 @@ class StackChan:
     elif cmd_ == 'get_key':
       res = util.get_config(self.apikeys, param.get('name'))
       return res
+    
     elif cmd_ == 'save_apikey':
       util.save_conf('/flash/apikey.txt', self.apikeys)
       return True
+    
     elif cmd_ == 'save_config':
       util.save_json('/flash/stackchan.json', self.config)
       return True
+    
     elif cmd_ == 'set_wlan':
       if param.get('name'):
         util.set_config(self.wlan_conf, param.get("name"), param.get("value"))
@@ -139,6 +148,7 @@ class StackChan:
     elif cmd_ == 'set_wlan':
       res = util.get_config(self.wlan_conf, param.get('name'))
       return res
+
     elif cmd_ == 'save_wlan':
       util.save_json('/flash/wlan.json', self.wlan_conf)
       return True

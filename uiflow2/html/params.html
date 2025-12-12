@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <meta charset="utf-8">
 
-        <script type="text/javascript" src="js/joy.min.js"></script>
         <script type="text/javascript">
+            var stackchan_params=null;
             async function set_parameter(name, val){
                 var value = document.getElementById(val).value;
                 var data = {'cmd': 'set_param', 'name': name, 'value': value};
@@ -35,21 +35,20 @@
                     body: JSON.stringify({'cmd':'get_parameters', 'name': name})
                 } );
 
-                const data = await response.json();
-                restore_config(data);
+                stackchan_params = await response.json();
+                restore_config(stackchan_params);
             }
 
             function restore_config(data) {
-               console.log(data);
-               document.getElementById("motor_type").value = data['motor'];
-               document.getElementById("motor_pan").value = data['SG90']['pan'];
-               document.getElementById("motor_tilt").value = data['SG90']['tilt'];
+               document.getElementById("motor").value = data['motor'];
+               document.getElementById("SG90_pan").value = data['SG90']['pan'];
+               document.getElementById("SG90_tilt").value = data['SG90']['tilt'];
 
-               document.getElementById("asr_type").value = data['asr'];
+               document.getElementById("asr").value = data['asr'];
                document.getElementById("google_sampleRateHertz").value = data['google']['sampleRateHertz'];
                document.getElementById("vosk_host").value = data['vosk']['host'];
 
-               document.getElementById("tts_type").value = data['tts'];
+               document.getElementById("tts").value = data['tts'];
                document.getElementById("google_lang").value = data['google']['lang'];
                document.getElementById("google_speakingRate").value = data['google']['speakingRate'];
                document.getElementById("google_ssmlGender").value = data['google']['ssmlGender'];
@@ -61,103 +60,223 @@
                document.getElementById("voicevox_host").value = data['voicevox']['host'];
                document.getElementById("voicevox_voice_id").value = data['voicevox']['voice_id'];
 
-               document.getElementById("dialog_type").value = data['dialog'];
+               document.getElementById("dialog").value = data['dialog'];
                document.getElementById("gemini_model").value = data['gemini']['model'];
                document.getElementById("gemini_lang").value = data['gemini']['lang'];
                document.getElementById("openai_model").value = data['openai']['model'];
                document.getElementById("prompt").value = data['prompt'];
 
 
-               document.getElementById("web_port").value = data['web_server'];
-               document.getElementById("camera").value = data['camera_setup'];
+               document.getElementById("web_server").value = data['web_server'];
+               document.getElementById("camera_setup").value = data['camera_setup'];
                document.getElementById("vflip").value = data['vflip'];
+            }
+
+            async function set_parameters(){
+                var data = {'cmd': 'set_parameters', 'data': stackchan_params};
+                const res = await fetch('/command', {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                });
+            }
+
+
+            function update_param(ele, key=null){
+               if(key == null){
+                  key=ele.id.split("_");
+                }
+               if(Array.isArray(key)){
+                    if(key.length > 1 ){
+                        var key1 = key.shift();
+                        var key2 = key.join("_");
+                        stackchan_params[key1][key2] = ele.value;
+                    }else{
+                        stackchan_params[key[0]] = ele.value;
+                    }
+                }else{
+                  stackchan_params[key] = ele.value;
+                }
+                ele.style.color="red";
+                console.log(stackchan_params);
+                return;
             }
         </script>
     </head>
     <body onload="get_params('config')">
-        <h1>アールティ版<br>スタックチャンの設定</h1>
+        <h1>アールティ版  スタックチャンの設定</h1>
       <!--  <button onclick="get_params('config')">Get</button> -->
+        <button onclick="set_parameters()">Update Parameters</button>
         <h2>モータ</h2>
-           <ul>
-             <li>Type:　<select id="motor_type">
+          <table>
+            <tr><th>モータのタイプ：</th>
+             <td colspan="2">
+                  <select id="motor" onChange="update_param(this)">
                          <option value="Dynamixel" /> Dynamixel
                          <option value="SG90" /> SG90
-                        </select></li>
-             <ul>SG90 options:
-             <li>Pan_port: <input id="motor_pan" value="" size="2"/></li>
-             <li>Tilt_port: <input id="motor_tilt" value="" size="2"> </li>
-             </ul>
-           </ul>
+                        </select>
+              </td>
+              </tr>
+             <tr>
+               <td></td>
+               <th>SG90 options:</th>
+               <td>
+                 　横方向: <input id="SG90_pan" value="" size="2"  onChange="update_param(this)"><br>
+                 　縦方向: <input id="SG90_tilt" value="" size="2"  onChange="update_param(this)">
+                </td>
+             </tr>
+           </table>
         <hr>
         <h2>音声認識</h2>
-           <ul>
-             <li>Service:　<select id="asr_type">
+           <table>
+             <tr>
+               <th>音声認識サーバー: </th>
+               <td colspan="2"><select id="asr"  onChange="update_param(this)">
                          <option value="google" /> Google Speech API
                          <option value="vosk" /> Vosk server(local)
-                        </select></li>
-             <ul>Google stt:
-                <li>sampleRateHertz: <input id="google_sampleRateHertz" value="" /></li>
-             </ul>
-            <ul>Vosk:
-                <li>Host: <input id="vosk_host" value="" /></li>
-             </ul>
-           </ul>
+                        </select>
+               </td>
+             </tr>
+             <tr>
+              <td></td>
+              <th>Google Speech</th><td></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>sampleRateHertz:</td><td> <input id="google_sampleRateHertz" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+               <td></td>
+               <th>Vosk:</th><td></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>Host: </td> <td><input id="vosk_host" value=""  onChange="update_param(this)" /></td>
+             </tr>
+           </table>
         <hr>
         <h2>音声合成</h2>
-           <ul>
-             <li>Service:　<select id="tts_type">
+           <table>
+             <tr>
+               <th>音声合成サーバー:</th>
+               <td colspan="2"><select id="tts"  onChange="update_param(this)" >
                          <option value="google" /> Google Speech API
                          <option value="voicevox" /> Voicevox_engine server(local)
-                        </select></li>
-
-             <ul>Google tts:
-                <li>Lang: <input id="google_lang" value="" /></li>
-                <li>speakingRate: <input id="google_speakingRate" value="" /></li>
-                <li>ssmlGender: <input id="google_ssmlGender" value="" /></li>
-                <li>voiceName: <input id="google_voiceName" value="" /></li>
-                <li>pitch: <input id="google_pitch" value="" /></li>
-                <li>volumeGain: <input id="google_volumeGain" value="" /></li>
-                <li>sampleRate: <input id="google_sampleRate" value="" /></li>
-                <li>effectsProfileId: <input id="google_effectsProfileId" value="" /></li>
-             </ul>
-             <ul>Voicevox:
-                <li>Host: <input id="voicevox_host" value="" /></li>
-                <li>Voice ID: <input id="voicevox_voice_id" value="" /></li>
-             </ul>
-           </ul>
+                        </select>
+               </td>
+             </tr>
+             <tr>
+               <td></td>
+               <th>Google tts:</th>
+               <td></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>Lang: </td><td><input id="google_lang" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                 <td>speakingRate: </td><td><input id="google_speakingRate" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>ssmlGender: </td><td><input id="google_ssmlGender" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>voiceName: </td><td><input id="google_voiceName" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>pitch:</td><td> <input id="google_pitch" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>volumeGain: </td><td><input id="google_volumeGain" value=""  onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>sampleRate: </td><td><input id="google_sampleRate" value="" onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>effectsProfileId:</td><td><input id="google_effectsProfileId" value="" onChange="update_param(this)" /></td>
+             </tr>
+ 
+             <tr>
+               <td></td>
+               <th>Voicevox:</th><td></td>
+             </tr>
+             <tr>
+               <td></td>
+               <td>Host:</td><td><input id="voicevox_host" value="" onChange="update_param(this)" /></td>
+             </tr>
+             <tr>
+                <td></td>
+                <td>Voice ID:</td><td><input id="voicevox_voice_id" value="" onChange="update_param(this)" /></td>
+             </tr>
+           </table>
         <hr>
         <h2>音声対話（LLM）</h2>
-            <ul>
-             <li>Service:　<select id="dialog_type">
+            <table>
+              <tr>
+                <th>音声対話サーバー（LLM)</th>
+                <td colspan="2"><select id="dialog" onChange="update_param(this)" >
                          <option value="gemini" /> Google Gemini
                          <option value="openai" /> OpenAI ChatGPT
-                        </select></li>
-             <ul>Gemini:
-                <li>Model: <input id="gemini_model" value="" /></li>
-                <li>Lang: <input id="gemini_lang" value="" /></li>
-             </ul>
-             <ul>ChatGPT:
-                <li>Model: <input id="openai_model" value="" /></li>
-             </ul>
-             <li>Prompt <textarea id="prompt" cols="80"></textarea></li>
-            </ul>
+                        </select></td>
+              </tr>
+              <tr>
+                 <td></td>
+                 <th>Gemini:</th><td></td>
+              </tr>
+              <tr>
+                 <td></td>
+                 <td>Model:</td><td><input id="gemini_model" value=""  onChange="update_param(this)" /></td>
+              </tr>
+              <tr>
+                 <td></td>
+                 <td>Lang: </td><td><input id="gemini_lang" value=""  onChange="update_param(this)" /></td>
+              </tr>
+              <tr>
+                <td></td>
+                <th>ChatGPT: </th><td></td>
+              </tr>
+              <tr>
+                 <td></td>
+                 <td>Model:</td><td> <input id="openai_model" value="" onChange="update_param(this)" /></td>
+              </tr>
+             </table>
+             <table>
+              <tr>
+                <th>Prompt</th>
+                <td><textarea id="prompt" cols="80"  onChange="update_param(this)"></textarea></td>
+               </tr>
+            </table>
         <hr>
         <h2>Web Server</h2>
-           <ul>
-             <li>Port:　<input id="web_port" value="" size="8"> </li>
-           </ul>
+           <table>
+             <tr>
+              <th>Port:　</th><td><input id="web_server" value="" size="8"  onChange="update_param(this, 'web_server')"> </td>
+             <tr>
+           </table>
         <hr>
         <h2>Camera</h2>
-           <ul>
-             <li>Setup:　<select id="camera">
+           <table>
+             <tr>
+               <th>開始時の初期化:　</th>
+               <td><select id="camera_setup"  onChange="update_param(this, 'camera_setup')">
                          <option value=true /> Enable
                          <option value=false /> Disable
-                        </select></li>
-            <li>V Flip:　<select id="vflip">
+                        </select></td>
+             </tr>
+             <tr>
+               <th>上下転置:　</th>
+               <td><select id="vflip"  onChange="update_param(this)" >
                     <option value=true /> Enable
                     <option value=false /> Disable
-                </select></li>
-           </ul>
+                </select></td>
+             </tr>
+           </table>
         <hr>
 
         <a href="/">Back to Top</a>

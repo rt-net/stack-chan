@@ -63,15 +63,15 @@ class WebServer:
     param = json.loads(data)
     dirname=param['dir_name']
     dir_list=os.listdir(param['dir_name'])
-    lst=[]
+    flst=[]
+    dlst=[]
+
     for x in dir_list:
-        print(x)
         if (os.stat(f"{dirname}/{x}")[0] & 0x8000) == 0:
-            lst.append(x+"/")
+            dlst.append(x)
         else:
-            lst.append(x)
-    response = {}
-    response['data'] = lst
+            flst.append(x)
+    response = {'dir_list': dlst, "file_list": flst}
     return response
   #
   #
