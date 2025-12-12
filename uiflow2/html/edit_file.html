@@ -7,6 +7,8 @@
         <link href="https://hara-jp.com/css/jquery-linedtextarea.css" type="text/css" rel="stylesheet" />
 
         <script type="text/javascript">
+            var get_dirlist=false;
+
             async function load_file(){
                 var name = document.getElementById("file_name").value;
                 var url ="/get_file"
@@ -42,74 +44,88 @@
                 alert("Save fiel: "+name);
             }
 
-        async function upload_file(){
-	     var name=document.getElementById('file_name').value;
-	     var txt=document.getElementById('file_data').value;
-             var url ="/save_file";
-             const response = await fetch(url,{
-                 method: "POST",
-                 headers: {
+            async function upload_file(){
+	        var name=document.getElementById('file_name').value;
+	        var txt=document.getElementById('file_data').value;
+                var url ="/save_file";
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
                         "Content-Type": "application/json;charset=utf-8",
-                 },
-                 body: JSON.stringify({'file_name': name, 'data': txt})
-              });
+                    },
+                    body: JSON.stringify({'file_name': name, 'data': txt})
+                });
                 console.log(response);
                 alert("Upload file: "+name);
-          }
+            }
 
-        async function get_file_list(){
-	  var name=document.getElementById('dir_name').value;
-	  if(!name ){
-		  name=".";
-	  }
-
-          var url ="/get_file_list";
-          const response = await fetch(url,{
-              method: "POST",
-              headers: {
-                 "Content-Type": "application/json;charset=utf-8",
-              },
-              body: JSON.stringify({'dir_name': name})
-           }).catch(error =>{
-              alert("ERROR");
-              console.error('エラーが発生しました', error);
-           });
-           var res = await response.json();
-	   var flst=document.getElementById('filelist');
-	   var dlst=document.getElementById('dirlist');
-	   console.log(res);
-	   set_options(flst,res['file_list']);
-	   set_options(dlst, res['dir_list']);
-	}
-
-	function removeChildren(x) {
-	    if (x.hasChildNodes()) {
-		while (x.childNodes.length > 0) {
-	          x.removeChild(x.firstChild)
+            async function get_file_list(){
+	        var name=document.getElementById('dir_name').value;
+	        if(!name ){
+		    name=".";
 	        }
-             }
-        }
-	function set_options(ele, lst){
-	    removeChildren(ele);
-	    for(let n in lst){
-		let op = document.createElement('option');
-		op.text = lst[n];
-		op.value = lst[n];
-		ele.appendChild(op);
+          
+                var url ="/get_file_list";
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({'dir_name': name})
+                }).catch(error =>{
+                    alert("ERROR");
+                    console.error('エラーが発生しました', error);
+                });
+                var res = await response.json();
+	        var flst = document.getElementById('filelist');
+	        var dlst = document.getElementById('dirlist');
+	        console.log(res);
+	        set_options(flst,res['file_list']);
+	        set_options(dlst, res['dir_list']);
+                get_dirlist=false;
 	    }
-	}
+
+	    function removeChildren(x) {
+	        if (x.hasChildNodes()) {
+		    while (x.childNodes.length > 0) {
+	                x.removeChild(x.firstChild)
+	            }
+                }
+            }
+
+	    function set_options(ele, lst){
+	        removeChildren(ele);
+	        for(let n in lst){
+		    let op = document.createElement('option');
+		    op.text = lst[n];
+		    op.value = lst[n];
+		    ele.appendChild(op);
+	        }
+	    }
 
 	    function select_dir(){
                 const dirname = document.getElementById('dir_name');
                 const dir_list = document.getElementById('dirlist');
 		if (dirname.value){
-		   dirname.value=dirname.value +"/"+dir_list.value;
+                   if(get_dirlist){
+                       var val = dirname.value.split("/")
+                       val.pop();
+                       if(val.length == 0){
+                           dirname.value=dir_list.value;
+                       }else{
+		           dirname.value=val.join("/") +"/"+dir_list.value;
+                       }
+                    }else{
+		       dirname.value=dirname.value +"/"+dir_list.value;
+                    }
 		}else{
 		   dirname.value=dir_list.value;
 		}
+                get_dirlist=true;
 	    }
 
 	    function select_file(){
+
                 const dirname = document.getElementById('dir_name');
                 const filename = document.getElementById('file_name');
                 const file_list = document.getElementById('filelist');
@@ -120,6 +136,9 @@
 		}else{
 		  filename.value=file_list.value;
 		}
+                if(get_dirlist){
+                  return;
+                }
 		load_file();
 	    }
 
@@ -210,5 +229,6 @@
         });
     </script>
 
+        <a href="/">Back to Top</a>
   </body>
 </html>
