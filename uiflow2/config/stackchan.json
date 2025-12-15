@@ -6,7 +6,7 @@
     "tts" : "google", 
     "google": {
         "lang": "ja-JP", "speakingRate": "1.2", "ssmlGender": "FEMALE",
-        "voiceName": "ja-JP-Wavenet-B", "pitch": "5.0", "volumeGain": "0",
+        "voiceName": "ja-JP-Standard-A", "pitch": "5.0", "volumeGain": "0",
         "sampleRate": "8000", "effectsProfileId": "", "sampleRateHertz": 8000},
     "voicevox": {"host": "192.168.0.100", "voice_id": 1},
     ## 音声合成のエンジン (google or vosk)
