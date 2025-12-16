@@ -26,7 +26,7 @@ class WebServer:
   #
   #
   def renew(self):
-    self.server.stop()
+    self.server.terminate()
     self.server=comm.SocketServer(self.reader, "Web", "", self.port)
     self.started=False
     return
