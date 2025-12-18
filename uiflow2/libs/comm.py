@@ -155,10 +155,13 @@ class SocketPort(Thread):
     return data
   #
   #  Thread oprations...
-  def start(self):
+  def start(self, with_thread=False):
     self.mainloop = True
     if self.socket :
-      Thread.start(self)
+      if with_thread:
+        Thread.start(self)
+      else:
+        self.run()
   #
   #
   def run(self):
