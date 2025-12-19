@@ -56,6 +56,8 @@ class Face:
         self.pos_x=0
         self.pos_y=0
         self.shaking=False
+        self._bg_color=DEFAULT_BG_COLOR
+        self._color=DEFAULT_COLOR
     #
     #
     def set_center(self, x, y):
@@ -150,37 +152,37 @@ class Face:
 
         if param0 == 1:   #  ^ ^
             for i in range(3):
-              self.buffer.drawArc(xl, yl, r-1+i, r+i, 180+angle1, 360+angle1, DEFAULT_COLOR)
-              self.buffer.drawArc(xr, yr, r-1+i, r+i, 180+angle1, 360+angle1, DEFAULT_COLOR)
+              self.buffer.drawArc(xl, yl, r-1+i, r+i, 180+angle1, 360+angle1, self._color)
+              self.buffer.drawArc(xr, yr, r-1+i, r+i, 180+angle1, 360+angle1, self._color)
 
         elif param0 == 2:  # o -
-            self.buffer.fillRect(xl-(r+l)//2, yl-r//2, r+l, r, DEFAULT_COLOR)
-            self.buffer.fillCircle(xr, yr, r, DEFAULT_COLOR)
+            self.buffer.fillRect(xl-(r+l)//2, yl-r//2, r+l, r, self._color)
+            self.buffer.fillCircle(xr, yr, r, self._color)
 
         elif param0 == 3:   # - o
-            self.buffer.fillRect(xr-(r+l)//2, yr-r//2, r+l, r, DEFAULT_COLOR)
-            self.buffer.fillCircle(xl, yl, r, DEFAULT_COLOR)
+            self.buffer.fillRect(xr-(r+l)//2, yr-r//2, r+l, r, self._color)
+            self.buffer.fillCircle(xl, yl, r, self._color)
 
         elif param0 == 4:  # - -
-            self.buffer.fillRect(xl-(r+l)//2, yl-r//2, r+l, r, DEFAULT_COLOR)
-            self.buffer.fillRect(xr-(r+l)//2, yr-r//2, r+l, r, DEFAULT_COLOR)
+            self.buffer.fillRect(xl-(r+l)//2, yl-r//2, r+l, r, self._color)
+            self.buffer.fillRect(xr-(r+l)//2, yr-r//2, r+l, r, self._color)
 
         elif param0 == 5:  # + +
-            self.buffer.fillRect(xl-(r+l)//2, yl-r//2, r+l, r, DEFAULT_COLOR)
-            self.buffer.fillRect(xl-r//2, yl-(r+l)//2, r, r+l, DEFAULT_COLOR)
-            self.buffer.fillRect(xr-(r+l)//2, yr-r//2, r+l, r, DEFAULT_COLOR)
-            self.buffer.fillRect(xr-r//2, yr-(r+l)//2, r, r+l, DEFAULT_COLOR)
+            self.buffer.fillRect(xl-(r+l)//2, yl-r//2, r+l, r, self._color)
+            self.buffer.fillRect(xl-r//2, yl-(r+l)//2, r, r+l, self._color)
+            self.buffer.fillRect(xr-(r+l)//2, yr-r//2, r+l, r, self._color)
+            self.buffer.fillRect(xr-r//2, yr-(r+l)//2, r, r+l, self._color)
 
         elif param0 == 6: # / \ or \ /
-            self.fillRectRot(xl-(r+l)//2, yl-r//2, r+l, r, -angle2, DEFAULT_COLOR)
-            self.fillRectRot(xr-(r+l)//2, yr-r//2, r+l, r, angle2, DEFAULT_COLOR)
+            self.fillRectRot(xl-(r+l)//2, yl-r//2, r+l, r, -angle2, self._color)
+            self.fillRectRot(xr-(r+l)//2, yr-r//2, r+l, r, angle2, self._color)
 
         else:  # o o
-            self.buffer.fillCircle(xl, yl, r, DEFAULT_COLOR)
-            self.buffer.fillCircle(xr, yr, r, DEFAULT_COLOR)
+            self.buffer.fillCircle(xl, yl, r, self._color)
+            self.buffer.fillCircle(xr, yr, r, self._color)
             if self.is_blinking():
-                self.buffer.fillCircle(xl, yl-self.blink, r, DEFAULT_BG_COLOR)
-                self.buffer.fillCircle(xr, yr-self.blink, r, DEFAULT_BG_COLOR)
+                self.buffer.fillCircle(xl, yl-self.blink, r, self._bg_color)
+                self.buffer.fillCircle(xr, yr-self.blink, r, self._bg_color)
                 self.update_blinking(r*2 + 2)
     #
     #
@@ -219,7 +221,7 @@ class Face:
             y=self.mouse_pos[1] - r -pos
             x, y = self.rot_pos([x, y], angle)
             for i in range(4):
-              self.buffer.drawArc(x, y, r+i, r+i+1, 70+angle, 110+angle, DEFAULT_COLOR)
+              self.buffer.drawArc(x, y, r+i, r+i+1, 70+angle, 110+angle, self._color)
 
         elif mouse_flag == 2 or mouse_flag == '^': # ^
             r=80
@@ -227,7 +229,7 @@ class Face:
             y=self.mouse_pos[1] + r -pos
             x, y = self.rot_pos([x, y], angle)
             for i in range(4):
-              self.buffer.drawArc(x, y, r+i, r+i+1, 250+angle, 290+angle, DEFAULT_COLOR)
+              self.buffer.drawArc(x, y, r+i, r+i+1, 250+angle, 290+angle, self._color)
 
         elif mouse_flag == 3 or mouse_flag == 'o': # ^
             x=self.mouse_pos[0] + xpos
@@ -235,7 +237,7 @@ class Face:
             rx=10
             ry=20
             for i in range(4):
-              self.buffer.drawEllipse(x, y, rx+i, ry+i, DEFAULT_COLOR)
+              self.buffer.drawEllipse(x, y, rx+i, ry+i, self._color)
        
         else:  # -
             minWidth=50
@@ -248,12 +250,12 @@ class Face:
             x=self.mouse_pos[0] - w // 2 + xpos
             y=self.mouse_pos[1] - h // 2 - pos
             if angle == 0:
-              self.buffer.fillRect(x, y, w, h, DEFAULT_COLOR)
+              self.buffer.fillRect(x, y, w, h, self._color)
             else:
               for i in range(h):
                 x1, y1 = self.rot_pos([x, y+i], angle)
                 x2, y2 = self.rot_pos([x+w, y+i], angle)
-                self.buffer.drawLine(x1, y1, x2, y2, DEFAULT_COLOR)
+                self.buffer.drawLine(x1, y1, x2, y2, self._color)
         return
     #
     #
@@ -286,7 +288,7 @@ class Face:
     #
     def drawFace(self, idx='x', angle=0, flush=True):
         if flush:
-            self.buffer.clear()
+            self.clear()
         self.drawEye(self.face_type, angle1=angle)
         self.drawMouse(*self.mouse_type[idx], angle=angle)
         if flush:
@@ -295,7 +297,7 @@ class Face:
     #
     #
     def clear(self):
-        self.buffer.clear()
+        self.buffer.clear(self._bg_color)
         return True
     #
     #
@@ -306,7 +308,7 @@ class Face:
     #
     #
     def draw(self, id: str='x', angle: int=0):
-        self.buffer.clear()
+        self.clear()
         if id == 'talk':
             try:
                 idx=list(self.mouse_type.keys())[round(random.random() * len(self.mouse_type))]
@@ -368,6 +370,15 @@ class Face:
         return
     #
     #
+    def set_color(self, color=None, bg_color=None):
+        if color : self._color=color
+        if bg_color: self._bg_color=bg_color
+
+    def reset_color(self):
+        self._color=DEFAULT_COLOR
+        self._bg_color=DEFAULT_BG_COLOR
+    #
+    #
     def print_message(self, msg='', color=0xffffff):
         self.message=msg
         if msg:
@@ -377,7 +388,7 @@ class Face:
             self.top_buffer.print(msg)
             self.top_buffer.push(0,0)
         else:
-            self.top_buffer.clear()
+            self.top_buffer.clear(self._bg_color)
         self.top_buffer.push(0,0)
         return
     #
@@ -390,7 +401,7 @@ class Face:
             self.bottom_buffer.setTextColor(0, color)
             self.bottom_buffer.print(msg)
         else:
-            self.bottom_buffer.clear()
+            self.bottom_buffer.clear(self._bg_color)
         self.bottom_buffer.push(0,214)
         return
     #
