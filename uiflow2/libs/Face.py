@@ -371,8 +371,8 @@ class Face:
     #
     #
     def set_color(self, color=None, bg_color=None):
-        if color : self._color=color
-        if bg_color: self._bg_color=bg_color
+        if not color is None: self._color=color
+        if not bg_color is None: self._bg_color=bg_color
 
     def reset_color(self):
         self._color=DEFAULT_COLOR
