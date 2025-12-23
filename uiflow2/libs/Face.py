@@ -213,7 +213,7 @@ class Face:
         return
     #
     #
-    def drawMouse(self, oRatio=0, oRatio2=0, angle=0, pos=0,
+    def drawMouth(self, oRatio=0, oRatio2=0, angle=0, pos=0,
                  mouse_flag=0, xpos=0, dw=0):
         if mouse_flag == 1 or mouse_flag == 'v':  # v
             r=80
@@ -290,7 +290,7 @@ class Face:
         if flush:
             self.clear()
         self.drawEye(self.face_type, angle1=angle)
-        self.drawMouse(*self.mouse_type[idx], angle=angle)
+        self.drawMouth(*self.mouse_type[idx], angle=angle)
         if flush:
             self.flush()
         return
@@ -318,43 +318,43 @@ class Face:
 
         elif id == 'smile':
             self.drawEye(1, angle1=angle)
-            self.drawMouse(mouse_flag='v', angle=angle)
+            self.drawMouth(mouse_flag='v', angle=angle)
 
         elif id == 'anger':
             self.drawEye(6, angle2=-10)
-            self.drawMouse(mouse_flag='^')
+            self.drawMouth(mouse_flag='^')
 
         elif id == 'unhappy':
             self.drawEye(6, angle2=10)
-            self.drawMouse(mouse_flag='^')
+            self.drawMouth(mouse_flag='^')
 
         elif id == 'surprise':
             self.drawEye(5)
-            self.drawMouse(mouse_flag='o')
+            self.drawMouth(mouse_flag='o')
 
         elif id == 'wink_r':
             self.drawEye(2)
-            self.drawMouse(angle=angle+5)
+            self.drawMouth(angle=angle+5)
 
         elif id == 'wink_l':
             self.drawEye(3)
-            self.drawMouse(angle=angle-5)
+            self.drawMouth(angle=angle-5)
 
         elif id == 'look_l':
             self.drawEye(xpos=-50, eye_dist=30, angle1=angle)
-            self.drawMouse(pos=-10, xpos=-40, dw=20, angle=angle)
+            self.drawMouth(pos=-10, xpos=-40, dw=20, angle=angle)
 
         elif id == 'look_r':
             self.drawEye(xpos=50, eye_dist=30, angle1=angle)
-            self.drawMouse(pos=-10, xpos=40, dw=20,angle=angle)
+            self.drawMouth(pos=-10, xpos=40, dw=20,angle=angle)
 
         elif id == 'look_u':
             self.drawEye(pos=30, eye_dist=60, angle1=angle)
-            self.drawMouse(pos=20,dw=-10, angle=angle)
+            self.drawMouth(pos=20,dw=-10, angle=angle)
 
         elif id == 'look_d':
             self.drawEye(pos=-30, eye_dist=60, angle1=angle)
-            self.drawMouse(pos=-20,dw=-10,angle=angle)
+            self.drawMouth(pos=-20,dw=-10,angle=angle)
 
         else:
             self.drawFace(angle=angle, flush=False)

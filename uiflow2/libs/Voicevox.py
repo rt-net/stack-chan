@@ -9,6 +9,7 @@ import time
 from comm import Command
 import json
 import struct
+import binascii
 
 #########
 #
@@ -40,8 +41,9 @@ class Voicevox(Command):
     def setUrl(self, host=None, id=1):
         if host: self.host=host
         self.id=id
-        self.query_url="http://%s:50021/audio_query?speaker=%d" % (self.host, self.id)
-        self.synth_url="http://%s:50021/synthesis?speaker=%d" % (self.host, self.id)
+        #self.query_url="http://%s:50021/audio_query?speaker=%d" % (self.host, self.id)
+        #self.synth_url="http://%s:50021/synthesis?speaker=%d" % (self.host, self.id)
+        self.synth_url="http://%s:8000/tts" % (self.host)
         return
     #
     #
@@ -51,36 +53,32 @@ class Voicevox(Command):
         else:
             self.id=id
         return self.id
+    
+    def text2speech(self, txt):
+        data={'data': txt, 'speaker': self.id}
+        response = requests2.post(self.synth_url, data=json.dumps(data).encode(), headers=self.header)
+        return response
     #
     #
-    def request_tts(self, txt):
+    def speak(self, txt):
+        result = False
         if self.requesting:
-            return False
-        #print("voicevox", txt)
+            return result    
         self.requesting=True
-        encode_txt=["%%%X" % x for x in txt.encode('utf-8')]
-        res = requests2.post(self.query_url+"&text="+"".join(encode_txt), headers=self.header)
-        self.query = b""
-
-        if res.status_code == 200:
-            self.query=res.content
-            res = requests2.post(self.synth_url, data=self.query, headers=self.header)
-            if res.status_code == 200:
-                self.play_wav(res.content)
-            else:
-                print("Fail to synthesize")
-                self.requesting=False
-                return False
+        res = self.text2speech(txt)
+        if res and res.status_code == 200:
+            result=res.json()
+            audio=binascii.a2b_base64(result['audio'])
+            self.play_wav(audio)
+            result = True
         else:
-            print("Fail to get query")
-            self.requesting=False
-            return False
+            print("Fail to synthesize")
         self.requesting=False
-        return True
+        return result
     #
     #
     def execute(self, txt):
-        return self.request_tts(txt)
+        return self.speak(txt)
     #
     #
     def play_wav(self, data, rate=24000):
@@ -117,7 +115,7 @@ class Voicevox(Command):
             req = request.replace("\n", "。").split("。")
             for msg in req:
                 if msg:
-                    self.request_tts(msg)
+                    self.speak(msg)
             self.request=None
             self.show_message()
         return

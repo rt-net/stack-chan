@@ -9,6 +9,7 @@ import socket
 import select
 import json
 
+import struct
 from comm import Command
 import util
 
@@ -119,28 +120,36 @@ class Gtts(Command):
     #
     def speak(self, data):
         response=self.text2speech(data)
-        res_=True
-        if response:
-            try:
-                result=response.json()
-                audio=binascii.a2b_base64(result['audioContent'])
-                if audio[:4] == b'RIFF':
-                    if audio[8:12] == b'WAVE':
-                        audio = audio[44:]
-                if self.parent:
-                    self.parent.face.start_talk()
-                play_audio(audio, volume=self._volume)
-                if self.parent:
-                    self.parent.face.stop_talk()              
-            except:
-                try:
-                    print(result)
-                except:
-                    print("Unknown error")
-                res_ = False
+        res_=False
+        if response and response.status_code == 200:
+            result=response.json()
+            audio=binascii.a2b_base64(result['audioContent'])
+            self.play_wav(audio)        
             res_ = True
             response.close()
+        else:
+            print("Error")
         return res_
+    #
+    #
+    def play_wav(self, data, rate=22050):
+        if self.parent:
+            self.parent.face.start_talk()
+        if data[:4].decode() == 'RIFF' and data[8:12].decode() == "WAVE":
+            fmt=struct.unpack("H", data[20:22])[0]
+            start=44
+            if fmt == 1:
+                rate=struct.unpack("I", data[24:28])[0]
+                play_audio(data[start:], rate, self._volume)
+            else:
+                print("Data is not Liner PCM")
+        else:
+            print("Unknown format")
+            play_audio(data, rate, self._volume)
+
+        if self.parent:
+            self.parent.face.stop_talk()
+        return
     #
     #
     def set_speaker(self, data):
@@ -180,11 +189,6 @@ class Gtts(Command):
             #if self.poll.poll(0.1)
             recv_data = self.udp.recvfrom(1024)
             self.execute(recv_data[0])
-    #
-    #
-    def reset(self):
-        machine.reset()
-        return
     
     def show_message(self, msg='', color=0xffff00):
       if self.parent:
