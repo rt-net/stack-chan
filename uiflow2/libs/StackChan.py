@@ -1,5 +1,18 @@
 '''
-  Stack-chan Main Class
+Copyright 2025 Isao Hara, RT Corporation.
+
+Licensed under the Apache License, Version 2.0 (the “License”);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an “AS IS” BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific language governing permissions and
+limitations under the License.
+
 '''
 import M5
 import json
@@ -354,6 +367,12 @@ class StackChan:
   def move(self, p_deg, t_deg):
     self.motor.move(p_deg, t_deg, force=True)
     return
+  
+  def get_current_pos(self):
+    if self.motor:
+      return self.motor.current_pos
+    else:
+      return None
   #
   # Show ASR result
   def show_asr_result(self, result):
@@ -441,6 +460,7 @@ class StackChan:
   def set_face_id(self, id):
     self.face.set_face_id(id)
     return
+  
   #
   # Spin once
   def update(self):
@@ -469,6 +489,7 @@ class StackChan:
             print(result)
             if result == "ありがとう":
               self.dialog.reset_chat()
+              self.asr.request = False
             self.tts.set_request(result.replace('*', ''))
           except:
             print(result)
