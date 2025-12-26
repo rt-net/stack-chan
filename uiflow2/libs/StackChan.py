@@ -460,7 +460,60 @@ class StackChan:
   def set_face_id(self, id):
     self.face.set_face_id(id)
     return
+
+  def set_face_color(self, color=0xffffff, bg_color=0x000000):
+    self.face.set_color(color, bg_color)
+    return
   
+  def get_face_id(self):
+    return self.face.current_face
+  
+  def get_current_pose(self):
+    if self.motor:
+      return self.motor.current_pos
+    else:
+      return None
+    
+  def web_update(self):
+    if self.web_server:
+      self.web_server.update()
+
+  def motor_update(self):
+    if self.motor:
+      return self.motor.update()
+
+  def chat_update(self):
+    if self.asr:
+      res=self.asr.check_request()
+      if res and self.dialog and res['result'] != '':
+          self.face.print_info("考え中…")
+          result=self.dialog.request(res['result'])
+          try:
+            print(result)
+            if result == "ありがとう":
+              self.dialog.reset_chat()
+              self.asr.request = False
+            if self.tts:
+              self.tts.set_request(result.replace('*', ''))
+          except:
+            print("Error in chat")
+      else:
+        if res is None:
+          pass
+          #self.tts.set_request("対話終了")
+        elif res and res['result'] == '':
+          if self.tts:
+            self.tts.set_request("何？")
+        self.show_asr_result(res)
+  
+    if self.tts:
+      self.tts.check_request()
+
+  def debug_update(self):
+    debug = time.time() - self.debug_time
+    if self.debug != debug:
+      #print(debug)
+      self.debug = debug
   #
   # Spin once
   def update(self):
