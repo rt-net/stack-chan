@@ -55,7 +55,7 @@ $ npm run setup
 $ npm run setup -- --device=esp32
 ```
 
-For macOS, when installing npm run setup -- --device=esp32, if the version of xcode-select is outdated, it may stop at "Error: Command failed with exit code 1: python3 -m pip install pyserial". In that case, manually remove xcode-select and install xcode-select (xcord-select –install) again.  
+For macOS, when installing npm run setup -- --device=esp32, if the version of xcode-select is outdated, it may stop at "Error: Command failed with exit code 1: python3 -m pip install pyserial". In that case, manually remove xcode-select and install xcode-select (xcode-select --install) again.  
 You can remove xcode-select with "sudo rm -rf /Library/Developer/CommandLineTools".   
 Internally, [`xs-dev`](https://github.com/HipsterBrown/xs-dev)  is used to automate the setup of ModdableSDK and ESP-IDF.
 
