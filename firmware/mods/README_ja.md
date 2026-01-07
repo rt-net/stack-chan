@@ -76,11 +76,15 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
 		- $ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 		- $ echo "deb https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 		- yarnのツールのインストール
-			- ubuntu : $ sudo apt update && sudo apt install yarn　(voltaが入っていない場合)
-			- ubuntu : $ sudo apt update && volta install yarn とyarn install (voltaが入っている場合)
-			- macOS : $ brew install yarn
-			- Windows : $ volta install yarn と yarn install
-		- $ npm install react react-dom
+			- 使用している環境に応じて以下を実行します。
+				- ubuntu(voltaが入っていない場合) : $ sudo apt update && sudo apt install yarn　
+				- ubuntu(voltaが入っている場合): $ sudo apt update && volta install yarn
+				- macOS : $ brew install yarn
+				- Windows : $ volta install yarn
+			- suburi-mediapipeのディレクトリに移動した上で以下のコマンドを実行します。
+				- $ cd /home/ubuntu/suburi-mediapipe/backend
+				- $ yarn install
+				- $ npm install react react-dom
 	- google-chromeをインストール(windowsでwlsからchromeが認識しない時)
 		- $ sudo apt update
 		- $ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
