@@ -240,10 +240,11 @@ class DynamixelDriver:
         self._tilt = Dynamixel(2)
         #print("get current_pos")
         pan_offset = self._pan.readPresentPosition()
-        if pan_offset:
-            tilt_offset = self._tilt.readPresentPosition()
-        else:
-            tilt_offset = None
+        tilt_offset = self._tilt.readPresentPosition()
+        #if pan_offset:
+        #    tilt_offset = self._tilt.readPresentPosition()
+        #else:
+        #    tilt_offset = None
         #print("check")
         if pan_offset and tilt_offset:
             self._controls = [
