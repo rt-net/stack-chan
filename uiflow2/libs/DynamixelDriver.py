@@ -309,6 +309,10 @@ class DynamixelDriver:
                 ctrl.update()
         self.start_time=time.time()
         return
+    
+    def motor(self, flag):
+        return self.setTorque(flag)
+
     #
     #
     def get_position(self):

@@ -127,6 +127,8 @@ class SG90Driver:
     else:
        self.rand_motion_time = None
 
+  def get_position(self):
+     return self.current_pos
   #
   #
   def update(self, tm=0):
