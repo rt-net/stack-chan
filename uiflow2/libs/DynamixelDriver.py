@@ -204,7 +204,11 @@ class PConrtol:
         self.goalPosition = 0
         self.servo.setTorque(False)
         self.servo.setOperatingMode(OPERATING_MODE['CURRENT_BASED_POSITION'])
-        self.servo.setGoalPosition(self.goalPosition + self._offset)  # つまり現位置
+        ok = self.servo.setGoalPosition(self.goalPosition + self._offset)  # つまり現位置
+        if not ok:
+            print("[ERR] setGoalPosition failed", self.name, self.goalPosition, self._offset)
+        else:
+            print("[OK] setGoalPosition succed", self.name, self.goalPosition, self._offset)
         self._lastGoalPosition = self.goalPosition
         self.servo.setTorque(True)
         return
@@ -213,10 +217,7 @@ class PConrtol:
     def update(self):
         if self._lastGoalPosition != self.goalPosition:
             ok = self.servo.setGoalPosition(self.goalPosition+self._offset)
-            if not ok:
-                print("[ERR] setGoalPosition failed", self.name, self.goalPosition, self._offset)
-            else:
-                print("[OK] setGoalPosition succed", self.name, self.goalPosition, self._offset)
+
             self._lastGoalPosition = self.goalPosition
         result = self.servo.readPresentPosition()
         if result is None:
