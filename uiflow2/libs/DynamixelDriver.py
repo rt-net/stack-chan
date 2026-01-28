@@ -201,6 +201,7 @@ class PConrtol:
             print("Fail to initialize")
             return
         self.goalPosition = 0
+        self.servo.setTorque(False)
         self.servo.setOperatingMode(OPERATING_MODE['CURRENT_BASED_POSITION'])
         self.servo.setTorque(True)
         return
@@ -235,17 +236,23 @@ class PConrtol:
 class DynamixelDriver:
     #
     #
-    def __init__(self):
+    def __init__(self, pan_off=None, tilt_off=None):
         self._pan = Dynamixel(1)
         self._tilt = Dynamixel(2)
         #print("get current_pos")
-        pan_offset = self._pan.readPresentPosition()
-        tilt_offset = self._tilt.readPresentPosition()
-        #if pan_offset:
-        #    tilt_offset = self._tilt.readPresentPosition()
-        #else:
-        #    tilt_offset = None
-        #print("check")
+        if pan_off is None:
+            pan_offset = self._pan.readPresentPosition()
+        else:
+            pan_offset = pan_off
+        
+        if pan_offset:
+            if tilt_off is None:
+                tilt_offset = self._tilt.readPresentPosition()
+            else:
+                tilt_offset = tilt_off
+        else:
+            tilt_offset = None
+        print(f"Offset: {pan_offset}, {tilt_offset}")
         if pan_offset and tilt_offset:
             self._controls = [
                                 PConrtol(self._pan, 0.15, 80, 'pan', pan_offset, -180, 180),

@@ -226,7 +226,9 @@ class StackChan:
     try:
       if motor_type == 'Dynamixel':
         import DynamixelDriver
-        self.motor = DynamixelDriver.DynamixelDriver()
+        pan_offset_ = util.get_config(self.config, 'Dynamixel/pan_offset', None)
+        tilt_offset_ = util.get_config(self.config, 'Dynamixel/tilt_offset', None)
+        self.motor = DynamixelDriver.DynamixelDriver(pan_offset_, tilt_offset_)
         if self.motor._controls is None:
           self.motor = None
       elif motor_type == 'SG90':
