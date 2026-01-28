@@ -174,6 +174,7 @@ class Dynamixel(object):
 class PConrtol:
     #
     #
+    # servoは Dynamixel が与えられる
     def __init__(self, servo, gain, saturation,
                   name='servo', offset_pos=2048,
                   min_pos=-180, max_pos=180):
@@ -203,13 +204,19 @@ class PConrtol:
         self.goalPosition = 0
         self.servo.setTorque(False)
         self.servo.setOperatingMode(OPERATING_MODE['CURRENT_BASED_POSITION'])
+        self.servo.setGoalPosition(self.goalPosition + self._offset)  # つまり現位置
+        self._lastGoalPosition = self.goalPosition
         self.servo.setTorque(True)
         return
     #
     #
     def update(self):
         if self._lastGoalPosition != self.goalPosition:
-            self.servo.setGoalPosition(self.goalPosition+self._offset)
+            ok = self.servo.setGoalPosition(self.goalPosition+self._offset)
+            if not ok:
+                print("[ERR] setGoalPosition failed", self.name, self.goalPosition, self._offset)
+            else:
+                print("[OK] setGoalPosition succed", self.name, self.goalPosition, self._offset)
             self._lastGoalPosition = self.goalPosition
         result = self.servo.readPresentPosition()
         if result is None:
