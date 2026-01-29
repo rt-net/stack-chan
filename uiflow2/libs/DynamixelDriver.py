@@ -179,7 +179,7 @@ class Dynamixel(object):
 
 ##############
 #  Position Control
-class PConrtol:
+class PControl:
     #
     #
     def __init__(self, servo, gain, saturation,
@@ -266,8 +266,8 @@ class DynamixelDriver:
         print(f"Offset: {pan_offset}, {tilt_offset}")
         if pan_offset and tilt_offset:
             self._controls = [
-                                PConrtol(self._pan, 0.15, 80, 'pan', pan_offset, -180, 180),
-                                PConrtol(self._tilt, 4, 800, 'tilt', tilt_offset, -20, 7)
+                                PControl(self._pan, 0.15, 80, 'pan', pan_offset, -180, 180),
+                                PControl(self._tilt, 4, 800, 'tilt', tilt_offset, -20, 7)
                             ]
             self.control_timer=machine.Timer(2)
         else:
