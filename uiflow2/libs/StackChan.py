@@ -205,13 +205,13 @@ class StackChan:
         dy = center_y - 120
         cpos = self.motor.get_position()
         if abs(dx) > 10 or  abs(dy) > 10: 
-          dx_deg = cpos[0] + dx / 20.0
-          dy_deg = cpos[1] + dy / 20.0
-          #print(cpos, dx, dy, dx_deg, dy_deg)
+          dx_deg = cpos[0] + dx / 2.0
+          dy_deg = cpos[1] + dy / 2.0
+          print(cpos, dx, dy, dx_deg, dy_deg)
           self.motor.motor(True)
           self.motor.move(dx_deg, dy_deg)
-      if pos_[3] > 160:
-        self.start_dialog()
+      # if pos_[3] > 160:
+      #   self.start_dialog()
     return
   #
   #
