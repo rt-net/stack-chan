@@ -140,6 +140,14 @@ class Dynamixel(object):
         return None
     #
     #
+    def readOperatingMode(self):
+        res = self.send_command(INSTRUCTION['READ'], ADDRESS['OPERATING_MODE'], b'\x01\x00')
+        len_ = self.parse(res)
+        if len_ == 5 and res[7:9] == b'\x55\00':
+            return res[9]
+        return None
+    #
+    #
     def setOperatingMode(self, mode):
         res = self.send_command(INSTRUCTION['WRITE'], ADDRESS['OPERATING_MODE'], struct.pack('B', mode))
         return self.parse(res) > 0
@@ -202,7 +210,10 @@ class PConrtol:
             return
         self.goalPosition = 0
         self.servo.setTorque(False)
-        self.servo.setOperatingMode(OPERATING_MODE['CURRENT_BASED_POSITION'])
+        mode = self.servo.readOperatingMode()
+        # print(f"mode: {mode}")
+        if mode != OPERATING_MODE['CURRENT_BASED_POSITION']:
+            self.servo.setOperatingMode(OPERATING_MODE['CURRENT_BASED_POSITION'])
         self.servo.setTorque(True)
         return
     #
