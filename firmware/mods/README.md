@@ -52,7 +52,7 @@ Some MODs require a network connection or an external server to run.
 - [monologue](./monologue/)
 
 ## Cheerup: Stack-chan cheerleaders!(windows/Ubuntu/mac)
-
+This mod has not been tested.
 ![face-sync](../docs/images/face-sync.gif)
 ![Stack-chan Cheerup](../docs/images/cheerup.gif)  
 - Connect the PC and Stack-chan One-to-one using BLE.
@@ -114,6 +114,7 @@ Some MODs require a network connection or an external server to run.
 - [cheerup_ws](./cheerup_ws/): WebSocket version
 
 ## Mimic: Manekko mimicing stack chan.  
+This mod has not been tested.
 - You will require 2 Stack-chan units.  
 ![manekko_stackchan](../docs/images/mimic.gif)  
 - [mimic_main](./mimic_main/): the one the user runs  
@@ -151,6 +152,7 @@ Some MODs require a network connection or an external server to run.
 - [face_tracker](./face_tracker/)
 
 ## Face: Stack-chan facial expression and complexion(Windows/Ubuntu/mac)
+This mod has not been tested.
 - Changees facial expression and complexion in turn.
 - How to install the mod
     - You do not need to set up Wi-Fi when building the host.
@@ -161,6 +163,7 @@ Some MODs require a network connection or an external server to run.
         - $npm run mod --target=esp32/m5stack_cores3 ./mods/face/manifest.json
 
 ## Chatty stack-chan(Ubuntu)
+This mod has not been tested.
 - ChatGPT is used to talk to the stack properly.
 - MacOS is out of scope.
 - Windows is not covered because the Wi-Fi bridge does not work properly.

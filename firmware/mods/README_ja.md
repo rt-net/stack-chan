@@ -50,6 +50,7 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
 - [monologue](./monologue/)
 
 ## Cheerup: ｽﾀｯｸﾁｬﾝ応援団(windows/Ubuntu/mac)
+こちらのModは動作未検証です。
 ![顔の同期](../docs/images/face-sync.gif)
 ![ｽﾀｯｸﾁｬﾝ応援団](../docs/images/cheerup.gif)
 - PCとｽﾀｯｸﾁｬﾝを一対一でBLEで接続します。
@@ -111,12 +112,14 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
 - [cheerup_ws](./cheerup_ws/): WebSocket版
 
 ## Mimic: まねっこｽﾀｯｸﾁｬﾝ
+こちらのModは動作未検証です。
 - ｽﾀｯｸﾁｬﾝが2台必要になります。  
 ![まねっこｽﾀｯｸﾁｬﾝ](../docs/images/mimic.gif)
 - [mimic_main](./mimic_main/): ユーザが動かすほう
 - [mimic_follow](./mimic_follow/): まねして動くほう
 
 ## Face Tracker: 顔を追いかけるｽﾀｯｸﾁｬﾝ(Windows/Ubuntu/mac)
+こちらのModは動作未検証です。
 - ｽﾀｯｸﾁｬﾝと[M5Stack UnitV2](https://docs.m5stack.com/en/unit/unitv2)が必要になります。
 - UnitV2の設定
     - UnitV2のドライバをインストールします。Ubuntuはインストール不要です。
@@ -158,6 +161,7 @@ $  UPLOAD_PORT=/dev/ttyACM0 npm run mod --target=esp32/m5stack_cores3 ./mods/che
         - $ npm run mod --target=esp32/m5stack_cores3 ./mods/face/manifest.json  
 
 ## おしゃべりスタックチャン(Ubuntu)
+こちらのModは動作未検証です。
 - CharGPTを使ってスタックちゃんと会話をします。
 - macOSは対象外になります。
 - windowsはWi-Fiブリッジが正常に動作しないため対象外になります。
