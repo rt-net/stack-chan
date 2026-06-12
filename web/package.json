@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "description": "Stack-chan development server",
   "scripts": {
-    "dev": "live-server --verbose"
+    "dev": "http-server ./ -a localhost -p 8080 -c-1"
   },
   "keywords": [],
   "author": "Shinya Ishikawa",
   "devDependencies": {
-    "live-server": "^1.2.2",
+    "http-server": "^14.1.1",
     "prettier": "^3.0.0"
   }
 }
