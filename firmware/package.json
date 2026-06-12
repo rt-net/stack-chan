@@ -63,5 +63,8 @@
     "web-audio-engine": "^0.13.4",
     "xs-dev": "^0.32.3",
     "yargs": "^17.6.2"
+  },
+  "overrides": {
+    "cross-spawn": "^7.0.5"
   }
 }
