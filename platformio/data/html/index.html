@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>Hello Stack-chan</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta charset="utf-8">
+
+        <style>
+         .top {
+            background-color: #aaaaff;
+            margin:0;
+            padding-top: 30px;
+            text-align: center;
+            height: 90px;
+          }
+        </style>
+
+        <script type="text/javascript" src="js/joy.min.js"></script>
+        <script type="text/javascript">
+            async function get_camera_image(){
+                const img = document.getElementById('camera_image');
+                img.src = '/camera_image?t=' + new Date().getTime();
+            }
+
+            async function move(){
+                var pn = document.getElementById('pan').value;
+                var tlt = document.getElementById('tilt').value;
+                var sp = document.getElementById('sp').value;
+
+                const res = await fetch('/move', {
+                    method: "POST",
+                    body: '{"x":' + pn + ', "y":' + tlt + ', "sp": ' + sp + '}'
+                });
+            }
+
+            async function move_angle(x, y){
+                var pn =  Math.trunc(x * 0.75);
+                var tlt = Math.trunc(Math.max(Math.min(y*0.3, 30), -15));
+                var sp = document.getElementById('sp').value;
+
+                const res = await fetch('/move', {
+                    method: "POST",
+                    body: '{"x":' + pn + ', "y":' + tlt + ', "sp": ' + sp + '}'
+                });
+            }
+
+            async function face(){
+                var face_ = document.getElementById('face').value;
+                const res = await fetch('/command', {
+                    method: "POST",
+                    body: '{"cmd": "face", "data": "' + face_+ '""}'
+                });
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1 class="top">RT版ｽﾀｯｸﾁｬﾝの操作</h1>
+        <h3>首振り操作</h3>
+		<div >
+            Duration:<input id="sp" type="text" value="600"/></br>
+            Pan方向:<input id="pan" type="text" value="0"/></br>
+			Tilt方向:<input id="tilt" type="text" value="0"/>
+            <button onclick="move()">Move</button><hr>
+
+			水平方向:<input id="joyX" type="text" value="0"/></br>
+			垂直方向:<input id="joyY" type="text" value="0"/>
+		</div>
+		<div id="joyDiv" style="width:200px;height:200px;margin:10px;"></div>
+
+        <script type="text/javascript">
+            var joyX = document.getElementById("joyX");
+            var joyY = document.getElementById("joyY");
+    
+            var joyParam = { "title": "joystick", "autoReturnToCenter": false };
+            var Joy = new JoyStick('joyDiv', joyParam);
+        
+            setInterval(function(){
+                if (joyX.value != Joy.GetX() || joyY.value != Joy.GetY()){
+                    move_angle(Joy.GetX(), Joy.GetY());
+                }
+                joyX.value=Joy.GetX(); 
+                joyY.value=Joy.GetY();  
+            }, 1000);
+        </script>
+        <h3>Face</h3>
+        顔の表情:
+         <select id="face" onchange="face()">
+            <option value="Neutral">通常</option>
+            <option value="Happy">笑い</option>
+            <option value="Angry">怒り</option>
+            <option value="Sad">悲しみ</option>
+            <option value="Sleepy">眠い</option>
+            <option value="Doubt">疑い</option>
+        </select><br>
+        <!-- <img src="images/face.png" > -->
+        <button onclick="get_camera_image()">カメラで撮影</button><br>
+        <img src="" id="camera_image" >
+
+        <h3>リンク</h3>
+        <ul>
+            <li><a href="asr_tts.html">音声認識＆音声合成</a></li>
+            <li><a href="edit_file.html">ファイルの修正</a></li>
+            <li><a href="/stream">カメラのストリーミング</a></li>
+<!--
+            <li><a href="params.html">パラメータの修正</a></li>
+-->
+        </ul>
+
+    </body>
+</html>

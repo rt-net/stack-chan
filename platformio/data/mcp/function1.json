@@ -1,0 +1,19 @@
+{
+    "type": "function",
+    "name": "stackchan:move",
+    "description": "スタックチャンの首を指定方向に動作させます。",
+    "parameters": {
+        "type": "object",
+        "properties": {
+        "direction": {
+            "type": "string",
+            "description": "動作させる方向は、「Right」,「RightUp」,「RightDown」,「Left」,「LeftUp」,「LeftDown」,「Up」,「Down」,「Front」のいずれか。"
+        },
+        "angle": {
+            "type": "string",
+            "description": "動作幅を指定します。省略時は「Normal」とし、「Little」,「Large」または角度(例えば 30度であれば 30という整数値)のいずれか。"
+        }
+        },
+        "required": ["direction", "angle"]
+    }
+}

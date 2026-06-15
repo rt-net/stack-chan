@@ -1,6 +1,0 @@
-vosk
-pyaudio
-pydub
-pyyaml
-numpy
-sounddevice

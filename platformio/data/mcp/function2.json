@@ -1,0 +1,16 @@
+
+{
+    "type": "function",
+    "name": "stackchan:face",
+    "description": "スタックチャンの顔の表情を変化させる。",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "表情を表す表現。「Neutral」「Happy」、「Angry」、「Sad」、「Sleepy」、「Doubt」のいずれか。"
+        }
+      },
+      "required": ["expression"]
+    }
+}

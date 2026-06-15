@@ -1,3 +1,0 @@
-GOOGLE_SPEECH_KEY=Replace your Google speech api key
-GEMINI_KEY=Replace your Gemini api key
-OPENAI_KEY=Replace your OpenAI api key

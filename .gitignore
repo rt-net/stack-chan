@@ -31,3 +31,6 @@ fp-info-cache
 # Gerber archive
 *.zip
 
+# PlatformIO
+.pio
+.vscode
