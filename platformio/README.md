@@ -51,14 +51,14 @@ PlatformIOの準備が整ったら、gitコマンドでリポジトリのソー�
 ターミナルを開いて、下記のように実行します。
 ```
 PS> cd C:/Work
-PS C:\Work> git clone https://github.com/haraiaso/AI_Stackchan_Arduino
+PS C:\Work> git clone -b arduino https://github.com/rt-net/stack-chan
 ```
 ### VS Codeでリポジトリを開く
 リポジトリのダウンロードが終了したら、VS Code でフォルダを開きます。
 ターミナルから下記のコマンドを実行します。
 ```
-PS> cd C:/Work/AI_Stackchan_Arduino
-PS C:\Work\AI_Stackchan_Arduino> code .
+PS> cd C:/Work/stack-chan/platformio
+PS C:\Work\stac-chan\platfoemio> code .
 ```
 これで VS Codeが起動し、PlatformIOでビルドするために必要なファイル群がダウンロードされます。
 
