@@ -153,12 +153,12 @@ def setup_wlan(apoint="Home", passwd="", n=3):
 
 #
 #
-def connect_wlan(wlan=None,apoints=["Firmware", "Home", "Work", "Mobile"], retry=3):
+def connect_wlan(wlan=None,apoints=["Home", "Work", "Mobile", "Firmware"], retry=10):
     conf = get_wlan_conf()
     if wlan is None:
         wlan=network.WLAN(network.STA_IF)
-    #if wlan.isconnected():
-    #    wlan.disconnect()
+    if wlan.isconnected():
+        wlan.disconnect()
     wlan.config(reconnects=retry)
     aps_ = scan_wlan(wlan)
 
@@ -166,8 +166,15 @@ def connect_wlan(wlan=None,apoints=["Firmware", "Home", "Work", "Mobile"], retry
         if get_config(conf, [name,'essid'])  in aps_:
             try:
                 wlan.connect(conf[name]['essid'], conf[name]['passwd'])
+                time.sleep(2)
+                stat_ = wlan.status()
+                while stat_ == network.STAT_CONNECTING or stat_ == network.STAT_IDLE:
+                    time.sleep(1)
+                    stat_ = wlan.status()
                 if wlan.isconnected():
-                    print(wlan.ifconfig())
+                    while wlan.status() != network.STAT_GOT_IP:
+                        time.sleep(1)
+                    print("IP Address:", wlan.ifconfig())
                     return wlan
             except:
                 pass
