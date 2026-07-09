@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2026
  * 
  */
-#include <StackChan.h>
+#include "StackChan.h"
 
 
 using namespace m5avatar;
@@ -464,8 +464,9 @@ void loop() {
 
   // Display watch
   showWatch(&avatar);
-
+#if 0
   if(!avatar.isDrawing()){
     Serial.printf("PS: %d,ALS: %d\r\n", DistanceSensor.getPsValue(),  DistanceSensor.getAlsValue());
   }
+#endif
 }

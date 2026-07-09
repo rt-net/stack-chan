@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2026
  * 
  */
-#include <GoogleSpeech.h>
-#include <Motion.h>
+#include "GoogleSpeech.h"
+#include "Motion.h"
 
 void resetVolume();
 /**

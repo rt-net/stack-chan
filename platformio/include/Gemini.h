@@ -18,11 +18,11 @@
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 
-#include <Motion.h>
-#include <GoogleSpeech.h>
+#include "Motion.h"
+#include "GoogleSpeech.h"
 
-#include <Utils.h>
-#include <HttpRequest.h>
+#include "Utils.h"
+#include "HttpRequest.h"
 
 String genGeminiRequest(String txt, String interactionId);
 String genMcpRequest(String model, String func, String callId, String interactionId, String result);

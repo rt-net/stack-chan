@@ -12,9 +12,9 @@
 #include <Arduino.h>
 #include <M5Unified.h>
 #include <time.h>
-#include <Utils.h>
+#include "Utils.h"
 
-#include <HttpRequest.h>
+#include "HttpRequest.h"
 
 String requestChatGPT(String txt, m5avatar::Avatar *avatar=nullptr);
 

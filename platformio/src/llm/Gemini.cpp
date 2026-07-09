@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2026
  * 
  */
-#include <Gemini.h>
+#include "Gemini.h"
 
 
 String genGeminiRequest(String txt, String interactionId) {

@@ -12,9 +12,9 @@
 #include <Arduino.h>
 #include <M5Unified.h>
 
-#include <HttpRequest.h>
-#include <Utils.h>
-#include <Motion.h>
+#include "HttpRequest.h"
+#include "Utils.h"
+#include "Motion.h"
 
 //#define SAMPLE_RATE 16000
 //#define FRAME_SIZE  320

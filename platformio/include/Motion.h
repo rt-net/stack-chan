@@ -16,8 +16,8 @@
 
 #include <Stackchan_servo.h>
 #include <Stackchan_system_config.h>
-#include <Utils.h>
-#include <TouchButton.h>
+#include "Utils.h"
+#include "TouchButton.h"
 
 #ifndef MOTION_LIB
 extern int isMoving;

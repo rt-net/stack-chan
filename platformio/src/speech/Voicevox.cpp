@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2026
  * 
  */
-#include <Voicevox.h>
+#include "Voicevox.h"
 
 
 

@@ -18,34 +18,32 @@
 #include <map>
 #include <time.h>
 
+
 #include <WiFi.h>
 #include <SD.h>
 #include <LittleFS.h>
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 
+#include <ArduinoJson.h>
+#include <mbedtls/base64.h>
+
 #include <Stackchan_system_config.h>
 #include <Stackchan_servo.h>
 #include <Avatar.h>
 
-#include <Motion.h>
+#include "Motion.h"
+#include "M5WebServer.h"
+#include "Rest.h"
+#include "TouchButton.h"
+#include "Utils.h"
 
-//#include <M5AsyncWebServer.h>
-#include <M5WebServer.h>
-#include <ArduinoJson.h>
-#include <mbedtls/base64.h>
+#include "GoogleSpeech.h"
+#include "Gemini.h"
+#include "ChatGPT.h"
 
-#include <Rest.h>
-#include <TouchButton.h>
-#include <Utils.h>
+#include "HttpRequest.h"
+#include "TimeSignal.h"
 
-#include <GoogleSpeech.h>
-#include <Gemini.h>
-
-#include <ChatGPT.h>
-
-#include <HttpRequest.h>
-#include <TimeSignal.h>
-
-#include <Voicevox.h>
-#include <Vosk.h>
+#include "Voicevox.h"
+#include "Vosk.h"
