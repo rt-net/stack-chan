@@ -356,6 +356,73 @@ void alert(){
   }
 }
 
+
+JsonDocument wlan_config;
+void execute_serial_cmd(String line) {
+  std::vector<String> argv;
+  std::vector<String> delims={ " " };
+  splitString(line, delims, argv);
+  if (argv[0] == "ShowWifi"){
+
+    if(!wlan_config.isNull() || loadJson("/wlan.json", wlan_config) == 0 ){
+      JsonObject networks = wlan_config.as<JsonObject>();
+      Serial.printf("\r\nWifi setting: \r\n");
+      for (JsonPair p : networks) {
+        String profileName = p.key().c_str();
+        const char* ssid = p.value()["essid"];
+        const char* pass = p.value()["passwd"];
+        Serial.printf("   %s: %s, %s\r\n", profileName.c_str(),ssid, pass);
+      }
+    }else{
+      Serial.println("Fail to load Wifi setting.");
+    }
+  } else if (argv[0] == "SetWifi"){
+    if(wlan_config.isNull()){
+      loadJson("/wlan.json", wlan_config);
+    }
+    if (argv.size() == 4){
+      if (argv[1] == "Home" || argv[1] == "Work" || argv[1] == "Mobile" ){
+        wlan_config[argv[1]]["essid"].set(argv[2]);
+        wlan_config[argv[1]]["passwd"].set(argv[3]);
+        Serial.printf("SetWifi [%s]: %s %s\r\n", argv[1], argv[2], argv[3]);
+      }else{
+        Serial.printf("Invaid argument, %s\r\n", argv[1]);
+      }
+    }else{
+      Serial.printf("Invaid arguments, 4 value required: %d\r\n", argv.size());
+    }
+  } else if (argv[0] == "SaveWifi"){
+    if(wlan_config.isNull()){
+      Serial.printf("No wifi setting\r\n");
+    }else{
+      saveJson("/wlan.json", wlan_config);
+    }
+  } else if (argv[0] == "Connect"){
+    if (argv.size() == 3){
+      if(connect_wifi(argv[1].c_str(), argv[2].c_str())){
+        Serial.printf("\r\nConnected.\r\nIP: %s\r\n", WiFi.localIP().toString().c_str());
+      } else {
+        Serial.printf("Fail to connect %s\r\n", argv[1].c_str());
+      }
+    }else{
+      Serial.printf("Usage: Connect [ssid] [password]\r\n");
+    }
+  } else if (argv[0] == "ShowIP"){
+    if (WiFi.status() == WL_CONNECTED) {
+      Serial.printf("\r\nIP: %s\r\n", WiFi.localIP().toString().c_str());
+      String maddr = getWifiMacAddr();
+      Serial.printf("Mac Addr: %s\r\n", maddr.c_str());
+    }else{
+      Serial.println("No connection found.");
+    }
+  } else if (argv[0] == "ShowMem"){
+    showRAM();
+  }else{
+    Serial.print("Input: ");
+    Serial.println(line);
+  }
+}
+
 /**
  * @brief 
  * 
@@ -469,4 +536,9 @@ void loop() {
     Serial.printf("PS: %d,ALS: %d\r\n", DistanceSensor.getPsValue(),  DistanceSensor.getAlsValue());
   }
 #endif
+
+  if (Serial.available() > 0) {
+    String line = Serial.readStringUntil('\n');
+    execute_serial_cmd(line);
+  }
 }

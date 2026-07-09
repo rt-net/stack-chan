@@ -385,6 +385,30 @@ int loadJson(String fname, JsonDocument& doc) {
   return -1;
 }
 
+
+int saveJson(String fname, JsonDocument doc) {
+  size_t doc_size = measureJson(doc);;
+  uint8_t *buff = (uint8_t *)malloc(doc_size +1);
+  if(buff) {
+    memset(buff, 0, doc_size +1);
+    serializeJson(doc, buff, doc_size+1);
+    saveFile(fname, (const char *)buff);
+    free(buff);
+    return 0;
+  }
+  return -1;
+}
+
+char *serializeJson(JsonDocument doc){
+  size_t doc_size = measureJson(doc);;
+  char *buff = (char *)malloc(doc_size +1);
+  if(buff) {
+    memset(buff, 0, doc_size +1);
+    serializeJson(doc, buff, doc_size+1);
+    return buff;
+  }
+  return nullptr;
+}
 /**
  * Beep
  * 
@@ -648,6 +672,30 @@ bool connect_wlan(const char* filepath) {
       Serial.println("All Wifi attempts failed.");
     }
     return false;
+}
+
+bool connect_wifi(const char *ssid, const char* passwd) {
+  WiFi.disconnect();
+  bool connected = false;
+  delay(100);
+  WiFi.begin(ssid, passwd);
+  // タイムアウト判定
+  int timeout_sec = 5;
+  unsigned long startAttemptTime = millis();
+  while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < timeout_sec * 1000) {
+      delay(500);
+  }
+
+  if (WiFi.status() == WL_CONNECTED) {
+    connected = true;
+    Serial.printf("Success IP: %s\r\n",  WiFi.localIP().toString().c_str());
+    return true;
+  } else {
+    Serial.println("Timeout / Failed.");
+    WiFi.disconnect();
+    delay(100);
+  }
+  return connected;
 }
 
 void setupWifi(String conf_file){

@@ -59,6 +59,8 @@ void splitString(String src, std::vector<String>& delims, std::vector<String>& s
 int cutString(String src, int len, std::vector<String>& slist);
 
 int loadJson(String fname, JsonDocument& doc);
+int saveJson(String fname, JsonDocument doc);
+char *serializeJson(JsonDocument doc);
 
 void setVolume(int v);
 void resetVolume();
@@ -66,6 +68,8 @@ void beginSpeaker(int v);
 void endSpeaker();
 void beep(int typ);
 
+bool connect_wlan(const char* filepath);
+bool connect_wifi(const char *ssid, const char* passwd);
 void setupWifi(String conf_file);
 
 int convertToInt(uint8_t *buff);
