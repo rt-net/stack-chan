@@ -25,6 +25,7 @@ import ntptime
 import socket
 import esp32
 import time
+import M5
 
 #
 #
@@ -158,9 +159,15 @@ def connect_wlan(wlan=None,apoints=["Home", "Work", "Mobile", "Firmware"], retry
     if wlan is None:
         wlan=network.WLAN(network.STA_IF)
     if wlan.isconnected():
+        M5.Lcd.printf("Disconnect network")
+        print("Disconnect network")
         wlan.disconnect()
     wlan.config(reconnects=retry)
-    aps_ = scan_wlan(wlan)
+    for _ in range(4):
+        time.sleep(1)
+        aps_ = scan_wlan(wlan)
+    for i,ap in enumerate(aps_):
+        print(f"{i}: {ap}")
 
     for name in apoints:
         if get_config(conf, [name,'essid'])  in aps_:
@@ -176,8 +183,14 @@ def connect_wlan(wlan=None,apoints=["Home", "Work", "Mobile", "Firmware"], retry
                         time.sleep(1)
                     print("IP Address:", wlan.ifconfig())
                     return wlan
-            except:
-                pass
+            except Exception:
+                print(f"Fail to connect to {name}")
+                #pass
+        else:
+            if get_config(conf, [name,'essid']):
+                print(f"{name}: {get_config(conf, [name,'essid'])} not found")
+            else:
+                print(f"{name}: not defined")
     print("Fail to connect wlan")
     return None
 #

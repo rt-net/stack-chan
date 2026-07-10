@@ -39,18 +39,25 @@ class StackChan:
     except:
       self.config={}
 
+    M5.Lcd.setTextColor(0xFFFFFF, 0x000000)
+    M5.Lcd.setCursor(10, 0)
+    M5.Lcd.printf("Load API Key\n")
     self.apikeys = util.load_conf("/flash/apikey.txt")
+
+    M5.Lcd.printf("Load Wifi setting\n")
     self.wlan_conf = util.load_json("/flash/wlan.json")
 
     print(self.config)
+    M5.Lcd.printf("Connect to Wifi...\n")
     # WLAN
     self.wlan = util.connect_wlan()
     self.camera_setupted = False
     self.tracking_flag = False
 
     if self.config.get('camera_setup'):
+      M5.Lcd.printf("Setup camera...\n")
       self.setup_camera()
-
+    M5.Lcd.clear(0x000000)
     #
     # face, motors, TTS client, ASR client
     self.face=Face.Face()
