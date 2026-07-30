@@ -8,6 +8,7 @@
     "format:fix": "prettier --write stackchan/{,**/}*.ts mods/**/*.js",
     "lint": "eslint stackchan/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
+    "test:setup": "node --test scripts/setup.test.js",
     "generate-speech-coqui": "node scripts/generate-speech-coqui.js",
     "generate-speech-voicevox": "node scripts/generate-speech-voicevox.js",
     "generate-speech-google": "cross-env GOOGLE_APPLICATION_CREDENTIALS=scripts/key.json node scripts/generate-speech-google.js",
@@ -20,7 +21,7 @@
     "deploy": "cross-env npm_config_target?=esp32/m5stack cross-env-shell mcconfig -d -m -p \\$npm_config_target -t deploy ./stackchan/manifest_local.json",
     "debug": "cross-env npm_config_target?=esp32/m5stack cross-env-shell mcconfig -d -m -p \\$npm_config_target ./stackchan/manifest_local.json",
     "mod": "cross-env npm_config_target?=esp32/m5stack cross-env-shell mcrun -d -m -p $npm_config_target",
-    "setup": "xs-dev setup --branch 4.9.5",
+    "setup": "node scripts/setup.js",
     "doctor": "echo stack-chan environment info: && git rev-parse HEAD && git rev-parse --show-toplevel && xs-dev doctor",
     "scan": "xs-dev scan",
     "erase-flash": "/home/ubuntu/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash"
