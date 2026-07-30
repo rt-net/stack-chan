@@ -66,7 +66,7 @@ export class PreferenceServer extends UARTServer {
       _batch = obj._batch
       prop = obj.prop
       value = obj.value
-    } catch (e) {
+    } catch {
       trace('not completed\n')
       if (this.#timeout == null) {
         this.#timeout = Timer.set(() => {

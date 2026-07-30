@@ -277,18 +277,11 @@ $ sudo echo "Temporary SuperUser Grant"
 $ npm run setup -- --device=esp32
 ```
 
+依存パッケージを追加する権限確認が表示された場合は承認してください。確認を閉じて`Request dismissed`になった場合は、表示されたパッケージ（例: `python3-venv`）を`sudo apt install`でインストールしてから同じ`setup`コマンドを再実行します。
+
 <img src="images/getting-started-wsl2_ja/npm_run_setup_esp32.jpg" width="100%">
 
-### PSRAM無効化と環境変数のセットアップ
-
-次のコマンドを実行して、PSRAM無効化の設定をします。
-
-```sh
-$ ./setting_scripts/unset_psram.sh
-```
-
-<img src="images/getting-started-wsl2_ja/unset_psram.jpg" width="100%">
-
+### 環境変数のセットアップ
 
 次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に自動で環境変数が設定されるようになります。
 
@@ -317,21 +310,7 @@ $ npm run doctor
 
 <img src="images/getting-started-wsl2_ja/npm_run_doctor.jpg" width="100%">
 
-`Moddable`のバージョンが`v4.9.5`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。  
-
-#### PSRAMの環境確認
-
-以下のコマンドでM5Stack CoreS3のPSRAMの設定を確認します。
-
-```bash
-$ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
-```
-
-<img src="images/getting-started-wsl2_ja/grep_config_spiram.jpg" width="100%">
-
-
-`CONFIG_SPIRAM=n`と表示されれば成功です。
-
+`Moddable`のバージョンが`8.3.1`で、`ESP32 IDF Directory`のパスが正しく表示されており、`Supported target devices`が`lin, esp32`となっていれば成功です。ESP-IDFはModdable 8.3.1に対応するv6.0が使用されます。
 
 ここまで完了次第、Ubuntuのウインドウを閉じてください。
 

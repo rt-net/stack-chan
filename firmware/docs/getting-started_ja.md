@@ -49,31 +49,37 @@ $ npm install
 ２つ目のコマンドでは、再度パスワードが要求されない内に実行してください。 もし、何らかの理由で１つめのコマンド実行から時間がかかってしまった場合は１つ目のコマンドの実行からやり直してください。
 
 ```console
-$ sudo echo "emporary SuperUser Grant"
+$ sudo echo "Temporary SuperUser Grant"
 $ npm run setup
 $ npm run setup -- --device=esp32
 ```
+
+Ubuntuで依存パッケージを追加する権限確認が表示された場合は承認してください。
+確認を閉じて`Request dismissed`になった場合は、表示されたパッケージ（例: `python3-venv`）を`sudo apt install`でインストールしてから同じ`setup`コマンドを再実行します。
 
 macOSの場合は、npm run setup -- --device=esp32のインストールの時、xcode-selectのバージョンが古いと"Error: Command failed with exit code 1: python3 -m pip install pyserial"で止まることがあります。その場合は、xcode-selectを手動で削除してから再度xcode-select(xcord-select –install)をインストールしてください。 
 xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でできます。  
 内部で[`xs-dev`](https://github.com/HipsterBrown/xs-dev)を使ってModdableSDKやESP-IDFのセットアップを自動化しています。  
 
+このプロジェクトでは、再現可能なビルドにするためModdable SDK 8.3.1を固定して使用します。
+ESP32のセットアップ時には、Moddable SDKのマニフェストに記載された対応バージョンに従い、ESP-IDF v6.0がインストールされます。
+
+既に以前のModdable SDKとESP-IDFをインストール済みの場合、`setup`は既存環境を置き換えません。
+次のコマンドで両方を対応バージョンへ更新してください。
+
+```console
+$ npm run setup:update
+```
 
 ### 手動でセットアップする
 
 [公式サイトの手順（英語）](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md)に従ってModdableSDKとESP-IDFをインストールします。
 xs-dev（CLI）でうまくセットアップできない場合はこちらを行ってください。
 
-- **ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.9.5、ESP-IDF 5.3.0 での動作を想定しています。**
-- **intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するには`firmware/package.json`の`"setup": "xs-dev setup --branch 4.9.5"`を`"setup": "xs-dev setup --branch 4.7.0"`にすることでインストールできますがサポート対象外になります。**
+- **ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 8.3.1、ESP-IDF v6.0での動作を想定しています。**
+- **Intel Macはサポート対象外です。**
 
-### PSRAMと環境変数のセットアップ
-
-次のコマンドを実行して、PSRAMの設定をします。
-
-```console
-$ ./setting_scripts/unset_psram.sh
-```
+### 環境変数のセットアップ
 
 次のコマンドを実行し、Shellの設定ファイルに`source ~/.local/share/xs-dev-export.sh`を追加します。これにより、Shellの起動時に環境変数が設定されます。
 
@@ -88,7 +94,7 @@ $ ./setting_scripts/set_xs-dev_env.sh
 `npm run doctor`コマンドで環境のテストができます。
 コマンドは、`stack-chan/firmware`配下で実行する必要があります。
 
-インストールに成功していれば次のようにModdable SDKのバージョンとして4.9.5が表示され、Supported target devicesにesp32が表示されます。
+インストールに成功していれば次のようにModdable SDKのバージョンとして8.3.1が表示され、Supported target devicesにesp32が表示されます。
 
 
 ```console
@@ -107,17 +113,9 @@ xs-dev environment info:
   Shell                      /bin/bash
   NodeJS Version             v22.8.0 (/home/ubuntu/.nvm/versions/node/22.8.0/bin/node)
   Python Version             3.12.3 (/usr/bin/python)
-  Moddable SDK Version       4.9.5 (/home/ubuntu/.local/share/moddable)
+  Moddable SDK Version       8.3.1 (/home/ubuntu/.local/share/moddable)
   Supported target devices   lin, esp32
   ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
-```
-
-`grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`コマンドでM5Stack CoreS3のPARAMの設定を確認できます。
-設定が完了していれば、`CONFIG_SPIRAM=n`と出力されます。
-
-```console
-$ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
-CONFIG_SPIRAM=n
 ```
 
 ## 次のステップ

@@ -41,8 +41,7 @@
 
 前述の通りｽﾀｯｸﾁｬﾝのファームウェアは基本プログラム（ホスト）とユーザアプリケーション（MOD）から構成されます。
 
-**esp-idfのバージョンが`5.x`からesp32に接続しているPSRAMの扱いが変わっています。デフォルト設定ではスムーズに動かないため一部変更しています。**
-**[環境構築の設定変更スクリプト実行時](./getting-started_ja.md#設定の変更)に、`~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults`に記述された`CONFIG_SPIRAM=y`を`CONFIG_SPIRAM=n`に書き換えています。**
+**ESP-IDF 5.x以降ではESP32に接続しているPSRAMの扱いが変わっています。そのためCoreS3のビルドでは、このリポジトリ内のsdkconfigから`CONFIG_SPIRAM=n`を適用します。インストール済みのModdable SDKは変更しません。**
 
 <br>
 
@@ -74,7 +73,7 @@ M5Stack のボタンを押すと次のように変わります。
 modを書き込みをした場合、上の動作ができなくなります。初期状態に戻すには、Flashの内容を消去してdeployで書き込む必要があります。
 
 ```console
-$ ~/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash
+$ npm run erase-flash
 $ cd ~/stack-chan/firmware
 $ npm run deploy --target=esp32/m5stack_cores3
 ```
