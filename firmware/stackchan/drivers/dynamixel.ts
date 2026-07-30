@@ -1,6 +1,5 @@
 import Serial from 'embedded:io/serial'
 import Timer from 'timer'
-import config from 'mc/config'
 
 type Maybe<T> =
   | {
@@ -208,7 +207,7 @@ class Dynamixel {
     packetHandler = new PacketHandler({
       receive: 6,
       transmit: 7,
-      baud: 1_000_000,
+      baud,
       port: 1,
     })
   }

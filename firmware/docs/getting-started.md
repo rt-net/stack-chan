@@ -50,14 +50,27 @@ After entering the password, the password will not be requested even if the same
 For the second command, run it before you are prompted for a password again. If, for some reason, it takes a long time to execute the first command, please start over from the execution of the first command.
 
 ```console
-$ sudo echo "emporary SuperUser Grant"
+$ sudo echo "Temporary SuperUser Grant"
 $ npm run setup
 $ npm run setup -- --device=esp32
 ```
 
+On Ubuntu, approve the privilege prompt if `xs-dev` needs to install a system dependency.
+If the prompt is dismissed and setup reports `Request dismissed`, install the package named in the error (for example, `sudo apt install python3-venv`) and rerun the same `setup` command.
+
 For macOS, when installing npm run setup -- --device=esp32, if the version of xcode-select is outdated, it may stop at "Error: Command failed with exit code 1: python3 -m pip install pyserial". In that case, manually remove xcode-select and install xcode-select (xcord-select –install) again.  
 You can remove xcode-select with "sudo rm -rf /Library/Developer/CommandLineTools".   
 Internally, [`xs-dev`](https://github.com/HipsterBrown/xs-dev)  is used to automate the setup of ModdableSDK and ESP-IDF.
+
+This project pins Moddable SDK 8.3.1 to keep builds reproducible.
+When setting up ESP32 support, `xs-dev` installs ESP-IDF v6.0 as specified by the Moddable SDK manifest.
+
+The `setup` command does not replace an existing Moddable SDK or ESP-IDF installation.
+If an older version is already installed, update both components with:
+
+```console
+$ npm run setup:update
+```
 
 The moddable configuration script xs-dev-export.sh is not automatically loaded when starting the terminal.   
 Add source ~/.local/share/xs-dev-export.sh to ~/.bashrc or ~/.zshrc.
@@ -69,16 +82,10 @@ The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to
 Follow the instructions on the [official website (English)](https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md) to install ModdableSDK and ESP-IDF.
 If you cannot setup xs-dev(CLI) properly, please do this.
 
-- **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work.**
-- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --branch 4.9.5" to "setup": "xs-dev setup --branch 4.7.0" in firmware/package.json, but it is not supported.**
+- **Stack-chan RT uses Moddable SDK 8.3.1 with ESP-IDF v6.0.**
+- **Intel Macs are not supported.**
 
-## Set up PSRAM and Environment Variable
-
-To configure the PSRAM settings, execute the following command.
-
-```console
-$ ./setting_scripts/unset_psram.sh
-```
+## Set up Environment Variables
 
 Next, run the following command to automatically add source `~/.local/share/xs-dev-export.sh` to your shell's configuration file. This ensures that the necessary environment variables are set each time the shell is started.
 
@@ -93,7 +100,7 @@ By completing these steps, your shell environment will be configured correctly f
 You can test your environment with the `npm run doctor` command.
 This command needs to be executed from the `stack-chan/firmware` directory.
 
-If the installation is successful, 4.9.5 will be displayed as the version of Moddable SDK as shown below, and esp32 will be displayed in Supported target devices.
+If the installation is successful, 8.3.1 will be displayed as the version of Moddable SDK as shown below, and esp32 will be displayed in Supported target devices.
 
 ```console
 $ npm run doctor
@@ -111,18 +118,9 @@ xs-dev environment info:
   Shell                      /bin/bash
   NodeJS Version             v22.8.0 (/home/ubuntu/.nvm/versions/node/22.8.0/bin/node)
   Python Version             3.12.3 (/usr/bin/python)
-  Moddable SDK Version       4.9.5 (/home/ubuntu/.local/share/moddable)
+  Moddable SDK Version       8.3.1 (/home/ubuntu/.local/share/moddable)
   Supported target devices   lin, esp32
   ESP32 IDF Directory        /home/ubuntu/.local/share/esp32/esp-idf
-```
-
-
-You can check the PARAM settings for the M5Stack CoreS3 with the `grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults` command.
-If the setting are correctly, `CONFIG_SPIRAM=n` will be displayed
-
-```console
-$ grep CONFIG_SPIRAM= $MODDABLE/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults
-CONFIG_SPIRAM=n
 ```
 
 ## Next step

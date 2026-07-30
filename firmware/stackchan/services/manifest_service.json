@@ -13,7 +13,6 @@
     "*": [
       "./*",
       "$(MODULES)/network/ble/uart/uartserver",
-      "../../typings/btutils",
       "../../typings/uartserver"
     ]
   },

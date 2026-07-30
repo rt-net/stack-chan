@@ -20,7 +20,7 @@
 
 ｽﾀｯｸﾁｬﾝ アールティver. では以下の変更が加えられています。
 
-* ファームウェアが依存するModdable SDKのバージョンを[4.9.5](https://github.com/Moddable-OpenSource/moddable/releases/tag/4.9.5)に固定しています
+* ファームウェアが依存するModdable SDKのバージョンを[8.3.1](https://github.com/Moddable-OpenSource/moddable/releases/tag/8.3.1)に固定しています
 * 回路図・基板を一部変更しています
 * サーボモータに DYNAMIXEL XL330-M288-T を採用しています
 * 本体を射出成形で製造しています

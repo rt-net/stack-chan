@@ -37,8 +37,7 @@ Additionally, you can specify the paths of other manifest files in a list format
 
 As stated above, Stack-chan's firmware comprises a base program (host) and a user application (MOD).  
 
-**The handling of PSRAM connected to esp32 has changed from esp-idf version 5.x. The default settings do not work smoothly, so we changed some of them.**
-**When [setting the PSRAM environment variables](./getting-started.md#set-up-manual), `CONFIG_SPIRAM=y` in `~/.local/share/moddable/build/devices/esp32/targets/m5stack_cores3/sdkconfig/sdkconfig.defaults` is rewritten to `CONFIG_SPIRAM=n`.**
+**The handling of PSRAM connected to ESP32 changed in ESP-IDF 5.x and later. The CoreS3 build therefore applies `CONFIG_SPIRAM=n` from the sdkconfig stored in this repository; the installed Moddable SDK is not modified.**
 
 The following commands are used to build and write a host.
 
@@ -63,7 +62,7 @@ If you can write correctly, the face of the stack-chan will be displayed a few s
 
 If you write a mod, you will not be able to perform the above operation. To return to the initial state, you need to erase the contents of Flash and write it with deploy.
 ```console
-$ ~/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash
+$ npm run erase-flash
 $ cd ~/stack-chan/firmware
 $ npm run deploy --target=esp32/m5stack_cores3
 ```

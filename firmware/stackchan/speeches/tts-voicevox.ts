@@ -10,7 +10,15 @@ const QUERY_PATH = config.file.root + 'query.json'
 
 /* global trace, SharedArrayBuffer */
 
-declare const device: any
+type HTTPProvider = ConstructorParameters<typeof WavStreamer>[0]['http'] & {
+  io: typeof HTTPClient
+}
+
+declare const device: {
+  network: {
+    http: HTTPProvider
+  }
+}
 
 export type TTSProperty = {
   onPlayed: (number) => void

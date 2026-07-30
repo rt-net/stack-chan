@@ -5,7 +5,13 @@ import calculatePower from 'calculate-power'
 
 /* global trace, SharedArrayBuffer */
 
-declare const device: any
+type HTTPProvider = ConstructorParameters<typeof WavStreamer>[0]['http']
+
+declare const device: {
+  network: {
+    http: HTTPProvider
+  }
+}
 
 export type TTSProperty = {
   onPlayed: (number) => void

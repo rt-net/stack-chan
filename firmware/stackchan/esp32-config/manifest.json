@@ -1,0 +1,9 @@
+{
+    "platforms": {
+        "esp32/m5stack_cores3": {
+            "build": {
+                "SDKCONFIGPATH": "./m5stack_cores3"
+            }
+        }
+    }
+}

@@ -15,7 +15,8 @@
         "./services/manifest_service.json",
         "./speeches/manifest_speech.json",
         "./utilities/manifest_utility.json",
-        "./manifest_typings.json"
+        "./manifest_typings.json",
+        "./esp32-config/manifest.json"
     ],
     "modules": {
         "*": [
@@ -30,6 +31,13 @@
         "touch"
     ],
     "strip": [],
+    "typescript": {
+        "tsconfig": {
+            "compilerOptions": {
+                "strict": false
+            }
+        }
+    },
     "creation": {
         "static": 98304,
         "chunk": {
