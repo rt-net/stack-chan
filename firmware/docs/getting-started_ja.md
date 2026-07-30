@@ -17,8 +17,8 @@
   * [cmake](https://cmake.org/)
   * [git](https://git-scm.com/)
   * [Node.js](https://nodejs.org/en/)
-    * cherrup_ble_liteのmodに関しては、新しいNode.jsに対応していないためV18.x.xを使用する必要があります。
-    * その他のmodはv22.8.xで動作することは確認しています。
+    * Node.js 20以降が必要です。v22.8.xでの動作を確認しています。
+    * cherrup_ble_liteのmodは新しいNode.jsに対応していないため、作業時は別途Node.js 18の環境を使用してください。
   * Python3.12で動作確認ができています。(macOSはbrewでインストールするのではなく[https://www.python.org](https://www.python.org)からダウンロードしインストールしてください。)
   * xcode-select(macOSのみ)  
 
@@ -65,7 +65,7 @@ xcode-selectの削除は"sudo rm -rf /Library/Developer/CommandLineTools"でで�
 xs-dev（CLI）でうまくセットアップできない場合はこちらを行ってください。
 
 - **ｽﾀｯｸﾁｬﾝ アールティver.では、Moddable SDK 4.9.5、ESP-IDF 5.3.0 での動作を想定しています。**
-- **intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するには`firmware/package.json`の`"setup": "xs-dev setup --target-branch 4.9.5"`を`"setup": "xs-dev setup --target-branch 4.7.0"`にすることでインストールできますがサポート対象外になります。**
+- **intel macはModdable SDK 4.7.0 + ESP-IDF 5.1.0 python3.9.0で動作することは確認しています。intel macで使用するには`firmware/package.json`の`"setup": "xs-dev setup --branch 4.9.5"`を`"setup": "xs-dev setup --branch 4.7.0"`にすることでインストールできますがサポート対象外になります。**
 
 ### PSRAMと環境変数のセットアップ
 
@@ -101,7 +101,7 @@ stack-chan environment info:
 55d005ac9f0764a4ebc561b7d0a2a29a66ee5199
 /home/ubuntu/stack-chan
 xs-dev environment info:
-  CLI Version                0.32.3
+  CLI Version                1.12.1
   OS                         Linux
   Arch                       x64
   Shell                      /bin/bash

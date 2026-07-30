@@ -17,8 +17,8 @@ Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, ple
   * [cmake](https://cmake.org/)
   * [git](https://git-scm.com/)
   * [Node.js](https://nodejs.org/en/)
-    * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
-    * I've confirmed that other mods work with v22.8.x.
+    * Node.js 20 or later is required. Operation has been confirmed with v22.8.x.
+    * The cherrup_ble_lite mod requires Node.js 18 because it does not support newer versions. Use a separate Node.js 18 environment when working on that mod.
   * The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
   * xcode-select (macOS only)
 
@@ -70,7 +70,7 @@ Follow the instructions on the [official website (English)](https://github.com/M
 If you cannot setup xs-dev(CLI) properly, please do this.
 
 - **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work.**
-- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
+- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --branch 4.9.5" to "setup": "xs-dev setup --branch 4.7.0" in firmware/package.json, but it is not supported.**
 
 ## Set up PSRAM and Environment Variable
 
@@ -105,7 +105,7 @@ stack-chan environment info:
 55d005ac9f0764a4ebc561b7d0a2a29a66ee5199
 /home/ubuntu/stack-chan
 xs-dev environment info:
-  CLI Version                0.32.3
+  CLI Version                1.12.1
   OS                         Linux
   Arch                       x64
   Shell                      /bin/bash

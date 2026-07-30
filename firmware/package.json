@@ -20,12 +20,15 @@
     "deploy": "cross-env npm_config_target?=esp32/m5stack cross-env-shell mcconfig -d -m -p \\$npm_config_target -t deploy ./stackchan/manifest_local.json",
     "debug": "cross-env npm_config_target?=esp32/m5stack cross-env-shell mcconfig -d -m -p \\$npm_config_target ./stackchan/manifest_local.json",
     "mod": "cross-env npm_config_target?=esp32/m5stack cross-env-shell mcrun -d -m -p $npm_config_target",
-    "setup": "xs-dev setup --target-branch 4.9.5",
+    "setup": "xs-dev setup --branch 4.9.5",
     "doctor": "echo stack-chan environment info: && git rev-parse HEAD && git rev-parse --show-toplevel && xs-dev doctor",
     "scan": "xs-dev scan",
     "erase-flash": "/home/ubuntu/.espressif/python_env/idf5.3_py3.12_env/bin/esptool.py erase_flash"
   },
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/meganetaaan/stack-chan.git"
@@ -46,25 +49,26 @@
   "devDependencies": {
     "@ffmpeg/core": "^0.11.0",
     "@ffmpeg/ffmpeg": "^0.11.6",
-    "@google-cloud/text-to-speech": "^5.2.0",
+    "@google-cloud/text-to-speech": "^6.4.1",
     "@microsoft/tsdoc": "^0.14.2",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "cross-env-default": "^5.1.3-1",
-    "eslint": "^8.24.0",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-tsdoc": "^0.2.17",
+    "eslint-plugin-tsdoc": "^0.5.2",
     "node-fetch": "^3.3.0",
     "prettier": "^2.7.1",
     "typedoc": "^0.23.24",
     "typedoc-plugin-markdown": "^3.14.0",
     "typescript": "^4.8.4",
     "web-audio-engine": "^0.13.4",
-    "xs-dev": "0.32.3",
+    "xs-dev": "1.12.1",
     "yargs": "^17.6.2"
   },
   "overrides": {
+    "brace-expansion": "5.0.8",
     "cross-spawn": "^7.0.5"
   }
 }
