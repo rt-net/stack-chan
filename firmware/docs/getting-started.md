@@ -17,8 +17,8 @@ Stack-chan can be developed on Windows 11, MacOS, and Linux. For Windows 11, ple
   * [cmake](https://cmake.org/)
   * [git](https://git-scm.com/)
   * [Node.js](https://nodejs.org/en/)
-    * As for the mod for cherrup_ble_lite, you need to use V18.x.x as it does not support the new Node.js.
-    * I've confirmed that other mods work with v22.8.x.
+    * Node.js 20 or later is required. Operation has been confirmed with v22.8.x.
+    * The cherrup_ble_lite mod requires Node.js 18 because it does not support newer versions. Use a separate Node.js 18 environment when working on that mod.
   * The operation has been confirmed with Python 3.12. (Please download and install macOS from https://www.python.org instead of installing it with brew.)) 
   * xcode-select (macOS only)
 
@@ -44,25 +44,19 @@ Stack-chan has npm scripted setup instructions.
 
 In the `stack-chan/firmware` directory, run the following command:
 
-Immediately after executing the first command shown below, you will be asked to enter the password set in Ubuntu.  
-After entering the password, the password will not be requested even if the same command is executed for a certain period of time.   
-
-For the second command, run it before you are prompted for a password again. If, for some reason, it takes a long time to execute the first command, please start over from the execution of the first command.
+On Linux/Ubuntu, each setup command prompts for your password when administrator privileges are needed to install system packages.
 
 ```console
-$ sudo echo "emporary SuperUser Grant"
 $ npm run setup
 $ npm run setup -- --device=esp32
 ```
 
 For macOS, when installing npm run setup -- --device=esp32, if the version of xcode-select is outdated, it may stop at "Error: Command failed with exit code 1: python3 -m pip install pyserial". In that case, manually remove xcode-select and install xcode-select (xcord-select –install) again.  
 You can remove xcode-select with "sudo rm -rf /Library/Developer/CommandLineTools".   
-Internally, [`xs-dev`](https://github.com/HipsterBrown/xs-dev)  is used to automate the setup of ModdableSDK and ESP-IDF.
+Internally, the repository setup script pins Moddable SDK 4.9.5 and ESP-IDF v5.3, then uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to install their tools and dependencies. This prevents newer incompatible ESP-IDF releases from being selected.
 
 The moddable configuration script xs-dev-export.sh is not automatically loaded when starting the terminal.   
 Add source ~/.local/share/xs-dev-export.sh to ~/.bashrc or ~/.zshrc.
-
-The script internally uses [`xs-dev`](https://github.com/HipsterBrown/xs-dev) to automate the setup of ModdableSDK and ESP-IDF.
 
 ## Set up Manual
 
@@ -70,7 +64,7 @@ Follow the instructions on the [official website (English)](https://github.com/M
 If you cannot setup xs-dev(CLI) properly, please do this.
 
 - **Stack-chan RT version assumes that Moddable SDK 4.9.5 and ESP-IDF 5.3.0 will work.**
-- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, you can install it by changing "setup": "xs-dev setup --target-branch 4.9.5" to "setup": "xs-dev setup --target-branch 4.7.0" in firmware/package.json, but it is not supported.**
+- **We have confirmed that intel mac works with Moddable SDK 4.7.0 + ESP-IDF 5.1.0 python 3.9.0. To use it on Intel Macs, change `MODDABLE_VERSION` to `4.7.0` and `ESP_IDF_VERSION` to `v5.1` in `firmware/scripts/setup.js`, but this configuration is not supported.**
 
 ## Set up PSRAM and Environment Variable
 
@@ -105,7 +99,7 @@ stack-chan environment info:
 55d005ac9f0764a4ebc561b7d0a2a29a66ee5199
 /home/ubuntu/stack-chan
 xs-dev environment info:
-  CLI Version                0.32.3
+  CLI Version                1.12.1
   OS                         Linux
   Arch                       x64
   Shell                      /bin/bash

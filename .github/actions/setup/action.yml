@@ -8,9 +8,9 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
-        node-version: 16
+        node-version: 22
     - name: Cache node modules
       uses: actions/cache@v3
       env:
@@ -27,7 +27,7 @@ runs:
         if [ -z "${{ inputs.target-branch }}" ]; then
           npm run setup
         else
-          npm run setup -- --target-branch ${{ inputs.target-branch }}
+          npm run setup -- --branch ${{ inputs.target-branch }}
         fi
       working-directory: ./firmware
       shell: bash
